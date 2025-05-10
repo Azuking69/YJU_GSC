@@ -1,27 +1,25 @@
-# ✅ 환경 변수 설정 파일 (.env는 GitHub에 올리지 않도록!)
-.env
-
-# ▶️ Python 관련
+# ✅ 파이썬 실행 시 자동 생성되는 캐시 및 빌드 파일 무시
 __pycache__/
-*.py[cod]
+*.pyc
+*.pyo
+*.pyd
 *.so
 *.egg-info/
 *.log
 
-# ▶️ 가상환경
+# ✅ 가상환경 디렉토리 무시 (venv 등)
 .venv/
 env/
 venv/
 ENV/
 
-# ▶️ Jupyter Notebook 체크포인트
+# ✅ Jupyter Notebook 체크포인트 파일 무시
 .ipynb_checkpoints/
 
-# ▶️ VSCode 설정
+# ✅ VSCode 개인 설정 파일 무시
 .vscode/
 
-# ▶️ 데이터/모델/출력
-data/
+# ✅ 출력 데이터, 모델 파일 등 무시 (필요시 주석 해제)
 outputs/
 *.h5
 *.pt
@@ -31,42 +29,15 @@ outputs/
 *.pkl
 *.npy
 *.npz
-*.csv
-*.tsv
-*.json
 
-# ▶️ 오디오 파일 (음성 데이터 등)
-*.wav
-*.mp3
-*.flac
-*.aac
-*.ogg
-*.m4a
+# ✅ 오디오 파일 무시 (필요시 주석 해제)
+# *.wav
+# *.mp3
 
-# ▶️ 이미지 파일 (데이터 시각화 / 입력 이미지 등)
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.bmp
-*.tiff
-*.webp
+# ✅ 이미지 파일 무시 (필요시 주석 해제)
+# *.png
+# *.jpg
 
-# ▶️ Docker 빌드 파일들 (로그 등)
-*.tar
-*.log
-*.pid
-
-# ▶️ 테스트 디렉토리 (테스트 오디오 등)
-test_audio_batch/
-test_output/
-
-# ▶️ MacOS / Windows 자동 생성 파일
+# ✅ 운영체제가 자동 생성하는 숨김 파일 무시
 .DS_Store
 Thumbs.db
-
-# ▶️ Git 백업 충돌
-*.orig
-
-# ▶️ MLflow 실험 기록 폴더 제외
-mlruns/
