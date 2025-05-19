@@ -4,20 +4,12 @@
 
 #1 사용자로부터 정수 10개를 입력받아
 print("정수를 입력하세요.")
-input_num1 = int(input("1번째 정수: "))
-input_num2 = int(input("2번째 정수: "))
-input_num3 = int(input("3번째 정수: "))
-input_num4 = int(input("4번째 정수: "))
-input_num5 = int(input("5번째 정수: "))
-input_num6 = int(input("6번째 정수: "))
-input_num7 = int(input("7번째 정수: "))
-input_num8 = int(input("8번째 정수: "))
-input_num9 = int(input("9번째 정수: "))
-input_num10 = int(input("10번째 정수: "))
+num_list = []
 
 #2 리스트 data 생성
-num_list = [input_num1, input_num2, input_num3, input_num4, input_num5, 
-            input_num6, input_num7, input_num8, input_num9, input_num10]
+for i in range(10):
+    num = int(input(f"{i + 1}번째 정수: "))
+    num_list.append(num)
 
 #3 처음 5개 원소
 print(f"1.처음 5개 원소: {num_list[0 : 5]}")
