@@ -52,7 +52,7 @@ for _ in range(3):
             top_num.append(num_list[i])
             top_frequency.append(frequency_list[i])
 
-    # ④ 最大回数を取り除く（次の最大を探すため）
+    #9 最大回数を取り除く（次の最大を探すため）
     i = 0
     while i < len(frequency_list):
         if frequency_list[i] == max_value:
@@ -61,7 +61,7 @@ for _ in range(3):
         else:
             i += 1
 
-# ⑤ 出力
+#10 出力
 print("가장 많이 등장한 숫자 Top 3 (동점 포함):")
 for i in range(len(top_num)):
     print(f"{top_num[i]} → {top_frequency[i]}회")
