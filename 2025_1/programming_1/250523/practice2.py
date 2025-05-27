@@ -29,3 +29,5 @@ for j in total_list:
         conversion_list.append(con_num)
 
 print(f"변화된 리스트 (+1/-1): {conversion_list}")
+
+#5 
