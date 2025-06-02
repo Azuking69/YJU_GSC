@@ -5,7 +5,7 @@ def foo():
     return 1, "hello", 10.0;
 
 test = foo() #(1, "hello", 10.0)
-print(test[0], test[1], test[2])
+print(test[0], test[1], test[2]) # 출력
 a, b, c = foo()
 
-print(a, b, c)
+print(a, b, c) # 출력
