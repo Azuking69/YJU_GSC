@@ -1,12 +1,9 @@
-#1-1000의 리스트를 작성
-numbers_list =  list(range(1,1001))
 """
-#확인
-print(numbers_list)"
+While문을 사용하여 1~1000까지의 정수 중 3의배수의 총합을 구하라
 """
-#리스트 중에 있는 3의 배수를 찾아기
-count3_number = [num for num in numbers_list if num % 3 == 0]
+#1 1~1000까지의 정수 
+num_list = list(range(1, 1000 + 1))
 
-#출력
-print(sum(count3_number))
-
+#2 3의배수의 총합
+while num_list:
+    
