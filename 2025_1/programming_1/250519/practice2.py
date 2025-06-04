@@ -15,14 +15,13 @@ menu = """
 4: 요소 삭제 (Delete)
 5: 종료 (Exit)"""
 
-count = 0
-
 #3 사용자는 작업 번호를 계속 입력할 수 있으며, 5번을 입력하면 종료한다.
+count = 0
 while True:
     user_input = int(input(f"""작업을 선택하세요: {menu}
 입력: """))
 
-    if 6 < user_input:
+    if 6 <= user_input:
         print("올마른 번호를 입력하세요\n")
 
     elif user_input == 5:
@@ -56,4 +55,9 @@ while True:
     #8 인덱스를 입력받아 해당 위치의 요소를 삭제
     else:
         delete_index = int(input("삭제할 인덱스를 입력하세요: "))
-        
+        if count < delete_index:
+            print("유호하지 않은 인덱스입니다.")
+        else:
+            del new_list[delete_index]
+            print("삭제 완료.\n")
+            count -= 1 
