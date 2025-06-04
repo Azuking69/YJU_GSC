@@ -1,6 +1,11 @@
+"""
+높이가 5인 다이아몬드 형태의 별을 출력
+"""
 line = 9
-for i in range(1, line + 1, 2): #（最初の数、最後の数、飛ばす数）
-    print(" " * ((line-i)// 2) + (i * "*")) #空白と＊をそれぞれ作る
-    
-for i in range(line -2 , 0, -2 ): #（最初の真ん中の列を飛ばすためー２
-    print(" " * ((line-i)// 2) + (i * "*")) #最後の列、飛ばす数）
+#1 위에 별 만들기
+for i in range(1, line + 1, 2):
+    print(" " * ((line - i) // 2) +  ("*" * i))
+
+#2 밑에 별 만들기
+for i in range(line -2, 0, -2):
+    print(" " * ((line - i) // 2) +  ("*" * i))
