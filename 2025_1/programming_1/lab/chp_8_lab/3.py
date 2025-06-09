@@ -3,6 +3,8 @@
 """
 
 #1 정의
+def greet_user(name):
+    return "Hello, " + name + "!"
 
 #2 Hello, Alice! 출력
-greet_user('Alice')
+print(greet_user('Alice'))
