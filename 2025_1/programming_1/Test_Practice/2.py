@@ -17,14 +17,18 @@ while True:
     else:
         #2-1 사용자가 입력한 횟수 N만큼 주사위를 던진다
         #2-2 주사위의 결과는 1부터 6 사이의 숫자
-        num_list = [random.randint(1, 6) for _ in range(dice_count + 1)]
+        num_list = [random.randint(1, 6) for _ in range(dice_count)]
         counts = [0] * 6
       
         #2-3 각 숫자의 발생 횟수를 카운트
         for num in num_list:
             counts[num - 1] += 1
 
-        max_count = max(counts)
+        #2-4 최대값
+        max_count = counts[0]
+        for count in counts:
+            if count > max_count:
+                max_count = count 
 
         #3 결과 시각화
         #3-1 1부터 6까지 각 숫자의 발생 빈도를 히스토그램으로 시각화
@@ -38,4 +42,3 @@ while True:
 
             #4 각 숫자별로 발생 횟수와 확률을 표시한다
             print(f"{i + 1}: {stars}({individual_count}times, {per:.2f}%)")
-            break
