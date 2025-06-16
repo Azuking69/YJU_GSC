@@ -7,9 +7,12 @@ foo(bar)
 
 print(bar)
 
+
 kin = 3
+
 def pos(arg):
     arg = 10
 
 pos(kin)
+
 print(kin)
