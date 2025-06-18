@@ -51,13 +51,14 @@ while True:
         # 학번 확인
         if not std_score:
             print("저장된 학생 정보가 없습니다.\n")
+            continue
         else:
             # 출력
             print("\n[ 전체 학생 성적 ]")
-            print("학번   이름    국어   영어   수학   합계   평균")
+            print("학번\t이름\t국어\t영어\t수학\t합계\t평균")
             # 학번마다 가져오기
             for i, info in std_score.items():
-                print(f"{i}  {info['이름']}  {info['국어']}    {info['영어']}     {info['수학']}    {info['합계']}    {info['평균']}")
+                print(f"{i}\t{info['이름']}\t{info['국어']}\t{info['영어']}\t{info['수학']}\t{info['합계']}\t{info['평균']:.2f}")
 
     #3. 학생 성적 확인
     elif input_menu == 3:
@@ -75,7 +76,8 @@ while True:
 영어: {info['영어']}
 수학: {info['수학']}
 합계: {info['합계']}
-평균: {info['평균']}\n""")
+평균: {info['평균']:.2f}
+""")
 
     #4. 학생 성적 삭제
     elif input_menu == 4:
