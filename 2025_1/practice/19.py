@@ -2,12 +2,8 @@
 여러 개의 정수를 받아 곱셈 결과를 반환하는 multiply_numbers() 함수를 작성
 단, 다양한 옵션을 키워드 인자(kwargs) 로 입력받아 조건에 따라 결과를 처리
 """
-
-
 # 여러 개의 정수를 받아 곱셈 결과를 반환하는 multiply_numbers() 함수를 작성
 def multiply_numbers(*args, **kwargs):
-    # 계산용 리스트
-    num_list = []
     # 사용 가능 키
     key_list = {'abs', 'nonzero', 'only_odd'}
     # 사용 불기능 시

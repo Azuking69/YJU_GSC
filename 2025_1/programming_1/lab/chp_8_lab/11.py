@@ -3,47 +3,52 @@
 조건에 따라 합계를 계산하는 함수를 작성.
 옵션은 선택 사항이며, 정의되지 않은 옵션이 포함되면 None을 반환.
 """
-#1 정의
+# 함수 정의
 def add_numbers(*args, **kwargs):
-    #2 사용 가능 키를 설정
-    vaild_keys = {'abs', 'only_even', 'unique'}
-    #3 위에 없는 키의 경우 = None
-    for key in kwargs:
-        if key not in vaild_keys:
-            print(None)
-            return
+    # 사용하는 키를 저장
+    option_key = {'abs', 'only_even', 'unique'}
 
-    #4 기본 값 = None    
-    use_abs = kwargs.get('abs', False)         #절댓값
-    only_even = kwargs.get('only_even', False) #짝수만
-    unique = kwargs.get('unique', False)       #중북 제거
+    # option_key 안에 없는 것은 다 None
+    for check_key in kwargs:
+        if check_key not in option_key:
+            return None
+        
+    #list를 복사
+    args_list = list(args)
 
-    #5 입력 값:args를 리스트화
-    result = list(args)
+    # option : abs
+    if 'abs' in kwargs and kwargs['abs'] == True:
+        for idx, val in enumerate(args_list):
+            # 숫자가 마이너스이라면 마이너스를 곱셈
+            if val < 0:
+                args_list[idx] = -val
 
-    #6 abs = True의 경우 -> 절댓값으로 변환
-    if use_abs:
-        result = [abs(x) for x in result]
+    # option : only_even
+    if 'only_even' in kwargs and kwargs['only_even'] == True:
+        args_list = [x for x in args_list if x % 2 == 0]
 
-    #7 only_even = True의 경우 -> 짝수만 남기기
-    if only_even:
-        result = [x for x in result if x % 2 == 0]
+    # option : unique
+    if 'unique' in kwargs and kwargs['unique'] == True:
+        temp = []
+        for val in args_list:
+            if val not in temp:
+                temp.append(val)
+        args_list = temp
 
-    #8 unique = True의 경우 -> 중북 제거
-    if unique:
-        result = list(set(result))
+    # 변수 초기화
+    total = 0
+    # 합계
+    for val in args_list:
+        total += val
 
-    #9 더하기 출력
-    print(f"합계는 {sum(result)}")
+    # 출력
+    print(f"합계는 {total}입니다.")
 
 # 출력: 합계는 -2        
 add_numbers(1, -2, 2, -3)
-
 # 출력: 합계는 4 (|-2|=2, |2|=2 -> 2+2)
 add_numbers(1, -2, 2, -3, abs=True, only_even=True)
-
 # 출력: 합계는 15 (중북 제거: 1+2+3+4+5)
-add_numbers(1, 2, 2, 3, 3, 4, unique=True)
-
+add_numbers(1, 2, 2, 3, 3, 4, 5, unique=True)
 # 출력: None
-add_numbers(1, 2, 3, round=True)
+print(add_numbers(1, 2, 3, round=True))
