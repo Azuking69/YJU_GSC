@@ -5,40 +5,43 @@
 """
 # 함수 정의
 def add_numbers(*args, **kwargs):
-    # option 정의
+    # option를 저장
     option_list = {'abs', 'only_even', 'unique'}
-    # option_list에 없을 때
+    # option_list에 없는 경우 None를 가져가기
     for key in kwargs:
         if key not in option_list:
             return None
     
-    # list 변화
+    # list 작성
     args_list = list(args)
 
     # abs: True일 경우
     if 'abs' in kwargs and kwargs['abs'] == True:
+        # 모든 숫자를 절댓값으로 변환
         for idx, val in enumerate(args_list):
-            # 모든 숫자를 절댓값으로 변환
             if val < 0:
                 args_list[idx] = -val
-
+    
     # only_even: True일 경우
     if 'only_even' in kwargs and kwargs['only_even'] == True:
+        # 짝수만
         args_list = [val for val in args_list if val % 2 == 0]
 
     # unique: True일 경우
     if 'unique' in kwargs and kwargs['unique'] == True:
-        # 중복을 제거하고 합산
+        #중복을 제거
         temp = []
-        for val in args:
+        for val in args_list:
             if val not in temp:
                 temp.append(val)
+        # args_list에 가져오기
         args_list = temp
 
     # 계산
     total = 0
     for x in args_list:
         total += x
+
     # 출력
     print(total)
 
