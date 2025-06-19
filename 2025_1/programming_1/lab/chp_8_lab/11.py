@@ -5,44 +5,42 @@
 """
 # 함수 정의
 def add_numbers(*args, **kwargs):
-    # 사용하는 키를 저장
-    option_key = {'abs', 'only_even', 'unique'}
-
-    # option_key 안에 없는 것은 다 None
-    for check_key in kwargs:
-        if check_key not in option_key:
+    # option 정의
+    option_list = {'abs', 'only_even', 'unique'}
+    # option_list에 없을 때
+    for key in kwargs:
+        if key not in option_list:
             return None
-        
-    #list를 복사
+    
+    # list 변화
     args_list = list(args)
 
-    # option : abs
+    # abs: True일 경우
     if 'abs' in kwargs and kwargs['abs'] == True:
         for idx, val in enumerate(args_list):
-            # 숫자가 마이너스이라면 마이너스를 곱셈
+            # 모든 숫자를 절댓값으로 변환
             if val < 0:
                 args_list[idx] = -val
 
-    # option : only_even
+    # only_even: True일 경우
     if 'only_even' in kwargs and kwargs['only_even'] == True:
-        args_list = [x for x in args_list if x % 2 == 0]
+        args_list = [val for val in args_list if val % 2 == 0]
 
-    # option : unique
+    # unique: True일 경우
     if 'unique' in kwargs and kwargs['unique'] == True:
+        # 중복을 제거하고 합산
         temp = []
-        for val in args_list:
+        for val in args:
             if val not in temp:
                 temp.append(val)
         args_list = temp
 
-    # 변수 초기화
+    # 계산
     total = 0
-    # 합계
-    for val in args_list:
-        total += val
-
+    for x in args_list:
+        total += x
     # 출력
-    print(f"합계는 {total}입니다.")
+    print(total)
 
 # 출력: 합계는 -2        
 add_numbers(1, -2, 2, -3)
