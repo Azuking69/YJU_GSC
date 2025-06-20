@@ -6,7 +6,7 @@
 #정수 목록은 *args로, 다음 키워드 인자 옵션을 **kwargs로 전달
 def add_numbers(*args, **kwargs):
     # option 정의
-    option_key = {'abs', 'only_even', 'unique'}
+    option_key = ['abs', 'only_even', 'unique']
     # kwargs에서 가져온 option가 dictionary에 없을 때
     for key in kwargs:
         if key not in option_key:
