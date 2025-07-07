@@ -10,8 +10,12 @@ class Sor{
 		}
 		return result;
 	}
-	public void 지정된값배열에서초기화() {
-		
+	public void 지정된값배열에서초기화(int[] x, int r) {
+		for (int i = 0; i < x.length; i++) {
+			if (x[i] == r) { // x[0]가 방금전에 찾은 제일 큰 값(r)인가?
+				x[i] = 0;
+			}
+		}
 	}
 }
 
