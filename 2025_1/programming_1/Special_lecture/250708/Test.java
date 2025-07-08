@@ -6,6 +6,7 @@ class A{
 }
 class B extends A{
 	public B() {
+		super(); //생략가능
 		System.out.println("B 생성자 호출");
 	}
 }
