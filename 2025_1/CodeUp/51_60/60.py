@@ -9,6 +9,4 @@ a, b = input("정수 두 개를 입력: ").split()
 num_a = int(a)
 num_b = int(b)
 
-total = num_a + num_b
-
 print(num_a & num_b)
