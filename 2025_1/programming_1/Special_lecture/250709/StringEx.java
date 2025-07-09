@@ -1,6 +1,4 @@
-package programming_1.Special_lecture.250709;
 
-public 
 
 public class StringEx {
 
@@ -48,7 +46,4 @@ public class StringEx {
 		// 객체를 해제 해 준다
 	}
 
-}
- StringEx {
-    
 }
