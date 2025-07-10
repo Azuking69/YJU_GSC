@@ -12,7 +12,7 @@ c = int(c)
 s = int(s)
 
 #3 필요한 저장 공간을 MB 단위로 바꾸어 출력
-result = (((h * b * c * s) / 8) / 1024) / 1000
+result = ((h * b * c * s) / 8) / 1024**2
 
 #4 출력
 print(f"{result:.1f} MB")
