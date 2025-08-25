@@ -39,13 +39,36 @@ public class BasicTypeEx {
 			double d = 0.1;
 			
 		// (3) 문자형
+			// 문자 하나를 저장하기 위해 ''를 사용
+			//문자 대신 아스키코드표 상에 값을 사용할 수 있다.
 			char c = 'A';
+			char c1 = 'B';
+			if (c > c1) {
+				System.out.println("애가 더 빠르다" + c);
+			}
+			
+//			c = c + 1; // 부가능
+			c++; // 가능
+			System.out.println(c);
+			
 			System.out.println(c);
 			c = 66; // ASKⅡ코드
 			System.out.println(c);
+			c = 75;
+            System.out.print(c); //  print: 次に来る文字が横並びになる
+            c = 73;
+            System.out.print(c);
+            c = 77;
+            System.out.print(c);
+            
+            c = '김';
+            System.out.print(c);
 			
 		// (4) boolean형
-			c 
+            // true or false 값만 저장 가능
+            boolean boo = true;
+			boo = false;
+//			boo = 0; // 불가능
 			
 	}
 
