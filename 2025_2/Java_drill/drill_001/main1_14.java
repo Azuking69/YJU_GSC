@@ -1,4 +1,4 @@
-package Java_drill;
+package Java_drill.drill_001;
 
 public class main1_14 {
     public static void main(String[] args) {
