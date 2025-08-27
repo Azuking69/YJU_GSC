@@ -6,13 +6,21 @@
 //　:특정지역(ex:메소드)에서만 사용가능한 변수
 
 public class VariableEx {
-	int x  = 10; // member variable
+	static int x  =10; // member variable
+	
 	
 	public static void main(String[] args) {
-		int y = 10; // local variable
-
+		
+		new VariableEx();
+		
+		int y = 100; // local variable
+		y = 200;
 		System.out.println(y);
-//		System.out.println(x);
+		
+//		VariableEx v = new VariableEx();
+//		System.out.println(v.x);
+		
+		System.out.println(x);
 
 	}
 
