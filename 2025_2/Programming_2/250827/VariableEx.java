@@ -8,7 +8,6 @@
 public class VariableEx {
 	static int x  =10; // member variable
 	
-	
 	public static void main(String[] args) {
 		
 		new VariableEx();

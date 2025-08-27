@@ -1,3 +1,4 @@
+
 // class 구성요소 3가지
 // 1. 멤버변수
 // 2. 메소드
@@ -6,6 +7,7 @@
 // 자바 프로그램은 모든 코드를 class를 만들고 내부에 작성해야 함 
 class MyClass {
 	int x = 10; // 멤버변수
+
 	// 멤버변수 선어 이외의 코드는 전부 메소드 안에 작성
 	public void printX() {
 		System.out.println(x);
@@ -26,7 +28,6 @@ public class OOPEx {
 		
 		// printX()메소드 실행(호출)
 		 MyClass m = new MyClass(); // Myclass를 메모링에 오려라
-		 m.
 		 printX();
 	}
 
