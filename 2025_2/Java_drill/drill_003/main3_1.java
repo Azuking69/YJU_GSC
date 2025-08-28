@@ -14,6 +14,8 @@ public class main3_1 {
         int sum = num1 + num2;
         // 출력
         System.out.println(sum);
+        // close
+        scanner.close();
     }
     
 }
