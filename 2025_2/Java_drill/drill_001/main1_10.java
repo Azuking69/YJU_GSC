@@ -5,6 +5,6 @@ public class main1_10 {
         // 変数宣言
         int age;
         // 出力
-        System.out.println(age);
+         System.out.println(age);
     }
 }

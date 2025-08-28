@@ -15,5 +15,7 @@ public class main2_3 {
         double total = 3.14159 * num * num;
         // 출력
         System.out.println(total);
+        // close
+        scanner.close();
     }
 }
