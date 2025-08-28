@@ -17,5 +17,7 @@ public class main3_3 {
         // 출력
         System.out.println(div);
         System.out.println(mod);
+        // close
+        scanner.close();
     }
 }
