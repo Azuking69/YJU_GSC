@@ -1,6 +1,3 @@
-package Programming_2.250901;
-
-
 // 자바에서 메소드 정의 문법
 // 접근제한자 리턴현 메소드이름(파라미터){실제코드}
 // 접근제한자 종류: public protected default private
