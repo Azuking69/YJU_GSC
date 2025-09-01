@@ -16,7 +16,7 @@ public class main3_10 {
         if (areStringsEqual(str1, str2)){
             System.out.println("입력된 문자열은 같습니다.");
         } else {
-            System.out.println("입력된 문자열은 안 같습니다.")
+            System.out.println("입력된 문자열은 안 같습니다.");
         }
 
         // close
@@ -24,6 +24,7 @@ public class main3_10 {
     }
 
     // 판단 내용 정의
-    public static 
+    public static boolean areStringsEqual(String str1, String str2){
+        return str1.equals(str2);
     }
 }
