@@ -12,6 +12,12 @@ public class main3_22 {
         int num = scanner.nextInt();
 
         // 계산
-        int twoRight = num & 2;
+        int mask = 1 << 1;
+        int result = num ^ mask;
+        // 출력
+        System.out.println(result);
+
+        // close
+        scanner.close();
     }
 }
