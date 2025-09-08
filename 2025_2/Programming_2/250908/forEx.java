@@ -14,15 +14,19 @@ public class forEx {
 	// ++x == x = x + 1
 	public void printC(char c, int x) {
 		System.out.println(c);
-		if (x > 0) {
+		if (x > 1) {
 			System.out.print(x);
-			printC(c, x--);
+			printC(c, x-1);
 		}
 	}
 	
-	public static void main(String[] args) {
-		forEx f = new forEx();
-		f.printC('*', 2);
+	public static void main(String[] args) {	
+		for (int j = 1; j < 10; j++){
+			forEx f = new forEx();
+			f.printC('*', j);
+			System.out.println("");
+		
+		}
 			
 //		for (int j = 0; j < 10; j++){
 //			for (int i = 0; i < j; i++) {
@@ -44,6 +48,3 @@ public class forEx {
 	}
 
 }
-
-
-
