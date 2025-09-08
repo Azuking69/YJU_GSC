@@ -16,5 +16,8 @@ public class main3_23 {
         int result = num1 & num2;
         // 출력
         System.out.println(result); 
+
+        // close
+        scanner.close();
     }
 }
