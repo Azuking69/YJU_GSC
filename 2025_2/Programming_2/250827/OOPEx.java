@@ -28,7 +28,7 @@ public class OOPEx {
 		
 		// printX()메소드 실행(호출)
 		 MyClass m = new MyClass(); // Myclass를 메모링에 오려라
-		 printX();
+		 m.printX();
 	}
 
 }

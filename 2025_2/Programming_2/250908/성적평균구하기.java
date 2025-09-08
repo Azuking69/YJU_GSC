@@ -46,7 +46,7 @@ public class 성적평균구하기 extends Object {
 		
 		
 		// ArrayList : 객체를 여러개 저장할 수 있는 공간
-		ArrayList mTptal = new ArrayList();
+		ArrayList<MyPerson> mTotal = new ArrayList();
 		mTotal.add(m1); // mTotal에 m1객체 저장
 		mTotal.add(m2);
 		mTotal.add(m3);
