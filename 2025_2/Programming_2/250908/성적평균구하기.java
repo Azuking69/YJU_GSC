@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-class MyPerson{
+class MyPerson extends Object{
 	int age;
 	String name;
 	int score1;
