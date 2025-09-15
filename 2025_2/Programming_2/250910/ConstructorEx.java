@@ -21,6 +21,7 @@ class MyCon{
 		name = n;
 	}
 	
+	
 	// default constructor
 //	public MyCon() {
 //		System.out.println("생성자 호출");
