@@ -1,15 +1,14 @@
-package 2025_2.Programming_2.Ch.1;
 
 // 붕어빵 클래스(붕어빵을 만들기 위한 설계도)
 class Bungeoppang{
-    String filling; // 속 재료 (팥, 그림 등)
+    String filling; // 멤버변수 = 속 재료 (팥, 그림 등)
 
     // 생성자 : 붕어빵 속을 설정
     Bungeoppang(String filling){
         this.filling = filling;
     }
 
-    // 붕어빵 정보 출력
+    // 메소드 : 붕어빵 정보 출력
     void printInfo(){
         System.out.println("이 붕어빵의 속은 " + filling + "입니다.");
     }
