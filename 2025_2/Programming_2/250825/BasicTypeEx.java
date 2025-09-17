@@ -71,5 +71,4 @@ public class BasicTypeEx {
 //			boo = 0; // 불가능
 			
 	}
-
 }
