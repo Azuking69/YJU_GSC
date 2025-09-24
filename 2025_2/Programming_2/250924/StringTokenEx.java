@@ -29,9 +29,10 @@ public class StringTokenEx {
 			}else if(r.equals("/")){ 
 				//(연산자(r)가(.equals()) 나눗셈이란면("/")
 				//나눗셈
-			}else { // r이 "+-*/" 아니라면 남은건 숫자
 				result = result / Integer.parseInt(t.nextToken());
-			}result = Integer.parseInt(r); // r 숫자형으로 바꿔서 저장
+			}else { // r이 "+-*/" 아니라면 남은건 숫자
+				result = Integer.parseInt(r); // r 숫자형으로 바꿔서 저장
+			}
 			System.out.println(r);
 		}
 		System.out.println(result);
