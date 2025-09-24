@@ -16,6 +16,16 @@ public class StringEx {
 		}else {
 			System.out.println("다르다");
 		}
+		
+		
+		// (2)불변적인 특징
+		String temp = "ABC";
+		temp = temp + "D"; //"ABC", "ABCD"
+		// 문자열 수정이 빈번하게 일어나면 수정된 객체가 계속 생성
+		// 쓸때없이 메모리 공간을 차지하게 됨
+		// 결국 메모리 누수 문제를 야기하게 됨
+		// 문자열 수정이 빈번하게 일어나는 경우라면
+		// String class 대신 StringBuffer class등을 사용해야 함
 
 	}
 
