@@ -33,19 +33,13 @@ public class StringTokenEx {
 			}else { // r이 "+-*/" 아니라면 남은건 숫자
 				result = Integer.parseInt(r); // r 숫자형으로 바꿔서 저장
 			}
-			System.out.println(r);
 		}
 		System.out.println(result);
 		
-		
-		
-		
+	
 //        for(int i = 0; i < 3; i++){
 //        	String r = t.nextToken();
 //        	System.out.println(r);
 //        }
-		
-		
-		
      }
 }
