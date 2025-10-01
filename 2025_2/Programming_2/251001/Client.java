@@ -34,7 +34,10 @@ class ClientUI extends JFrame{
 	
 	public ClientUI() {
 		jf = new JTextField(15);
-		this.add(jf); // 판때기에 ㅇ비력창 추가
+		this.add(jf); // 판때기에 입력창 추가
+		MyUIListener m = new MyUIListener();
+		jf.addActionListener(m); // 입력창에 검사자 달아주기
+		
 		setSize(300, 100);
 		setLocation(200, 200);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,5 +55,7 @@ public class Client {
 //		String msg = "안녕";
 //		os.write(msg.getBytes("utf-8"));
 
+		new ClientUI();
+		
 	}
 }
