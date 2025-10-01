@@ -14,6 +14,7 @@ public class Server {
 			
 			// 읽기 위한 실 거저오기
 			InputStream is = server.getInputStream();
+//			InputStream is2 = new InputStream(); 객체화 불가능
 			byte b[] = new byte[1024];
 			is.read(b);
 			String str = new String(b);
