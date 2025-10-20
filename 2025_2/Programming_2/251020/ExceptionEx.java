@@ -15,6 +15,18 @@ public class ExceptionEx {
 			System.out.println("산술연산 오류 발생");
 		}
 		
+		int k[] = new int[3];
+		k[0] = 0;
+		k[1] = 10;
+		k[2] = 100;
+		try{
+			System.out.println(k[3]);
+		}catch (ArrayIndexOutOfBoundsException e){
+			System.out.println("배열범위넘어가는 오류 발생");
+			System.out.println(e);
+			e.printStackTrace();
+		}
+		
 		
 		System.out.println("end");
 	}
