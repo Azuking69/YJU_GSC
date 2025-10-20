@@ -24,7 +24,7 @@ public class ExceptionEx {
 		}catch (ArrayIndexOutOfBoundsException e){
 			System.out.println("배열범위넘어가는 오류 발생");
 			System.out.println(e);
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		
 		
