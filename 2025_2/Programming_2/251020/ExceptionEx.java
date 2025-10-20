@@ -27,6 +27,26 @@ public class ExceptionEx {
 //			e.printStackTrace();
 		}
 		
+		try {
+			int x1 = 10; 
+			int x2 = 2;
+			int r2 = x1 / x2; // new ArithmeticException();
+			
+			int xx1[] = {10, 20, 30};
+			System.out.println(xx1[3]);
+			// Exception e = new ArithmeticException();
+			// Exception e = new ArrayIndexOutOfBoundsException();
+
+		}catch (Exception e) { 
+			System.out.println("Exception으로 통쳐내기");
+			System.out.println(e);
+		}
+		
+//		} catch(ArrayIndexOutOfBoundsException e) {
+//			
+//		} catch(ArithmeticException e) {
+//			
+//		}
 		
 		System.out.println("end");
 	}
