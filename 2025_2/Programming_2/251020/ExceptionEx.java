@@ -40,6 +40,8 @@ public class ExceptionEx {
 		}catch (Exception e) { 
 			System.out.println("Exception으로 통쳐내기");
 			System.out.println(e);
+		} finally {
+			// 예외 발생 여부와 상관없이 무조건 실행
 		}
 		
 //		} catch(ArrayIndexOutOfBoundsException e) {
