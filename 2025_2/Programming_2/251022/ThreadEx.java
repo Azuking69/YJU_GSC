@@ -19,17 +19,20 @@ class Mythread2 implements Runnable{
 			System.out.println(i);
 		}
 	}
-	
 }
 
 public class ThreadEx {
-
 	public static void main(String[] args) {
 		System.out.println("Start");
 		// 1) 방식 사용
 		MyThread1 m1 = new MyThread1();
 		m1.start(); // Thread 실행을 위해서는 꼭! start()메서드 호출할 것!
 //		m1.run(); // 잘못된 코드
+		
+		// 2) 방식 사용
+		Mythread2 m2 = new Mythread2();
+		Thread m2t = new Thread(m2);
+		m2t.start();
 		
 		System.out.println("End");
 	}
