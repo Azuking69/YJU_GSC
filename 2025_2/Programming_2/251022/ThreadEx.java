@@ -13,10 +13,12 @@ class MyThread1 extends Thread{
 public class ThreadEx {
 
 	public static void main(String[] args) {
+		System.out.println("Start");
 		// 1) 방식 사용
 		MyThread1 m1 = new MyThread1();
 		m1.run();
-
+		
+		System.out.println("End");
 	}
 
 }
