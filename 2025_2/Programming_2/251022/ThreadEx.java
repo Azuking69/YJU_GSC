@@ -14,10 +14,6 @@ class MyThread1 extends Thread{
 class Mythread2 implements Runnable{
 	boolean flag = true;
 	
-	public void start() {
-		new Thread(this).start();
-	}
-	
 	@Override
 	public void run() {
 		// Thread 수행할 작업을 코딩
@@ -37,10 +33,8 @@ public class ThreadEx {
 		
 		// 2) 방식 사용
 		Mythread2 m2 = new Mythread2();
-		m2.start();
-		new Thread(m2).start();
-//		Thread m2t = new Thread(m2);
-//		m2t.start(); 
+		Thread m2t = new Thread(m2);
+		m2t.start(); 
 		// start() 메소드 호출이 이제 Thread 실행을 의미하는 것은 아니다.
 		// 해당 Thread가 CPU 제어권을 얻을 수 있는 대비방에 들어가게 됨을 의ㄴ미
 		
