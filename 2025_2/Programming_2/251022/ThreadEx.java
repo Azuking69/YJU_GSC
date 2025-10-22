@@ -2,12 +2,22 @@
 // 자바에서 Thread 사용을 위한 문법 2가지
 // 1)번 반식으로 정의
 class MyThread1 extends Thread{
-	public void run() {
+	public void run() { // callback method
 		// Thread가 수행할 작업을 코딩
 		for (int i = 0; i < 10; i++) {
 			System.out.println(i);
 		}
 	}
+}
+
+// 2)번 방식
+class Mythread2 implements Runnable{
+	@Override
+	public void run() {
+		// Thread 수행할 작업을 코딩
+		
+	}
+	
 }
 
 public class ThreadEx {
