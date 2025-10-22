@@ -15,7 +15,9 @@ class Mythread2 implements Runnable{
 	@Override
 	public void run() {
 		// Thread 수행할 작업을 코딩
-		
+		for(int i = 0; i < 10; i++) {
+			System.out.println(i);
+		}
 	}
 	
 }
