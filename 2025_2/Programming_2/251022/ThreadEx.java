@@ -16,7 +16,8 @@ public class ThreadEx {
 		System.out.println("Start");
 		// 1) 방식 사용
 		MyThread1 m1 = new MyThread1();
-		m1.run();
+		m1.start(); // Thread 실행을 위해서는 꼭! start()메서드 호출할 것!
+//		m1.run(); // 잘못된 코드
 		
 		System.out.println("End");
 	}
