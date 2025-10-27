@@ -10,7 +10,7 @@ class ATM implements Runnable{
 			}
 			if (getDepositeMoney() <= 0) {
 				break;
-				withDraw(1000);
+			withDraw(1000);
 			}
 		}
 	}
