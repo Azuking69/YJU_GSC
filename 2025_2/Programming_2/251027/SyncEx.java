@@ -34,7 +34,9 @@ class ATM implements Runnable{
 
 public class SyncEx {
 	public static void main(String[] args) {
-		
+		ATM a = new ATM();
+		Thread at = new Thread(a);
+		at.start();
 
 	}
 }
