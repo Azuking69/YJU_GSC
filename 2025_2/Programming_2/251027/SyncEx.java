@@ -39,8 +39,8 @@ public class SyncEx {
 		Thread mother = new Thread(a, "mother");
 		mother.start();
 
-		ATM b = new ATM();
-		Thread son = new Thread(b, "son");
+//		ATM b = new ATM();
+		Thread son = new Thread(a, "son");
 		son.start();
 	}
 }
