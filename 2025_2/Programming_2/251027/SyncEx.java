@@ -8,10 +8,11 @@ class ATM implements Runnable{
 			} catch(InterruptedException e) {
 				e.printStackTrace();
 			}
-			if (getDepositeMoney() <= 0) {
+			
+			if (getDepositeMoney() <= 0) 
 				break;
 			withDraw(1000);
-			}
+			
 		}
 	}
 	
