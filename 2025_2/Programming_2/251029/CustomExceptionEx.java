@@ -16,11 +16,11 @@ public class CustomExceptionEx {
 		// 자 그럼 우리만의 예외 처리 클래스를 실제 사용해 보자
 		try {
 			int x = 10;
-			int y= 5;
+			int y = 0;
 			int r = x / y;
 			System.out.println(r);
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("문제 발생");
 		}
 		
 
