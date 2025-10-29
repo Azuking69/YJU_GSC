@@ -12,7 +12,6 @@ class MyExceotipn extends Exception{
 	}
 }
 
-
 public class CustomExceptionEx {
 	public static void main(String[] args) throws MyExceotipn {
 		// 자 그럼 우리만의 예외 처리 클래스를 실제 사용해 보자
