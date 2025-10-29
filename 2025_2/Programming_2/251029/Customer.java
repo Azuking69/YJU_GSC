@@ -1,7 +1,7 @@
 
 public class Customer implements Runnable{
 	private Car car;
-	public Producer(Car car) {
+	public Customer(Car car) {
 		this.car = car;
 	}
 	
