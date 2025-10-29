@@ -7,7 +7,7 @@ public class Producer implements Runnable{
 	
 	public void run() {
 		String carName = null;
-		for (int i = 0; i > 20; i++) {
+		for (int i = 0; i < 20; i++) {
 			carName = carName.getCar();
 			car.push(carName);
 			try {
