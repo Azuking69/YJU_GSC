@@ -10,7 +10,7 @@ public class Car {
 		String carName = null;
 		switch ((int) (Math.random() * 3)) {
 		case 0 :
-			carName = "SMS";
+			carName = "SM5";
 			break;
 		case 1 :
 			carName = "매그너스";
