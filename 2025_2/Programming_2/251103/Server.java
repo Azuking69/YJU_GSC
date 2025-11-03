@@ -1,4 +1,3 @@
-
 // 서버파트 구현 목록
 // 1) 클라이언트 접속 대기 → 접속 후 클라이언트와 매칭되는 종이컵(Socket) 생성
 // 2) 접속한 모든 클라이언트로 부터 메시지 수신 → 수신된 메시지를 모든 클라이언트로 송신
@@ -6,8 +5,10 @@
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 
 // 서버가 클라이언트 접속 대기도 하면서 클라이언트들!이 보내는 메시지 수신도 하기위해
@@ -29,9 +30,12 @@ class ServerThread extends Thread{
 			// 수신된 메시지를 모든 클라이언트로 송신
 			// 종이컵 저장 공간에서 종이컵을 하나씩 가져와서 해당 클라이언트로 메시지 전송
 			// 그렇다는 애기는 어딘가에 여태껏 만들어진 종이컵이 다 저장되어 있는곳이 있어야 한다.
-			OutputStream is2 = Server.totalSocket[0].getOutputStream();
 			
-			
+			for (int i = 0; i < 100; i++) {
+				OutputStream is2 = Server.totalSocket[i].getOutputStream();
+				os.write(b); // 방금전에 1024바이트 만큼 읽은 데이터를 전송
+			}
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -40,22 +44,16 @@ class ServerThread extends Thread{
 
 
 public class Server {
-	static Socket totalSocket[] = new Socket[100];
-	
+	static ArrayList totalSocket = new ArrayList();
 	public static void main(String[] args) throws IOException {
-		
-		Socket totalSocket[] = new Socket[100];
-		int index = 0;
-		
 		// 1) 클라이언트 접속 대기
 		ServerSocket ss = new ServerSocket(8888);
-		
 		while (true) { // 여러 클라이언트 접속을 받아주기 위해 반복문 사용
 		// 클라이언트 접속대기 + 접속하면 종이컵 만들어 주기
 			Socket server = ss.accept();
 			// 종이컵 저장
-			totalSocket[index] = server;
-			index++;
+			totalSocket.add(server);
+			
 		}
 		
 		
