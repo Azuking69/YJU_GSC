@@ -29,6 +29,8 @@ class ServerThread extends Thread{
 			// 수신된 메시지를 모든 클라이언트로 송신
 			// 종이컵 저장 공간에서 종이컵을 하나씩 가져와서 해당 클라이언트로 메시지 전송
 			// 그렇다는 애기는 어딘가에 여태껏 만들어진 종이컵이 다 저장되어 있는곳이 있어야 한다.
+			Server.totalSocket[0]
+			
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -37,6 +39,8 @@ class ServerThread extends Thread{
 }
 
 public class Server {
+	static Socket totalSocket[] = new Socket[100];
+	
 	public static void main(String[] args) throws IOException {
 		
 		Socket totalSocket[] = new Socket[100];
