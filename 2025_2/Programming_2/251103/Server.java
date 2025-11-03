@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 
 // 서버파트 구현 목록
@@ -10,7 +11,8 @@ public class Server {
 	public static void main(String[] args) throws IOException {
 		// 1) 클라이언트 접속 대기
 		ServerSocket ss = new ServerSocket(8888);
-
+		// 클라이언트 접속대기 + 접속하면 종이컵 만들어주기
+		Socket server = ss.accept(); 
 
 
 
