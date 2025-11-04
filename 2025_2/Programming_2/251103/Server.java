@@ -14,7 +14,7 @@ import java.util.ArrayList;
 // 서버가 클라이언트 접속 대기도 하면서 클라이언트들!이 보내는 메시지 수신도 하기위해
 // 두 가지 작업을 동시에 처리해 줄 수 있도록 thread를 만든다.
 class ServerThread extends Thread{
-	Socket serverSocket;
+	Socket server;
 	
 	public ServerThread(Socket server) {
 	this.server = server;
