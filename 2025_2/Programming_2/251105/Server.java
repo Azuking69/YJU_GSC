@@ -45,6 +45,10 @@ class ServerThread extends Thread{
 	}
 }
 
+class 세우버거 extends Object{
+	
+}
+
 
 public class Server {
 	static ArrayList totalSocket = new ArrayList();
@@ -56,11 +60,11 @@ public class Server {
 			Socket server = ss.accept();
 			// 종이컵 저장
 			totalSocket.add(server);
+			totalSocket.add("세우튀김");
+			totalSocket.add(new 세우버거());
 			
 		}
 		
-		
-		
-		
+				
 	}
 }
