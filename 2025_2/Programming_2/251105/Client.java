@@ -15,8 +15,7 @@ public class Client {
 		
 		// 2) 서버로 메시지 승신
 		OutputStream os = client.getOutputStream();
-		os.write();
+		os.write("카츠동");
 	}
 }
-
 
