@@ -23,27 +23,30 @@ class ServerThread extends Thread{
 	
 	public void run() {
 		// 2) 접속한 모든 클라이언트로 부터 메시지 수신
-		try {
-			// 종이컵에서 읽기 위한 실 뽑아 내기
-			InputStream is = server.getInputStream(); // 종이컵에서 읽기 위한 실 뽑아 내기
-			byte[] b = new byte[1024];
-			is.read(b); // 1024바이트 읽어서 배열 b에 저장
-			// 수신된 메시지를 모든 클라이언트로 송신
-			// 종이컵 저장 공간에서 종이컵을 하나씩 가져와서 해당 클라이언트로 메시지 전송
-			// 그렇다는 애기는 어딘가에 여태껏 만들어진 종이컵이 다 저장되어 있는곳이 있어야 한다.
-						
-			// 종이컵 저장 공간(totalSocket)에서 종이컵 하나씩 가져 와서
-			// 쓰기 위한 실(OutputStream) 뽑아내서 데이터 전송(write)
-			for (int i = 0; i < Server.totalSocket.size(); i++) {
-//				OutputStream os = Server.totalSocket.get(i).getOutputStream();
-//				os.write(b); // 방금전에 1024바이트 만큼 읽은 데이터를 전송
-				Socket temp = (Socket)Server.totalSocket.get(i);
-				OutputStream os = temp.getOutputStream();
-				os.write(b);
+		while(true){
+			try {
+				// 종이컵에서 읽기 위한 실 뽑아 내기
+				InputStream is = server.getInputStream(); // 종이컵에서 읽기 위한 실 뽑아 내기
+				byte[] b = new byte[1024];
+				is.read(b); // 1024바이트 읽어서 배열 b에 저장
+				// 수신된 메시지를 모든 클라이언트로 송신
+				// 종이컵 저장 공간에서 종이컵을 하나씩 가져와서 해당 클라이언트로 메시지 전송
+				// 그렇다는 애기는 어딘가에 여태껏 만들어진 종이컵이 다 저장되어 있는곳이 있어야 한다.
+							
+				// 종이컵 저장 공간(totalSocket)에서 종이컵 하나씩 가져 와서
+				// 쓰기 위한 실(OutputStream) 뽑아내서 데이터 전송(write)
+				for (int i = 0; i < Server.totalSocket.size(); i++) {
+//					OutputStream os = Server.totalSocket.get(i).getOutputStream();
+//					os.write(b); // 방금전에 1024바이트 만큼 읽은 데이터를 전송
+					Socket temp = (Socket)Server.totalSocket.get(i);
+					OutputStream os = temp.getOutputStream();
+					os.write(b);
+				}
+	
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
+			
 		}
 	}
 }
@@ -66,6 +69,9 @@ public class Server {
 			//totalSocket.add("세우튀김"); Object s = new String("세우튀김");
 			//totalSocket.add(new 세우버거()); Object s = new 세우버거();
 			
+			// 이제 클라이언트가 접속했으니 해당 클라이언트 담당하는 Thread 만들어서
+			// 구동시켜 줘야 함
+			new SeverThread(sever).start();
 		}
 		
 				
