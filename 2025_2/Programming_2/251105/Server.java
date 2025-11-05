@@ -33,7 +33,8 @@ class ServerThread extends Thread{
 			// 그렇다는 애기는 어딘가에 여태껏 만들어진 종이컵이 다 저장되어 있는곳이 있어야 한다.
 			
 			Socket temp = (Socket)Server.totalSocket.get(0);
-			temp.getOutputStream();
+			OutputStream os = temp.getOutputStream();
+			os.write(b);
 			
 			for (int i = 0; i < Server.totalSocket.size(); i++) {
 				OutputStream os = Server.totalSocket.get(i).getOutputStream();
