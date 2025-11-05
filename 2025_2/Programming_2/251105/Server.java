@@ -32,8 +32,8 @@ class ServerThread extends Thread{
 			// 종이컵 저장 공간에서 종이컵을 하나씩 가져와서 해당 클라이언트로 메시지 전송
 			// 그렇다는 애기는 어딘가에 여태껏 만들어진 종이컵이 다 저장되어 있는곳이 있어야 한다.
 			
-			Object temp = Server.totalSocket.get(0);
-			temp.getInputStream();
+			Socket temp = (Socket)Server.totalSocket.get(0);
+			temp.getOutputStream(0);
 			
 			for (int i = 0; i < Server.totalSocket.size(); i++) {
 				OutputStream os = Server.totalSocket.get(i).getOutputStream();
@@ -52,7 +52,7 @@ class 세우버거 extends Object{
 
 
 public class Server {
-	static ArrayList totalSocket = new ArrayList();
+	static ArrayList totalSocket = new ArrayList<Socket>();
 	public static void main(String[] args) throws IOException {
 		// 1) 클라이언트 접속 대기
 		ServerSocket ss = new ServerSocket(8888);
