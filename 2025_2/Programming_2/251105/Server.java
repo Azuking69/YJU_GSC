@@ -6,6 +6,7 @@
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.invoke.StringConcatFactory;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -59,9 +60,9 @@ public class Server {
 		// 클라이언트 접속대기 + 접속하면 종이컵 만들어 주기
 			Socket server = ss.accept();
 			// 종이컵 저장
-			totalSocket.add(server);
-			totalSocket.add("세우튀김");
-			totalSocket.add(new 세우버거());
+			totalSocket.add(server); Object s = new Socket();
+			totalSocket.add("세우튀김"); Object s = new String("세우튀김");
+			totalSocket.add(new 세우버거()); Object s = new 세우버거();
 			
 		}
 		
