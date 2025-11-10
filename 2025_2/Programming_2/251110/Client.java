@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import java.lang.foreign.AddressLayout;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.time.chrono.IsoChronology;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,6 +27,16 @@ class MyListner implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// callback method
 		// 버튼이 클릭되거나 "enter"키가 입력되면 호출되는 콜백 메소드
+		
+		// 버튼이 늘려졌는지 "enter"키가 눌려졌는지 구분
+		// 늘리진 버튼에 이름 가져오기
+		String str = e.getActionCommand();
+		if(str.equals("접속")) {
+			System.out.println("서버접속 버튼 클릭됨");
+		}else {
+			System.out.println("Enter 늘리짐");
+		}
+		
 		System.out.println("서버접속 버튼 클릭됨");
 	}
 }
@@ -58,6 +69,11 @@ class ClientUI extends JFrame {
 		add(jtf); // 판대기에 한줄 입력창 먼저 배치
 		add(con); // 그다음 접속버튼
 		add(jta); // 마지막으로 대화창 배치
+		
+		jta.setText("가나다라");
+		jta.setText("마바사");
+		jta.append("abc");
+		jta.append("def");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 강제종료 기능 활성화
 		setSize(300, 500); // 판대기 사이즈 조절
