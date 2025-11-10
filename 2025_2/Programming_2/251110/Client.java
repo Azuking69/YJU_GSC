@@ -25,7 +25,8 @@ class MyListner implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// callback method
-		
+		// 버튼이 클릭되거나 "enter"키가 입력되면 호출되는 콜백 메소드
+		System.out.println("서버접속 버튼 클릭됨");
 	}
 }
 
@@ -40,6 +41,17 @@ class ClientUI extends JFrame {
 		con = new JButton("접속");
 		jtf = new JTextField(20);
 		jta = new JTextArea(30, 30);
+		
+		// 접속버튼 event handling
+		// 감시자 객체화
+		MyListner m = new MyListner();
+		// 접속 버튼에 감시자 달아추기
+		con.addActionListener(m);
+		
+		// 입력창 event handling
+		// 한줄 입력창에 감시자 달아추기
+		jtf.addActionListener(m);
+		
 		
 		FlowLayout layout = new FlowLayout(); // 화면 배치 관리자
 		setLayout(layout); // 현재 판대기에 배치 관리자 설정
