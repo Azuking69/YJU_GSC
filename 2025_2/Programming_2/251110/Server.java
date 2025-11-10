@@ -6,7 +6,6 @@
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.invoke.StringConcatFactory;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -19,6 +18,7 @@ class ServerThread extends Thread{
 	
 	public ServerThread(Socket server) {
 	this.server = server;
+	
 	}
 	
 	public void run() {
@@ -51,14 +51,11 @@ class ServerThread extends Thread{
 	}
 }
 
-class 세우버거 extends Object{
-	
-}
-
 
 public class Server {
 	static ArrayList totalSocket = new ArrayList();
 	public static void main(String[] args) throws IOException {
+		System.out.println("서버구동중");
 		// 1) 클라이언트 접속 대기
 		ServerSocket ss = new ServerSocket(8888);
 		while (true) { // 여러 클라이언트 접속을 받아주기 위해 반복문 사용
@@ -71,7 +68,7 @@ public class Server {
 			
 			// 이제 클라이언트가 접속했으니 해당 클라이언트 담당하는 Thread 만들어서
 			// 구동시켜 줘야 함
-			new SeverThread(sever).start();
+			new ServerThread(server).start();
 		}
 		
 				
