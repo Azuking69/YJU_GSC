@@ -15,6 +15,7 @@ import java.time.chrono.IsoChronology;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -34,10 +35,9 @@ class MyListner implements ActionListener{
 		if(str.equals("접속")) {
 			System.out.println("서버접속 버튼 클릭됨");
 		}else {
+			jta.settext("Enter");
 			System.out.println("Enter 늘리짐");
 		}
-		
-		System.out.println("서버접속 버튼 클릭됨");
 	}
 }
 
