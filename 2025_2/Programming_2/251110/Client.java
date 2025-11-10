@@ -23,29 +23,31 @@ import javax.swing.JTextField;
 // 클라이언트 화면에서 처리되어야 하는 이벤트 목록
 // -> "접속" 버튼을 클릭시 서버애 접속
 // -> 대화창에 "enter" 입력시 서버로 메시지 전송
-class MyListner implements ActionListener{
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// callback method
-		// 버튼이 클릭되거나 "enter"키가 입력되면 호출되는 콜백 메소드
-		
-		// 버튼이 늘려졌는지 "enter"키가 눌려졌는지 구분
-		// 늘리진 버튼에 이름 가져오기
-		String str = e.getActionCommand();
-		if(str.equals("접속")) {
-			System.out.println("서버접속 버튼 클릭됨");
-		}else {
-			jta.settext("Enter");
-			System.out.println("Enter 늘리짐");
-		}
-	}
-}
+
 
 //채팅 메시지 입력창, 대화창이 기본적으로 제공되는 클라이언트 화면구현
 class ClientUI extends JFrame {
 	JButton con;   // 서버 접속을 위한 버튼
 	JTextField jtf; // 채팅 메시지 입력창
 	JTextArea jta; // 지난 채팅 메시지를 볼 수 있는 대화창
+	
+	class MyListner implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// callback method
+			// 버튼이 클릭되거나 "enter"키가 입력되면 호출되는 콜백 메소드
+			
+			// 버튼이 늘려졌는지 "enter"키가 눌려졌는지 구분
+			// 늘리진 버튼에 이름 가져오기
+			String str = e.getActionCommand();
+			if(str.equals("접속")) {
+				System.out.println("서버접속 버튼 클릭됨");
+			}else {
+				jta.settext("Enter");
+				System.out.println("Enter 늘리짐");
+			}
+		}
+	}
 
 	public ClientUI() {
 		super("이것은 클라이언트");
