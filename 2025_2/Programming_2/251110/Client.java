@@ -43,8 +43,8 @@ class ClientUI extends JFrame {
 			if(str.equals("접속")) {
 				System.out.println("서버접속 버튼 클릭됨");
 			}else {
-				jta.settext("Enter");
-				System.out.println("Enter 늘리짐");
+				jta.setText(jtf.getText() + '\n');
+				jtf.setText("");
 			}
 		}
 	}
