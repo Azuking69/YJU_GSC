@@ -1,5 +1,5 @@
 // Client 파트 구현 목록
-// 1) 서버에 접속(Socket 생성)
+// 1) 서버에 접속(Socket 생성) - 접속 버튼 클릭되었을 때
 // 2) 서버로 메시지 승신
 // 3) 서버에서 보내는 메시지 수신
 
@@ -31,6 +31,8 @@ class ClientUI extends JFrame {
 	JTextField jtf; // 채팅 메시지 입력창
 	JTextArea jta; // 지난 채팅 메시지를 볼 수 있는 대화창
 	
+	Socket client; //서버외의 통신
+	
 	class MyListner implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -41,6 +43,13 @@ class ClientUI extends JFrame {
 			// 늘리진 버튼에 이름 가져오기
 			String str = e.getActionCommand();
 			if(str.equals("접속")) {
+				try {
+					// 1) 서버에 접속(Socket 생성)
+					client = new Socket("127.0.0.1", 8888);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				System.out.println("서버접속 버튼 클릭됨");
 			}else {
 				jta.setText(jtf.getText() + '\n');
@@ -65,17 +74,11 @@ class ClientUI extends JFrame {
 		// 한줄 입력창에 감시자 달아추기
 		jtf.addActionListener(m);
 		
-		
 		FlowLayout layout = new FlowLayout(); // 화면 배치 관리자
 		setLayout(layout); // 현재 판대기에 배치 관리자 설정
 		add(jtf); // 판대기에 한줄 입력창 먼저 배치
 		add(con); // 그다음 접속버튼
 		add(jta); // 마지막으로 대화창 배치
-		
-		jta.setText("가나다라");
-		jta.setText("마바사");
-		jta.append("abc");
-		jta.append("def");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 강제종료 기능 활성화
 		setSize(300, 500); // 판대기 사이즈 조절
