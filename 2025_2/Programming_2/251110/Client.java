@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.foreign.AddressLayout;
 import java.net.Socket;
@@ -24,6 +25,26 @@ import javax.swing.JTextField;
 // -> "접속" 버튼을 클릭시 서버애 접속
 // -> 대화창에 "enter" 입력시 서버로 메시지 전송
 
+// 서버에 접속을 성공하고 나면 Thread
+class ClientThread extends Thread{
+	public void run() {
+		//3) 서버에서 보내는 메시지 수신
+		while(true){
+			try {
+			// 종이컵에서 읽기 위한 실 뽑아내기
+			InputStream is = client.getInputStream();
+			byte[] b = new byte[1024];
+			is.read(b); // 1024byte 읽어서 배열 b에 저장
+			// 수진된 메시지 화면에 보여주기
+			String str = new String(b); // 바이트값 -> 문자열 변환
+			jta.append(str.trim() + "\n"); // 빈공백 제거 후 화면에 보여주기
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+}
 
 //채팅 메시지 입력창, 대화창이 기본적으로 제공되는 클라이언트 화면구현
 class ClientUI extends JFrame {
@@ -31,7 +52,7 @@ class ClientUI extends JFrame {
 	JTextField jtf; // 채팅 메시지 입력창
 	JTextArea jta; // 지난 채팅 메시지를 볼 수 있는 대화창
 	
-	Socket client; //서버외의 통신
+	Socket client; //서버외의 통신 위한 종이컵
 	
 	class MyListner implements ActionListener{
 		@Override
@@ -46,10 +67,11 @@ class ClientUI extends JFrame {
 				try {
 					// 1) 서버에 접속(Socket 생성)
 					client = new Socket("127.0.0.1", 8888);
+					new ClientThread().start(); // 成功したときのみ
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				
 				System.out.println("서버접속 버튼 클릭됨");
 			}else {
 				jta.setText(jtf.getText() + '\n');
