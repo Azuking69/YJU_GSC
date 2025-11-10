@@ -4,6 +4,8 @@
 // 3) 서버에서 보내는 메시지 수신
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.foreign.AddressLayout;
@@ -15,6 +17,17 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+
+// 클라이언트 화면에서 처리되어야 하는 이벤트 목록
+// -> "접속" 버튼을 클릭시 서버애 접속
+// -> 대화창에 "enter" 입력시 서버로 메시지 전송
+class MyListner implements ActionListener{
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// callback method
+		
+	}
+}
 
 //채팅 메시지 입력창, 대화창이 기본적으로 제공되는 클라이언트 화면구현
 class ClientUI extends JFrame {
