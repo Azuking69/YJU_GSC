@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.foreign.AddressLayout;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.time.chrono.IsoChronology;
@@ -44,7 +43,6 @@ class ClientUI extends JFrame {
 			while(true){
 				try {
 				// 종이컵에서 읽기 위한 실 뽑아내기
-				
 				byte[] b = new byte[1024];
 				is.read(b); // 1024byte 읽어서 배열 b에 저장
 				// 수진된 메시지 화면에 보여주기
@@ -55,7 +53,6 @@ class ClientUI extends JFrame {
 					e.printStackTrace();
 				}
 			}
-			
 		}
 	}
 	
@@ -71,10 +68,11 @@ class ClientUI extends JFrame {
 			if(str.equals("접속")) {
 				try {
 					// 1) 서버에 접속(Socket 생성)
-					client = new Socket("127.0.0.1", 8888);
+//					client = new Socket("127.0.0.1", 8888);
+					client = new Socket("210.101.236.171", 8888);
 					// 서버 접속을 성공하고 나면
 					is = client.getInputStream();
-					os =client.getOutputStream();
+					os = client.getOutputStream();
 					new ClientThread().start(); // 成功したときのみ
 				} catch (IOException e1) {
 					e1.printStackTrace();
