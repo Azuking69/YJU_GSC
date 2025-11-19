@@ -1,5 +1,4 @@
 
-
 // 학생이 도서관에서 책을 빌리는 기능을 구현하다고 샌각하고
 // 관련 믈래스외 메소드를 정의후에 사용
 
@@ -19,12 +18,12 @@ class 학생{
 				
 				// 빌렸으니 책장을 비움
 				lib.books[i] = null;
-				return;
+				// 한 권 빌렸으면 종료
+				return; 
 			}
 		}
 		// 책 없을 때 오류문 출력
 		System.out.println("학생: 책이 아무것도 없어요.");
-		
 	}
 }
 
@@ -63,8 +62,15 @@ class 책{
 
 // 실행
 public class 도서관에서책빌리기 {
-	public static void main(String[] args) {		
+	public static void main(String[] args) {
+		// 도서관 호출
+		도서관 lib = new 도서관();
+		// 도서관에 책 꽂기(差し込み)
+		lib.초시책등록();
+		
+		// 학생 만들기
 		학생 s = new 학생();
-		s.학생이도서관에서책빌리기();
+		// 책 빌리기
+		s.학생이도서관에서책빌리기(lib);
 	}
 }
