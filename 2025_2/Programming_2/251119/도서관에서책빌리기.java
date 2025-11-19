@@ -9,8 +9,22 @@ class 학생{
 		// 학생 방문
 		System.out.println("학생: 책을 빌리러 왔습니다.");
 		
-		//
-		for(){}
+		// 순서대로 확인
+		for(int i = 0; i < lib.books.length; i++){
+			// 책이 있는지 확인
+			if (lib.books[i] != null) {
+				책 b = lib.books[i];
+				// 출력
+				System.out.println("학생" + b.title + "를 빌렸습니다.");
+				
+				// 빌렸으니 책장을 비움
+				lib.books[i] = null;
+				return;
+			}
+		}
+		// 책 없을 때 오류문 출력
+		System.out.println("학생: 책이 아무것도 없어요.");
+		
 	}
 }
 
