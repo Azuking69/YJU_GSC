@@ -17,6 +17,7 @@ import java.util.ArrayList;
 class ServerThread extends Thread{
 	Socket server;
 	boolean flag = true; //	스레드 구동여부를 결정하는 변수
+	
 	static int index = 0; // 스레드에 이름으로 부여될 정수값
 	
 	public ServerThread(Socket server) {
@@ -43,17 +44,22 @@ class ServerThread extends Thread{
 				System.out.println("클라이언트에서 보내온 메시지 수진하다가 문제 발생됨");
 				flag = false; // while 문이 더 이상 동작하지 않게 됨 => 스레드 종료호출
 			}
-			try {
+//			try {
 				// 수신된 메시지를 모든 클라이언트로 송신
 				// 종이컵 저장 공간에서 종이컵을 하나씩 가져와서 해당 클라이언트로 메시지 전송
 				// 그렇다는 애기는 어딘가에 여태껏 만들어진 종이컵이 다 저장되어 있는곳이 있어야 한다.
 							
 				// 종이컵 저장 공간(totalSocket)에서 종이컵 하나씩 가져 와서
 				// 쓰기 위한 실(OutputStream) 뽑아내서 데이터 전송(write)
+			
+				synchronized (Server.totalSocket) { // 열쇠를 가지고 있는 사람만 안에 들어갈 수 있도록 하는 구조
+					
+				}
 				for (int i = 0; i < Server.totalSocket.size(); i++) {
 //					OutputStream os = Server.totalSocket.get(i).getOutputStream();
 //					os.write(b); // 방금전에 1024바이트 만큼 읽은 데이터를 전송
 					Socket temp = (Socket)Server.totalSocket.get(i);
+					
 					try {
 						OutputStream os = temp.getOutputStream();
 						os.write(b);
@@ -84,6 +90,7 @@ public class Server {
 		System.out.println("서버구동중");
 		// 1) 클라이언트 접속 대기
 		ServerSocket ss = new ServerSocket(8888);
+		
 		while (true) { // 여러 클라이언트 접속을 받아주기 위해 반복문 사용
 		// 클라이언트 접속대기 + 접속하면 종이컵 만들어 주기
 			Socket server = ss.accept();
