@@ -1,39 +1,110 @@
+// 서버파트 구현 목록
+// 1) 클라이언트 접속 대기 → 접속 후 클라이언트와 매칭되는 종이컵(Socket) 생성
+// 2) 접속한 모든 클라이언트로 부터 메시지 수신 
+// → 수신된 메시지를 모든 클라이언트로 송신
+// : 클라이언트 수 + 1 개의 Thread 필요
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.ArrayList;
 
 
-class Camera{
-	static Camera c; // 3) static 있으면 아래에서도 사용할 수 있음
-	private Camera() {
-		
+// 서버가 클라이언트 접속 대기도 하면서 클라이언트들!이 보내는 메시지 수신도 하기위해
+// 두 가지 작업을 동시에 처리해 줄 수 있도록 thread를 만든다.
+class ServerThread extends Thread{
+	Socket server;
+	boolean flag = true; //	스레드 구동여부를 결정하는 변수
+	
+	static int index = 0; // 스레드에 이름으로 부여될 정수값
+	
+	public ServerThread(Socket server) {
+		super(index + ""); // 현제 스레드 이름을 index로 부여
+		index++;
+		this.server = server;
 	}
 	
-	public static Camera open() { // 2) static 없으면 될 수 있음
-		c = new Camera(); // 1) Private Camera(); 때문에
-		플래시온(); // 4) 아래에 static 있으면 호출 됨
-		return c;
-		
-//		return new Camera();
-	}
+	public void run() {
+		// 2) 접속한 모든 클라이언트로 부터 메시지 수신
+		while(flag){
+			byte[] b = new byte[1024];
+			
+			try {
+				// 종이컵에서 읽기 위한 실 뽑아 내기
+				InputStream is = server.getInputStream(); // 종이컵에서 읽기 위한 실 뽑아 내기
+				is.read(b); // 1024바이트 읽어서 배열b에 저장
+				
+			}catch (IOException e) {
+				// 여기서 문제가 발생했던건 지금 스레드가 있는 클라이언트가 
+				// 종료되었다라 고추측할 수 있다.
+				// 따라서 현제 스레드는 더 이상 구동시키지 말고 종료해 줄필요가 있음!!
+				System.out.println(this.getName() + "Thread에서 문제발생:");
+				System.out.println("클라이언트에서 보내온 메시지 수진하다가 문제 발생됨");
+				flag = false; // while 문이 더 이상 동작하지 않게 됨 => 스레드 종료호출
+			}
+//			try {
+				// 수신된 메시지를 모든 클라이언트로 송신
+				// 종이컵 저장 공간에서 종이컵을 하나씩 가져와서 해당 클라이언트로 메시지 전송
+				// 그렇다는 애기는 어딘가에 여태껏 만들어진 종이컵이 다 저장되어 있는곳이 있어야 한다.
+							
+				// 종이컵 저장 공간(totalSocket)에서 종이컵 하나씩 가져 와서
+				// 쓰기 위한 실(OutputStream) 뽑아내서 데이터 전송(write)
+			
+				synchronized (Server.totalSocket) { // 열쇠를 가지고 있는 사람만 안에 들어갈 수 있도록 하는 구조
+					
+				}
+				for (int i = 0; i < Server.totalSocket.size(); i++) {
+//					OutputStream os = Server.totalSocket.get(i).getOutputStream();
+//					os.write(b); // 방금전에 1024바이트 만큼 읽은 데이터를 전송
+					Socket temp = (Socket)Server.totalSocket.get(i);
+					
+					try {
+						OutputStream os = temp.getOutputStream();
+						os.write(b);
+					}catch (Exception e) {
+						// 현제 예외는 이제 더 이상 사용되지 않는 종이컵, 벌써 종료되어
+						// 없어진 클라이언트랑 연결되어 있던 종이컵이 아직 종이컵 저장 공간에 남아
+						// 있어서 해당 종이컵을 사용해서 메시지를 보내려고 하면 예외가 발생한 상황
+						// -> 해결 방법은 이제 더 이상 사용하지 않은 종이컵을 재거
+						Server.totalSocket.remove(i);
+						
+						// System class 안에 있는 변수 "out"
+						// out 안에 있는 method "println"
+//						PrintStream p = System.out;
+//						p.println("AAA");
+						System.out.println(this.getName() + "Thread에서 문제발생:"); 
+						System.out.println("모든 클라이언트에게 메시지 보내주다가 문제 발생");
+					}
+				}
 	
-	public static void 플래시온() {
-//		
-//	}
-//	
-//	public void 플래시오프() {
-//		
-//	}
+//			} catch (IOException e) {
+//				System.out.println(this.getName() + "Thread에서 문제발생:");
+//				System.out.println("모든 클라이언트에게 메시지 보내주다가 문제 발생");
+//			}
+		}
+	}
 }
 
 
-public class SingltonEx {
-	public static void main(String[] args) {
-		Camera c1 = Camera.open();
-//		Camera c1 = new Camera(); // Camera class 안을 다 가져오기
-//		c1.플래시온();
+public class Server {
+	static ArrayList totalSocket = new ArrayList();
+	
+	public static void main(String[] args) throws IOException {
+		System.out.println("서버구동중");
+		// 1) 클라이언트 접속 대기
+		ServerSocket ss = new ServerSocket(8888);
 		
-		Camera c2 = new Camera();
-//		c2.플래시오프();
-
-		
+		while (true) { // 여러 클라이언트 접속을 받아주기 위해 반복문 사용
+		// 클라이언트 접속대기 + 접속하면 종이컵 만들어 주기
+			Socket server = ss.accept();
+			// 종이컵 저장
+			totalSocket.add(server);	
+			// 이제 클라이언트가 접속했으니 해당 클라이언트 담당하는 Thread 만들어서
+			// 구동시켜 줘야 함
+			new ServerThread(server).start();
+		}				
 	}
-
 }
