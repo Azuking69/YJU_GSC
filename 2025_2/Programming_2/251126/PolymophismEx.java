@@ -5,6 +5,7 @@ class A{ // class
 	}
 }
 
+
 class B extends A{ // printA()를 가지고 있는 class
 	public void printA() { // method overriding : printA를 초기화
 		System.out.println("B class 안의 printA()");
@@ -15,11 +16,17 @@ class B extends A{ // printA()를 가지고 있는 class
 	}
 }
 
+
 class C extends A{
+	public void printA() { // method overriding : printA를 초기화
+		System.out.println("B class 안의 printA()");
+	}
+	
 	public void printC(){
 		System.out.println("C");
 	}
 }
+
 
 
 public class PolymophismEx {
@@ -43,5 +50,6 @@ public class PolymophismEx {
 		
 		C c = new C();
 		c.printC();
+		c.printA();
 	}
 }
