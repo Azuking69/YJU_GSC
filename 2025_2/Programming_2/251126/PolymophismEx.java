@@ -25,8 +25,8 @@ class C extends A{
 public class PolymophismEx {
 	public static void main(String[] args) { // 한 번만 실행하는 method
 		// 1)
-		A a = new A(); // 객체
-		a.printA();
+		A a = new A(); // 객체화
+		a.printA(); // method 호출
 		
 		// 2)
 		A aa = new B(); // class A의 상속을 받은 B
