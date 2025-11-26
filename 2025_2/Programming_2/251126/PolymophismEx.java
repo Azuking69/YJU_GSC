@@ -65,6 +65,8 @@ public class PolymophismEx {
 		
 		// 다형성 문법 적용의 조건
 		// 1) class가 상속관계에 있어야 함
+		// 2) method overriding이 필요함
+		// 3) A aa = new B();
 		
 	}
 }
