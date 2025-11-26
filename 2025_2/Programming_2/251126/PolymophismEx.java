@@ -32,7 +32,7 @@ class C extends A{
 public class PolymophismEx {
 	public static void main(String[] args) { // 한 번만 실행하는 method
 		// 1)
-		A a = new A(); // 객체화
+		A a = new A(); // 객체화 = 메모리 올라감
 		a.printA(); // method 호출
 		
 		// 2)
@@ -48,8 +48,19 @@ public class PolymophismEx {
 //		b.printB();
 //		b.printA(); // class B 안에 printA()가 있음
 		
+		// 1)
 		C c = new C();
 		c.printC();
 		c.printA();
+		
+		// 2-1)
+		A cc = new C();
+//		cc.printC(); // 여거 안되
+		cc.printA();
+		
+		// 다형성
+		System.out.println("----------");
+		aa.printA();
+		cc.printA();
 	}
 }
