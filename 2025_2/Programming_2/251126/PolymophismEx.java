@@ -19,7 +19,7 @@ class B extends A{ // printA()를 가지고 있는 class
 
 class C extends A{
 	public void printA() { // method overriding : printA를 초기화
-		System.out.println("B class 안의 printA()");
+		System.out.println("C class 안의 printA()");
 	}
 	
 	public void printC(){
@@ -59,8 +59,12 @@ public class PolymophismEx {
 		cc.printA();
 		
 		// 다형성
-		System.out.println("----------");
-		aa.printA();
-		cc.printA();
+		System.out.println("--------------------");
+		aa.printA(); // aa, cc : 같은 타입을 가지고 있는 타입인데
+		cc.printA(); // 결과가 다르게 출력 = 다형성
+		
+		// 다형성 문법 적용의 조건
+		// 1) class가 상속관계에 있어야 함
+		
 	}
 }
