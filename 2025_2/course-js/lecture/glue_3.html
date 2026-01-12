@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Test</title>
+</head>
+<body>
+
+    <h3>날씨 확인하기</h3>
+
+    <form onsubmit="return checkForm();">
+        <label>
+            지역명:
+            <input type="text" id="city">
+        </label>
+        <br><br>
+        <button type="submit">날씨 확인하기</button>
+    </form>
+
+    <script>
+        function checkForm() {
+            let city = document.getElementById("city").value;
+
+            if (city === "") {
+                alert("지역명을 입력하세요.");
+                return false;  // 폼 전송 막기
+            }
+
+            return true; // 정상 입력이면 전송 허용
+        }
+    </script>
+
+</body>
+</html>
