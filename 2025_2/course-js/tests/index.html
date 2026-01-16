@@ -4,9 +4,13 @@
     <title>Document</title>
   </head>
   <body>
-    <input type="button" value="Count 1" />
+    <input type="button" value="Count 1" onclick="counter()" />
     <script>
-      alert("hello");
+      let count = 1;
+      function counter() {
+        alert(count);
+        count++;
+      }
     </script>
   </body>
 </html>
