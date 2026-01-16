@@ -1,5 +1,5 @@
 # Test codes directory
-tests/
+#tests/
 
 # Node modules
 node_modules/
