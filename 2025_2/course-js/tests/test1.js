@@ -1,34 +1,16 @@
 print = console.log;
 
-function sayHello() {
+test();
+
+function test() {
   print("hello");
 }
 
-function helloSomething() {
-  let name = "GSC";
-  function bar() {
-    print("hello" + name);
-  }
-  return bar;
-}
+// legacy
+var bar = 1;
 
-let foo = helloSomething();
-foo();
+// ES 6 -> new!!!!
+let foo = 2;
+const pos = 3;
 
-// let foo = helloSomething(core){
-//   core();
-//   function bar(){
-//     print("hello 2");
-//   }
-//   return bar;
-//   // return core
-// }
-
-// function hello(core) {
-//   core();
-// }
-
-hello(sayHello);
-
-// let saySomething = sayHello;
-// saySomething();
+// variable & function -> hoisting
