@@ -9,12 +9,11 @@ print = console.log;
 // legacy
 var bar = 1;
 
-if (2 > 1) {
-  var gsc = 2;
+function test() {
   print(bar);
 }
-
-print(gsc);
+test();
+print(bar);
 
 // ES 6 -> new!!!!
 let foo = 2;
