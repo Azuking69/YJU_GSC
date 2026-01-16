@@ -1,13 +1,20 @@
 print = console.log;
 
-test();
+// test();
 
-function test() {
-  print("hello");
-}
+// function test() {
+//   print("hello");
+// }
 
 // legacy
 var bar = 1;
+
+if (2 > 1) {
+  var gsc = 2;
+  print(bar);
+}
+
+print(gsc);
 
 // ES 6 -> new!!!!
 let foo = 2;
