@@ -8,21 +8,27 @@
     <p></p>
     <input type="button" value="Count 2" onclick="counter2()" />
     <script>
-      // outer 함수
-      function makeCounter() {
-        let count = 1;
+      // // outer 함수
+      // function makeCounter() {
+      //   let count = 1;
 
-        // inner 함수
-        function counter() {
-          alert(count);
-          count++;
-        }
-        return counter;
-      }
+      //   // inner 함수
+      //   function counter() {
+      //     alert(count);
+      //     count++;
+      //   }
+      //   return counter;
+      // }
 
-      // const:再代入できない変数宣言
-      const counter1 = makeCounter();
-      const counter2 = makeCounter();
+      // // const:再代入できない変数宣言
+      // const counter1 = makeCounter();
+      // const counter2 = makeCounter();
+
+      let bar = 2;
+      bar = 2.0;
+      bar = "2";
+      bar = true;
+      // Dynamic typing
     </script>
   </body>
 </html>
