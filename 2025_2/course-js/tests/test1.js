@@ -7,13 +7,12 @@ print = console.log;
 // }
 
 // legacy
-var bar = 1;
+// var bar = 1;
 
-function test() {
-  print(bar);
+for (var i = 1; i < 10; i++) {
+  print(i);
 }
-test();
-print(bar);
+print("var i : " + i);
 
 // ES 6 -> new!!!!
 let foo = 2;
