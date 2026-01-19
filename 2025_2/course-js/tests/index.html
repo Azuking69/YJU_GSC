@@ -6,12 +6,19 @@
     <title>Document</title>
   </head>
   <body>
-    <input type="number" placeholder="Put numbers" />
+    <input type="number" id="input_value" placeholder="Put numbers" />
     <button id="add_btn" onclick="add()">Add</button>
     <script>
+      let result = 0;
+
       // Event handler
       function add() {
-        alert(hello);
+        const input = document.getElementById("input_value").value;
+
+        // previous value + current value
+        result += Number(input);
+        // show result
+        alert(result);
       }
     </script>
   </body>
