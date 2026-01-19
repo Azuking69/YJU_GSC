@@ -1,34 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
   <body>
-    <input type="button" value="Count 1" onclick="counter1()" />
-    <p></p>
-    <input type="button" value="Count 2" onclick="counter2()" />
+    <input type="number" placeholder="Put numbers" />
+    <button id="add_btn" onclick="add()">Add</button>
     <script>
-      // // outer 함수
-      // function makeCounter() {
-      //   let count = 1;
-
-      //   // inner 함수
-      //   function counter() {
-      //     alert(count);
-      //     count++;
-      //   }
-      //   return counter;
-      // }
-
-      // // const:再代入できない変数宣言
-      // const counter1 = makeCounter();
-      // const counter2 = makeCounter();
-
-      let bar = 2;
-      bar = 2.0;
-      bar = "2";
-      bar = true;
-      // Dynamic typing
+      // Event handler
+      function add() {
+        alert(hello);
+      }
     </script>
   </body>
 </html>
