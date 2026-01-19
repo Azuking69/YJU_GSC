@@ -7,7 +7,7 @@
   </head>
   <body>
     <input type="number" id="input_value" placeholder="Put numbers" />
-    <button id="add_btn" onclick="add()">Add</button>
+    <button id="add_btn" onclick="add_num()">Add</button>
     <script>
       function createdAdder() {
         let result = 0;
@@ -21,8 +21,9 @@
           // show result
           alert(result);
         }
-        return add;
+        return add; // 자신이 만들어진 장소의 바깥쪽변수 result를 외운 채로 계속 살아가다
       }
+      const add_num = createdAdder();
     </script>
   </body>
 </html>
