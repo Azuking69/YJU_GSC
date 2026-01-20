@@ -6,13 +6,17 @@
   <body>
     <script>
       print = console.log();
-      {
-        var bar = "gsc"; // var -> scope unit: function
-      }
-      print(bar);
 
-      //   var bar = "gsc";
-      //   let foo = "yju";
+      let foo = 1; // global
+
+      function test() {
+        {
+          let foo = 2;
+        } // local
+        print(foo);
+      }
+      test();
+      print(foo);
     </script>
   </body>
 </html>
