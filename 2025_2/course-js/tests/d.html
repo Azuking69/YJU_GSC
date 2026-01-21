@@ -1,22 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
   <body>
     <script>
-      print = console.log();
-
-      let foo = 1; // global
-
-      function test() {
-        {
-          let foo = 2;
-        } // local
-        print(foo);
+      for (var i = 1; i < 3; i++) {
+        console.log(i);
       }
-      test();
-      print(foo);
+      console.log("fn: " + i);
     </script>
   </body>
 </html>
