@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      print = console.log();
+
+      let foo = 1; // global
+
+      function test() {
+        {
+          let foo = 2;
+        } // local
+        print(foo);
+      }
+      test();
+      print(foo);
+    </script>
+  </body>
+</html>
