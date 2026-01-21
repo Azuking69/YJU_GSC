@@ -1,21 +1,17 @@
 print = console.log;
 
-// test();
+let x = 2;
+var a = 1;
 
-// function test() {
-//   print("hello");
-// }
-
-// legacy
-// var bar = 1;
-
-for (var i = 1; i < 10; i++) {
-  print(i);
+function bar() {
+  print(x);
 }
-print("var i : " + i);
 
-// ES 6 -> new!!!!
-let foo = 2;
-const pos = 3;
-
-// variable & function -> hoisting
+function outer() {
+  let y = 2;
+  function inner() {
+    let z = 3;
+    print(x, y, z);
+  }
+  bar();
+}
