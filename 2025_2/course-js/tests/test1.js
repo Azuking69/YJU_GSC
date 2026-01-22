@@ -10,8 +10,7 @@ function a_1() {
 }
 
 function b_1() {
-  const bar = a_1();
-  bar(); // a_2() -> 1, 2, 3
+  a_1(); // a_2() -> 1, 2, 3
 }
 
 b_1();
