@@ -1,17 +1,17 @@
-print = console.log;
+let x = 1;
 
-let x = 2;
-var a = 1;
-
-function bar() {
-  print(x);
-}
-
-function outer() {
+function a_1() {
   let y = 2;
-  function inner() {
+  function a_2() {
     let z = 3;
-    print(x, y, z);
+    console.log(x, y, z);
   }
-  bar();
+  return a_2;
 }
+
+function b_1() {
+  const bar = a_1();
+  bar(); // a_2() -> 1, 2, 3
+}
+
+b_1();
