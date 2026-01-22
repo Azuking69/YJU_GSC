@@ -4,13 +4,16 @@ function a_1() {
   let y = 2;
   function a_2() {
     let z = 3;
+    y++;
     console.log(x, y, z);
   }
   return a_2;
 }
 
 function b_1() {
-  a_1(); // a_2() -> 1, 2, 3
+  const bar = a_1();
+  bar(); // a_2() -> 1, 2, 3
+  bar(); // a_2() -> 1, 4, 3
 }
 
 b_1();
