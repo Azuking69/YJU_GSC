@@ -8,4 +8,7 @@ function foo() {
   function pos() {
     let z = 3;
   }
+  pos();
+  bar();
 }
+foo();
