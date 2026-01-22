@@ -7,13 +7,12 @@ function a_1() {
     y++;
     console.log(x, y, z);
   }
-  return a_2;
+  a_2();
 }
 
 function b_1() {
-  const bar = a_1();
-  bar(); // a_2() -> 1, 2, 3
-  bar(); // a_2() -> 1, 4, 3
+  a_1(); // a_2() -> 1, 3, 3
+  a_1(); // a_2() -> 1, 3, 3
 }
 
 b_1();
