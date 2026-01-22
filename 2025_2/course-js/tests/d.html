@@ -8,16 +8,21 @@
     <script>
       let flag = true;
 
-      function makeToggleHandler() {
-        // 버튼 클릭 시
-        // 온 이면 오프로
-        // 오프 이면 온으로
-        if (flag) {
-        } else {
-        }
+      function makeToggleHandler(el) {
+        // closure function
+        return function () {
+          flag != flag;
+
+          // on or off
+          el.textContext = flag ? "ON" : "OFF";
+          el.style.backgroundColor = flag ? "gray" : "blue";
+        };
       }
-      const btn = document.getElementById("btn");
-      btn.addEventListener("click", makeToggleHandler);
+      const btn1 = document.getElementById("btn1");
+      btn1.addEventListener("click", makeToggleHandler(btn1));
+
+      const btn2 = document.getElementById("btn2");
+      btn2.addEventListener("click", makeToggleHandler(btn2));
     </script>
   </body>
 </html>
