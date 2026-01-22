@@ -4,19 +4,20 @@
     <title>Document</title>
   </head>
   <body>
+    <button id="btn">ON</button>
     <script>
-      print = console.log();
+      let flag = true;
 
-      let foo = 1; // global
-
-      function test() {
-        {
-          let foo = 2;
-        } // local
-        print(foo);
+      function makeToggleHandler() {
+        // 버튼 클릭 시
+        // 온 이면 오프로
+        // 오프 이면 온으로
+        if (flag) {
+        } else {
+        }
       }
-      test();
-      print(foo);
+      const btn = document.getElementById("btn");
+      btn.addEventListener("click", makeToggleHandler);
     </script>
   </body>
 </html>
