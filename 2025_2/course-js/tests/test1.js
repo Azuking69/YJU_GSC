@@ -1,13 +1,10 @@
 function bar() {
-  console.log(this);
+  print(){
+    console.log(this);
+  };
 }
 
-function foo() {
-  console.log(this);
-  function pos() {
-    console.log(this);
-  }
-  pos();
-}
-bar();
-foo();
+b1 = new Bar();
+b1.prt(); // gsc
+const f = b1.prtName;
+f();
