@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">Color toggle</button>
+  </body>
+  <script>
+    function makeBlue() {
+      this.style.backgroundColor = "blue";
+    }
+    const btn = document.getElementById("btn");
+    btn.onclick = makeBlue;
+  </script>
+</html>

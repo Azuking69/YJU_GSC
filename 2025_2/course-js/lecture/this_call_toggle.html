@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn" onclick="btn_click.call(this)">Color toggle</button>
+  </body>
+  <script>
+    const btn = document.getElementById("btn");
+
+    function makeColorChanger() {
+      let flag = true;
+
+      return function () {
+        console.log(this);
+        this.style.backgroundColor = flag ? "red" : "blue";
+        this.style.color = "white";
+        flag = !flag;
+      };
+    }
+
+    const btn_click = makeColorChanger();
+  </script>
+</html>
