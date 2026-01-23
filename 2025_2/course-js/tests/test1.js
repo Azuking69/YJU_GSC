@@ -1,15 +1,13 @@
-// .js file
-class Bar {
-  constructor(argName = "gsc") {
-    this.name = argName;
-  }
-
-  prtName() {
-    console.log(this.name);
-  }
+function bar() {
+  console.log(this);
 }
 
-b1 = new Bar();
-b1.prtName(); // gsc
-const f = b1.prtName;
-f();
+function foo() {
+  console.log(this);
+  function pos() {
+    console.log(this);
+  }
+  pos();
+}
+bar();
+foo();
