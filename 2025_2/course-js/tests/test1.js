@@ -1,17 +1,10 @@
-print = console.log;
-
-let x = 2;
-var a = 1;
-
 function bar() {
-  print(x);
+  // OER -> global
 }
 
 function outer() {
-  let y = 2;
+  // OER -> global
   function inner() {
-    let z = 3;
-    print(x, y, z);
+    // OER -> outer
   }
-  inner();
 }
