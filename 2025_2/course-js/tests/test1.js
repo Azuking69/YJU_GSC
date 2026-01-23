@@ -1,19 +1,20 @@
-// Static type vs Dynamic type
+// .js file
 
-// Java
-int a = 2; // a -> int, static 
-a = 2; // 오류
+// JS {} -> create an object
+foo = {
+  name:"gsc", 
+  prtName: function(){console.log()this.name};};
 
-// JS or Python
-let a = 2; // JS
-a = 2; // Python
-a = "2"; // int -> string
+// 1) {} -> create an object
+// 2) this.name = "gsc"
+// 3) this.prtname = function(){console.log()this.name}
 
-class Bar {
-  constructor(argName = "gsc") {
-    this.name = argName;
-  }
-}
+foo.prtName();
+// class Bar {
+//   constructor(argName = "gsc") {
+//     this.name = argName;
+//   }
+// }
 
-b1 = new Bar();
-console.log(b1.name);
+// b1 = new Bar();
+// console.log(b1.name);
