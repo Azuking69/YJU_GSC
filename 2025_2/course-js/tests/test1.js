@@ -1,10 +1,8 @@
-function bar() {
-  // OER -> global
-}
-
-function outer() {
-  // OER -> global
-  function inner() {
-    // OER -> outer
+class Bar {
+  constructor(argName = "gsc") {
+    this.name = argName;
   }
 }
+
+b1 = new Bar();
+console.log(b1.name);
