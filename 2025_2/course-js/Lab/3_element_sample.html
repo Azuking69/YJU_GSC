@@ -13,44 +13,49 @@
   </head>
   <body>
     <h2>DOM CRUD (Add / Delete / Edit)</h2>
-
+    <!-- 입력 박스(문자로 인식) -->
     <input id="txt" type="text" placeholder="할 일을 입력" />
+    <!-- 추가 버튼 -->
     <button id="btnAdd">추가</button>
-
+    <!-- 리스트 작성 -->
     <ul id="list"></ul>
 
     <script>
+      // 입력 내용 가져오기
       const txt = document.getElementById("txt");
       const btnAdd = document.getElementById("btnAdd");
       const list = document.getElementById("list");
 
+      // createItem 메소드 만들기
       function createItem(text) {
+        // 내용 만들기
         const li = document.createElement("li");
 
         const span = document.createElement("span");
         span.textContent = text;
-
+        //
         const input = document.createElement("input");
         input.type = "text";
         input.value = text;
         input.style.display = "none";
-
+        // 수정 버튼 만들기
         const btnEdit = document.createElement("button");
         btnEdit.textContent = "수정";
-
+        // 저장 버튼 만들기
         const btnSave = document.createElement("button");
         btnSave.textContent = "저장";
         btnSave.style.display = "none";
-
+        // 취소 버튼 만들기
         const btnCancel = document.createElement("button");
         btnCancel.textContent = "취소";
         btnCancel.style.display = "none";
-
+        // 삭제 버튼 만들기
         const btnDel = document.createElement("button");
         btnDel.textContent = "삭제";
-
+        // prevText 변수에 text를 넣기
         let prevText = text;
 
+        // enterEditMode inner 함수 만들기
         function enterEditMode() {
           prevText = span.textContent;
           input.value = prevText;
@@ -68,6 +73,7 @@
           input.select();
         }
 
+        // exitEditMode inner 함수 만들기
         function exitEditMode() {
           span.style.display = "";
           input.style.display = "none";
@@ -78,7 +84,7 @@
 
           btnDel.disabled = false;
         }
-
+        // click하면 enterEditMode에
         btnEdit.addEventListener("click", enterEditMode);
 
         btnSave.addEventListener("click", () => {
@@ -92,7 +98,7 @@
           span.textContent = prevText;
           exitEditMode();
         });
-
+        // click하면 remove에
         btnDel.addEventListener("click", () => li.remove());
 
         input.addEventListener("keydown", (e) => {
