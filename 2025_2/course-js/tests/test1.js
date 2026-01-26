@@ -1,14 +1,24 @@
-function prtName() {
-  console.log(this.name);
+class Car {
+  model = undefined;
+  prtModel = undefined;
+  constructor(argModel) {
+    this.model = argModel;
+  }
+  prtModel() {
+    console.log(this.model);
+  }
 }
 
-class Student {
-  name = "gsc";
-  prtInfo = undefined;
+class enCar {
+  prtList = undefined;
 }
 
-std1 = new Student();
-std1.prtInfo = prtName();
+car1 = new Car("Y");
+car1.prtModel(); // 출력: Y
+// car1.prtModel = enCar;
 
-std1.prtInfo();
-prtName();
+// car1.prtModel(); // 출력: Y
+// enCar(); // 출력: undefined
+
+const encar = car1.prtModel;
+encar();
