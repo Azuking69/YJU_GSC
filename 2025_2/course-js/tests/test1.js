@@ -1,25 +1,11 @@
-class Car {
-  model = undefined;
-  prtModel = undefined;
-  constructor(argModel) {
-    this.model = argModel;
-  }
-  prtModel() {
-    console.log(this.model);
-  }
+// setTimeout(// handler, time: ms);
+// class -> ES6
+
+var count = 0;
+
+function increate() {
+  count++;
+  console.log(this);
 }
 
-class enCar {
-  prtList = undefined;
-}
-
-car1 = new Car("Y");
-car1.prtModel(); // 출력: Y
-// car1.prtModel = enCar;
-
-// car1.prtModel(); // 출력: Y
-// enCar(); // 출력: undefined
-
-const encar = car1.prtModel;
-// encar();
-encar.call(car1); // 출력: Y
+setTimeout(increate, 1000);
