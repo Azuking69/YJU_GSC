@@ -21,4 +21,5 @@ car1.prtModel(); // 출력: Y
 // enCar(); // 출력: undefined
 
 const encar = car1.prtModel;
-encar();
+// encar();
+encar.call(car1); // 출력: Y
