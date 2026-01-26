@@ -1,10 +1,14 @@
-function bar() {
-  print(){
-    console.log(this);
-  };
+function prtName() {
+  console.log(this.name);
 }
 
-b1 = new Bar();
-b1.prt(); // gsc
-const f = b1.prtName;
-f();
+class Student {
+  name = "gsc";
+  prtInfo = undefined;
+}
+
+std1 = new Student();
+std1.prtInfo = prtName();
+
+std1.prtInfo();
+prtName();
