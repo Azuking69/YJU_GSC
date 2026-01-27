@@ -1,21 +1,14 @@
-class Student {
-  // class -> ES6, ECMA2015
-  age = undefined;
-  constructor(argAge) {
-    this.age = argAge;
-  }
+// Function declaration -> 3
 
-  prtAge() {
-    console.log(this.age);
-  }
+// Literal Function
+function add(x, y) {
+  return x + y;
 }
 
-class Button {
-  onclick = null;
-}
+// Function express (Anonymous function)
+let add2 = function () {
+  return x + y;
+};
 
-btn = new Button();
-std = new Student();
-
-btn.onclick = std.prtAge;
-btn.onclick(); // this broken
+console.log(add1(2, 3));
+console.log(add2(4, 5));
