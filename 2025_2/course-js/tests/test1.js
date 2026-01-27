@@ -1,11 +1,21 @@
-// setTimeout(// handler, time: ms);
-// class -> ES6
+class Student {
+  // class -> ES6, ECMA2015
+  age = undefined;
+  constructor(argAge) {
+    this.age = argAge;
+  }
 
-var count = 0;
-
-function increate() {
-  count++;
-  console.log(this);
+  prtAge() {
+    console.log(this.age);
+  }
 }
 
-setTimeout(increate, 1000);
+class Button {
+  onclick = null;
+}
+
+btn = new Button();
+std = new Student();
+
+btn.onclick = std.prtAge;
+btn.onclick(); // this broken
