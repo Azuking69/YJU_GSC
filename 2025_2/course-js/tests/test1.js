@@ -1,6 +1,4 @@
 // Function declaration -> 3
-console.log(add1(2, 3));
-console.log(add2(4, 5));
 
 // Literal Function
 function add(x, y) {
@@ -12,19 +10,7 @@ let add2 = function () {
   return x + y;
 };
 
-// Legacy -> Class definition
-function Student(argAge) {
-  this.age = argAge;
+// Arrow function (ES), ECMA2015
+let add3 = () => {
+  return x + y;
 };
-
-std1 = new Student();
-
-// {}
-/*{
-    Student()
-    this.age = argAge;
-      this.prtAge = function(){
-        console.log(this.age);
-      }
-  }
-
