@@ -7,30 +7,37 @@
     <input type="number" id="counter" placeholder="0" />
     <button id="btn">Start</button>
     <script>
-      const counter = document.getElementById("counter");
-      const button = document.getElementById("btn");
-      let cnt = 0;
-      let flag = true;
+      function makeCounter() {
+        // 변수 선언
+        let cnt = 0;
+        let isRunning = true;
+        let timerID = null;
 
-      function test() {
-        cnt++;
-        counter.value = cnt;
-        flag = !flag;
-        this.textContent = flag ? "Hi" : "Hello";
+        // 입력된 counter의 숫자를 가져오기
+        const counter = document.getElementById("counter");
+        const button = document.getElementById("btn");
+
+        function counter() {
+          // 시작
+          if (!isRunning) {
+            // 카운트 값 1증가
+            count++;
+            // 화면 출력
+            console.log(count);
+            // 버튼의 글자 -> 실행
+            btn.textContent = "STOP";
+
+            isRunning = true;
+            // 종료
+          } else {
+            // 터이머 종료
+            clearInterval(timerID);
+            // 버튼의 글자 -> 시작
+            isRunning = false;
+          }
+        }
       }
       button.addEventListener("click", test);
-      /*
-  let cnt = 0;
-  function myCounter() {
-    cnt++;
-    console.log(cnt);
-    if(cnt == 10){
-      clearInterval(timerID);
-      console.log("terminated");
-    }
-  }
-  let timerID = setInterval(myCounter, 1000);
-*/
     </script>
   </body>
 </html>
