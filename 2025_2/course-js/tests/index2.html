@@ -8,23 +8,38 @@
     <button id="btn">Start</button>
 
     <script>
+      let counter = document.getElementById("counter");
+      const button = document.getElementById("btn");
+
+      let cnt = 0;
+      let flag = true;
+
+      function test() {
+        cnt++;
+        console.log("Hello");
+        flag = !flag;
+        this.textContent = flag ? "Hi" : "Hello";
+      }
+
+      button.addEventListener("click", test);
+
       // id = setInterval(handler, interval time);
       // clearInterval(id);
 
-      let cnt = 0;
+      //   let cnt = 0;
 
-      function MyCounter() {
-        // callback 함수
-        cnt++;
-        console.log(cnt);
-      }
+      //   function MyCounter() {
+      //     // callback 함수
+      //     cnt++;
+      //     console.log(cnt);
+      //   }
 
-      if (cnt == 10) {
-        clearInterval(timerID);
-        console.log("terminated");
-      }
+      //   if (cnt == 10) {
+      //     clearInterval(timerID);
+      //     console.log('terminated');
+      //   }
 
-      let timerID = MyCounter(MyCounter, 1000);
+      //   let timerID = MyCounter(MyCounter, 1000);
     </script>
   </body>
 </html>
