@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="number" id="counter" placeholder="0" />
+    <button id="btn">Start</button>
+    <script>
+      const counter = document.getElementById("counter");
+      const button = document.getElementById("btn");
+      let cnt = 0;
+      let flag = true;
+
+      function test() {
+        cnt++;
+        counter.value = cnt;
+        flag = !flag;
+        this.textContent = flag ? "Hi" : "Hello";
+      }
+      button.addEventListener("click", test);
+      /*
+  let cnt = 0;
+  function myCounter() {
+    cnt++;
+    console.log(cnt);
+    if(cnt == 10){
+      clearInterval(timerID);
+      console.log("terminated");
+    }
+  }
+  let timerID = setInterval(myCounter, 1000);
+*/
+    </script>
+  </body>
+</html>
