@@ -9,35 +9,47 @@
     <script>
       function makeCounter() {
         // 변수 선언
-        let cnt = 0;
+        let count = 0;
         let isRunning = true;
         let timerID = null;
 
-        // 입력된 counter의 숫자를 가져오기
+        // ID 가져오기
         const counter = document.getElementById("counter");
         const button = document.getElementById("btn");
 
-        function counter() {
+        return function () {
           // 시작
           if (!isRunning) {
-            // 카운트 값 1증가
-            count++;
-            // 화면 출력
-            console.log(count);
+            // setInterval(함수, 시간)
+            timerID = setInterval(() => {
+              // 카운트 값 1증가
+              count++;
+              // countを持ってきたIDに返す
+              counter.value = count;
+              // 화면 출력
+              console.log(count);
+            }, 1000);
+
             // 버튼의 글자 -> 실행
-            btn.textContent = "STOP";
+            button.textContent = "STOP";
 
             isRunning = true;
+
             // 종료
           } else {
             // 터이머 종료
             clearInterval(timerID);
             // 버튼의 글자 -> 시작
+            button.textContent = "START";
             isRunning = false;
           }
-        }
+        };
       }
-      button.addEventListener("click", test);
+
+      // global 변수
+      const button = document.getElementById("btn");
+      const handler = makeCounter();
+      button.addEventListener("click", handler);
       /*
         let cnt = 0;
         function myCounter() {
