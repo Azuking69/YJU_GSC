@@ -21,3 +21,6 @@ let btn = new Button();
 
 btn.onclick = std1.prtAge2;
 btn.onclick();
+
+let test = std1.argAge2;
+test();
