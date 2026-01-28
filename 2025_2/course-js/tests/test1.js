@@ -4,8 +4,12 @@ class Student {
     console.log(this.age);
   };
   prtAge2 = (argAge) => {
+    // 실수에 쓰지 않은 방법
     console.log(this.age);
   };
+  prtAge3(argAge) {
+    console.log(this.age);
+  }
 }
 
 let std1 = new Student();
