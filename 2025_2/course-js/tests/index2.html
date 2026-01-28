@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="number" id="counter" placeholder="0" />
+    <button id="btn">Start</button>
+
+    <script>
+      // id = setInterval(handler, interval time);
+      // clearInterval(id);
+
+      let cnt = 0;
+
+      function MyCounter() {
+        // callback 함수
+        cnt++;
+        console.log(cnt);
+      }
+
+      if (cnt == 10) {
+        clearInterval(timerID);
+        console.log("terminated");
+      }
+
+      let timerID = MyCounter(MyCounter, 1000);
+    </script>
+  </body>
+</html>
