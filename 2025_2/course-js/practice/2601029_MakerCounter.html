@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="number" id="counter" placeholder="0" />
+    <button id="btn">Start</button>
+    <script>
+      const counter = document.getElementById("counter");
+      const button = document.getElementById("btn");
+      function makerCounter(argButton, argCounter) {
+        // member variable
+        let count = 0;
+        let isRunning = false;
+        let timerId = null;
+        const button = argButton;
+        const counter = argCounter;
+        return function () {
+          // 시작
+          if (!isRunning) {
+            timerId = setInterval(function () {
+              // 카운트 값 1증가
+              count++;
+              // 화면 출력
+              counter.value = count;
+            }, 1000);
+            // 버튼의 글자 -> 실행
+            button.textContent = "STOP";
+            isRunning = true;
+            // 종료
+          } else {
+            // 타이머 종료
+            clearInterval(timerId);
+            // 버튼의 글자 -> 시작
+            button.textContent = "START";
+            isRunning = false;
+          }
+        };
+      }
+      button.addEventListener("click", makerCounter(button, counter));
+    </script>
+  </body>
+</html>
