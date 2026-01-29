@@ -3,6 +3,8 @@ class Student {
   // 3) Class Member variable
   // 4) Class Member method
 
+  name = ""; // ES 2022
+
   // Constructor
   constructor(argAge) {
     // 1) Instance Member variable
