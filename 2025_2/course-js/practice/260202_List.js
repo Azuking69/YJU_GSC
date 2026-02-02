@@ -1,19 +1,12 @@
-print = console.log;
+const myList = [10, 20, , , 50];
 
-let myList1 = [100, 200, 300]; // dense array
-let myList2 = [10, 20, 30]; // dense attay
+myList.forEach((v) => {
+  console.log(v);
+});
 
-myList1[100] = 400; // space array
+// for of -> value
+for (const value of myList) {
+  console.log(value);
+}
 
-print(myList1.length === Object.keys(myList1).length);
-print(myList2.length === Object.keys(myList2).length);
-
-// for (let i = 0; i < myList1.length; i++) {
-//   print(myList1[i]);
-// }
-// for (let i = 0; i < myList2.length; i++) {
-//   print(myList2[i]);
-// }
-
-// print(`myList1: ${myList1}, length: ${myList1.length}`);
-// print(`myList2: ${myList2}, length: ${myList2.length}`);
+// for of -> index
