@@ -210,21 +210,53 @@
         // - this를 사용하여 각 필드에 값 저장
         // - total 계산: 세 과목 점수의 합
         // - avg 계산: total을 3으로 나눈 값 (toFixed(2)로 소수점 처리)
-        constructor(studentId, name, kor, eng, math) {}
+        constructor(studentId, name, kor, eng, math) {
+          this.studentId = studentId;
+          this.name = name;
+          this.kor = kor;
+          this.eng = eng;
+          this.math = math;
 
-        // TODO: toRow(index) 메서드 구현
-        // - 매개변수 index: 테이블에 표시할 순번 (No)
-        // - 반환값: <tr> 요소 (document.createElement('tr') 사용)
-        //
-        // [구현 단계]
-        // 1) tr 요소 생성
-        // 2) 표시할 데이터 배열 만들기: [index, studentId, name, kor, eng, math, total, avg]
-        // 3) for문으로 배열 순회하며 각 데이터에 대해:
-        //    - td 요소 생성 (document.createElement('td'))
-        //    - td.textContent에 데이터 값 설정
-        //    - tr에 td 추가 (tr.appendChild(td))
+          // TODO: toRow(index) 메서드 구현
+          // - 매개변수 index: 테이블에 표시할 순번 (No)
+          // - 반환값: <tr> 요소 (document.createElement('tr') 사용)
+          //
+          // [구현 단계]
+          // 1) tr 요소 생성
+          // 2) 표시할 데이터 배열 만들기: [index, studentId, name, kor, eng, math, total, avg]
+          // 3) for문으로 배열 순회하며 각 데이터에 대해:
+          //    - td 요소 생성 (document.createElement('td'))
+          //    - td.textContent에 데이터 값 설정
+          //    - tr에 td 추가 (tr.appendChild(td))
+          var sum = 0;
+          var arr = [kor, eng, math];
+          for (var i = 0; i < arr.length; i++) {
+            sum += arr[i];
+          }
+          this.total = sum;
+          this.avg = (sum / 3).toFixed(2);
+        }
         // 4) 완성된 tr 반환
-        toRow(index) {}
+        toRow(index) {
+          var tr = document.createElement("tr");
+
+          var data = [
+            index,
+            this.studentId,
+            this.name,
+            this.kor,
+            this.eng,
+            this.math,
+            this.total,
+            this.avg,
+          ];
+          for (var i = 0; i < data.length; i++) {
+            var td = document.createElement("td");
+            td.textContent = data[i];
+            tr.appendChild(td);
+          }
+          return tr;
+        }
       }
 
       // =============================================
@@ -233,12 +265,15 @@
 
       // TODO: 학생 객체를 저장할 빈 배열 선언
       // 힌트: var students = [];
-
+      var students = [];
       // TODO: DOM 요소 참조 변수 선언
       // 힌트: document.getElementById() 사용
       // - form: 'studentForm' 요소
       // - tableBody: 'tableBody' 요소
       // - noDataMsg: 'noData' 요소
+      var form = document.getElementById("studentForm");
+      var tableBody = document.getElementById("tableBody");
+      var noDataMsg = document.getElementById("noData");
 
       // =============================================
       // 3. 유효성 검사 함수
@@ -256,16 +291,32 @@
       function validateInput(studentId, name, kor, eng, math) {
         // TODO: 학번 빈 값 체크
         // 힌트: if (studentId.trim() === '') { alert(...); return false; }
-
+        if (studentId.trim() === "") {
+          alert("학번(学番)을 입력하세요.");
+          return false;
+        }
         // TODO: 이름 빈 값 체크
-
+        if (name.trim() === "") {
+          alert("이름(名前)을 입력하세요.");
+          return false;
+        }
         // TODO: 국어 점수 검사 (숫자인지, 0~100 범위인지)
         // 힌트: isNaN(kor)로 숫자 여부 체크
-
+        if (isNaN(kor) || kor < 0 || kor > 100) {
+          alert("국어 점수는 0~100 사이의 숫자여야 합니다.");
+          return false;
+        }
         // TODO: 영어 점수 검사
-
+        // TODO: 영어 점수 검사
+        if (isNaN(eng) || eng < 0 || eng > 100) {
+          alert("영어 점수는 0~100 사이의 숫자여야 합니다.");
+          return false;
+        }
         // TODO: 수학 점수 검사
-
+        if (isNaN(math) || math < 0 || math > 100) {
+          alert("수학 점수는 0~100 사이의 숫자여야 합니다.");
+          return false;
+        }
         // 모든 검사 통과 시 true 반환
         return true;
       }
@@ -282,12 +333,23 @@
       function renderTable() {
         // TODO: 기존 tbody 내용 초기화
         // 힌트: tableBody.innerHTML = '';
+        tableBody.innerHTML = "";
         // TODO: students 배열이 비어있는지 체크
         // - 비어있으면: noDataMsg.style.display = 'block'; 후 return
         // - 데이터 있으면: noDataMsg.style.display = 'none';
+        if (students.length === 0) {
+          noDataMsg.style.display = "block";
+          return;
+        } else {
+          noDataMsg.style.display = "none";
+        }
         // TODO: for문으로 students 배열 순회
         // - 각 학생 객체의 toRow(i + 1) 메서드 호출 (순번은 1부터 시작)
         // - 반환된 tr을 tableBody에 추가 (tableBody.appendChild(row))
+        for (var i = 0; i < students.length; i++) {
+          var row = students[i].toRow(i + 1);
+          tableBody.appendChild(row);
+        }
       }
 
       // =============================================
@@ -299,6 +361,11 @@
       function resetForm() {
         // TODO: 각 입력 필드의 value를 '' 로 설정
         // 대상 필드: studentId, name, kor, eng, math
+        document.getElementById("studentId").value = "";
+        document.getElementById("name").value = "";
+        document.getElementById("kor").value = "";
+        document.getElementById("eng").value = "";
+        document.getElementById("math").value = "";
       }
 
       // =============================================
@@ -317,17 +384,33 @@
       form.addEventListener("submit", function (event) {
         // TODO: 기본 폼 제출 동작 방지
         // 힌트: event.preventDefault();
+        event.preventDefault();
         // TODO: 입력값 가져오기
         // - studentId, name: document.getElementById(...).value
         // - kor, eng, math: parseInt()로 숫자 변환 필요
+        var studentId = document.getElementById("studentId").value;
+        var name = document.getElementById("name").value;
+
+        var kor = parseInt(document.getElementById("kor").value, 10);
+        var eng = parseInt(document.getElementById("eng").value, 10);
+        var math = parseInt(document.getElementById("math").value, 10);
+
         // TODO: 유효성 검사 호출
         // - validateInput() 결과가 false면 return하여 중단
+        if (!validateInput(studentId, name, kor, eng, math)) {
+          return;
+        }
         // TODO: Student 객체 생성
         // 힌트: var student = new Student(studentId, name, kor, eng, math);
+        var student = new Student(studentId, name, kor, eng, math);
+
         // TODO: students 배열에 추가
         // 힌트: students.push(student);
+        students.push(student);
         // TODO: 폼 초기화 함수 호출
+        resetForm();
         // TODO: 테이블 렌더링 함수 호출
+        renderTable();
       });
 
       // =============================================
@@ -335,6 +418,7 @@
       // =============================================
       // TODO: 페이지 로드 시 테이블 초기 렌더링 호출
       // 힌트: renderTable();
+      renderTable();
     </script>
   </body>
 </html>
