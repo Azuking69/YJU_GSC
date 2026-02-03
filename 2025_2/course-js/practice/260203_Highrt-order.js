@@ -27,7 +27,10 @@ forEach(myList, (v) => process.stdout.write(`${v}\t`));
 // 2) 각 배열의 원소에 1을 더하다
 // 요소 값이 변경 11, 21, 31, 41
 // map(myList, 1);
-map(myList, (v) => {
+// map(myList, (v) => {
+//   return v + 1;
+// });
+myList.map((v) => {
   return v + 1;
 });
 
