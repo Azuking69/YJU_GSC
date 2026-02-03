@@ -8,7 +8,10 @@ let myList = [10, 20, 30, 40];
 // 1) 현제 배열 값을 화면에 출력
 // 10, 20, 30, 40
 print = console.log;
-print(myList);
+
+for (let i = 0; i < myList.length; i++) {
+  print(myList[i]);
+}
 
 // 2) 각 배열의 원소에 1을 더하다
 // 요소 값이 변경 11, 21, 31, 41
@@ -22,7 +25,9 @@ for (let i = 0; i < myList.length; i++) {
 
 // 3) 현제 배열 값을 화면에 출력
 // 11, 21, 31, 41
-print(myList);
+for (let i in myList) {
+  print(myList[i]);
+}
 
 // 4) 각 배열의 원소에 2을 더하다
 // 요소 값이 변경 13, 23, 33, 43
@@ -36,4 +41,6 @@ for (let i = 0; i < myList.length; i++) {
 
 // 5) 현제 배열 값을 화면에 출력
 // 13, 23, 33, 43
-print(myList);
+for (let i in myList) {
+  print(myList[i]);
+}
