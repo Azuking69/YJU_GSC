@@ -1,4 +1,5 @@
 // Higher-order function
+
 let myList = [10, 20, 30];
 
 // 배열을 순회하겠다
@@ -11,6 +12,15 @@ function map(argList, argFn) {
   for (index in argList) {
     // 사용자 함수의 변환 값을 현재 요소 값으로 치환
     // 이때, 사용자 함수 호출 시, 현 요소값을 전달
-    argList[index] = argFn(argList(argList[index]));
+    argList[index] = argFn(argList[index]);
   }
 }
+
+// let myFn = function (argValue) {
+//   // my task
+//   return argValue * 10;
+// };
+
+map(myList, function (argValue) {
+  return argValue * 10;
+});
