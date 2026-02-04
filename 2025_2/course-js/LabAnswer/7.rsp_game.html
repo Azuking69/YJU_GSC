@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가위바위보 게임</title>
+    <style>
+      /* ========== 기본 스타일 ========== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      /* ========== 타이틀 ========== */
+      .title {
+        text-align: center;
+        color: white;
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+
+      /* ========== 카드 공통 스타일 ========== */
+      .card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      /* ========== 게임 컨트롤 버튼 ========== */
+      .controls {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .controls img {
+        cursor: pointer;
+        border-radius: 10px;
+        transition: transform 0.2s;
+      }
+
+      .controls img:hover {
+        transform: scale(1.05);
+      }
+
+      /* ========== 선택 버튼 (가위/바위/보) ========== */
+      .choices {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .choice {
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 15px;
+        border: 3px solid transparent;
+        background: #f8f9fa;
+        transition: all 0.3s;
+      }
+
+      .choice:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      .choice.selected {
+        border-color: #667eea;
+        background: #e8eaff;
+      }
+
+      .choice img {
+        width: 100px;
+        height: 100px;
+      }
+
+      /* ========== 대결 영역 ========== */
+      .battle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .player {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        width: 280px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      .player h3 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+      }
+
+      /* 점수 표시 배지 */
+      .score {
+        display: inline-block;
+        padding: 8px 15px;
+        border-radius: 20px;
+        color: white;
+        font-weight: bold;
+        margin-bottom: 15px;
+        background: #6c757d;
+      }
+
+      .score.win {
+        background: #28a745;
+      }
+      .score.lose {
+        background: #dc3545;
+      }
+      .score.draw {
+        background: #ffc107;
+        color: #333;
+      }
+
+      /* 선택 이미지 표시 영역 */
+      .display {
+        width: 180px;
+        height: 180px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8f9fa;
+        border-radius: 15px;
+        border: 2px dashed #dee2e6;
+        font-size: 4rem;
+        color: #dee2e6;
+      }
+
+      .display img {
+        max-width: 160px;
+        max-height: 160px;
+      }
+
+      /* ========== 결과 텍스트 ========== */
+      .result {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .result.win {
+        color: #28a745;
+      }
+      .result.lose {
+        color: #dc3545;
+      }
+      .result.draw {
+        color: #ffc107;
+      }
+
+      /* ========== 타이머 ========== */
+      .timer {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #dc3545;
+        font-family: "Courier New", monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">가위바위보 게임</h1>
+
+      <!-- 게임 시작/종료 버튼 -->
+      <div class="controls">
+        <img
+          src="../img/gamestart.jpg"
+          width="150"
+          height="80"
+          alt="게임 시작"
+          onclick="game.start()"
+        />
+        <img
+          src="../img/finishgame.jpg"
+          width="150"
+          height="80"
+          alt="게임 종료"
+          onclick="game.stop()"
+        />
+      </div>
+
+      <!-- 가위/바위/보 선택 영역 -->
+      <div class="card">
+        <p style="margin-bottom: 15px; font-size: 1.1rem">
+          가위, 바위, 보 중 하나를 선택하세요!
+        </p>
+        <div class="choices">
+          <div class="choice" onclick="game.play('scissors')">
+            <img src="../img/human_scissors.gif" alt="가위" />
+          </div>
+          <div class="choice" onclick="game.play('rock')">
+            <img src="../img/human_rock.gif" alt="바위" />
+          </div>
+          <div class="choice" onclick="game.play('paper')">
+            <img src="../img/human_paper.gif" alt="보" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 대결 화면: 사용자 vs 컴퓨터 -->
+      <div class="battle">
+        <!-- 사용자 영역 -->
+        <div class="player">
+          <h3>사용자</h3>
+          <div class="score" id="humanScore">0승 0무 0패</div>
+          <div class="display" id="humanDisplay">?</div>
+        </div>
+
+        <!-- VS 이미지 -->
+        <img src="../img/vs.gif" width="100" alt="VS" />
+
+        <!-- 컴퓨터 영역 -->
+        <div class="player">
+          <h3>컴퓨터</h3>
+          <div class="score" id="computerScore">0승 0무 0패</div>
+          <div class="display" id="computerDisplay">?</div>
+        </div>
+      </div>
+
+      <!-- 결과 표시 -->
+      <div class="card">
+        <div class="result" id="result">게임 시작 버튼을 눌러주세요!</div>
+      </div>
+
+      <!-- 타이머 -->
+      <div class="card">
+        <div class="timer" id="timer">00:00:00</div>
+      </div>
+    </div>
+
+    <script>
+      /**
+       * 가위바위보 게임 객체
+       * - 모든 게임 로직과 상태를 하나의 객체로 관리
+       */
+      const game = {
+        // ========== 게임 상태 ==========
+        isRunning: false, // 게임 진행 중 여부
+        humanScore: { win: 0, draw: 0, lose: 0 }, // 사용자 점수
+        computerScore: { win: 0, draw: 0, lose: 0 }, // 컴퓨터 점수
+        timerId: null, // 타이머 ID (setInterval 반환값)
+        seconds: 0, // 경과 시간 (초)
+
+        // ========== 게임 시작 ==========
+        start() {
+          this.isRunning = true;
+
+          // 점수 초기화
+          this.humanScore = { win: 0, draw: 0, lose: 0 };
+          this.computerScore = { win: 0, draw: 0, lose: 0 };
+          this.seconds = 0;
+
+          // 화면 초기화
+          this.updateScore("human");
+          this.updateScore("computer");
+          this.resetDisplay();
+          this.showResult("가위, 바위, 보를 선택하세요!");
+
+          // 타이머 시작 (1초마다 updateTimer 실행)
+          clearInterval(this.timerId);
+          this.timerId = setInterval(() => this.updateTimer(), 1000);
+        },
+
+        // ========== 게임 종료 ==========
+        stop() {
+          this.isRunning = false;
+          clearInterval(this.timerId);
+
+          // 최종 결과 계산
+          const { win, draw, lose } = this.humanScore;
+          let message, resultClass;
+
+          if (win > lose) {
+            message = "승리!";
+            resultClass = "win";
+          } else if (win < lose) {
+            message = "패배...";
+            resultClass = "lose";
+          } else {
+            message = "무승부!";
+            resultClass = "draw";
+          }
+
+          this.showResult(
+            `게임 종료! ${message} (${win}승 ${draw}무 ${lose}패)`,
+            resultClass,
+          );
+        },
+
+        // ========== 한 판 진행 ==========
+        play(humanChoice) {
+          // 게임이 시작되지 않았으면 안내 메시지 표시
+          if (!this.isRunning) {
+            this.showResult("먼저 게임 시작 버튼을 눌러주세요!");
+            return;
+          }
+
+          // 1. 컴퓨터의 랜덤 선택
+          const choices = ["scissors", "rock", "paper"];
+          const computerChoice = choices[Math.floor(Math.random() * 3)];
+
+          // 2. 선택 이미지 표시
+          this.showChoice("human", humanChoice);
+          this.showChoice("computer", computerChoice);
+          this.highlightChoice(humanChoice);
+
+          // 3. 승패 판정
+          const result = this.judge(humanChoice, computerChoice);
+
+          // 4. 점수 업데이트
+          this.humanScore[result]++;
+          // 컴퓨터는 반대 결과 (win↔lose, draw는 동일)
+          const opposite = { win: "lose", lose: "win", draw: "draw" };
+          this.computerScore[opposite[result]]++;
+
+          // 5. 화면 업데이트
+          this.updateScore("human", result);
+          this.updateScore("computer", opposite[result]);
+
+          const messages = { win: "승리!", lose: "패배...", draw: "무승부!" };
+          this.showResult(messages[result], result);
+        },
+
+        // ========== 승패 판정 ==========
+        // 사용자 기준으로 win/lose/draw 반환
+        judge(human, computer) {
+          if (human === computer) return "draw";
+
+          // 이기는 조건: 가위→보, 바위→가위, 보→바위
+          const winMap = { scissors: "paper", rock: "scissors", paper: "rock" };
+          return winMap[human] === computer ? "win" : "lose";
+        },
+
+        // ========== 화면 업데이트 함수들 ==========
+
+        // 점수 표시 업데이트
+        updateScore(player, result = null) {
+          const score =
+            player === "human" ? this.humanScore : this.computerScore;
+          const el = document.getElementById(`${player}Score`);
+
+          el.textContent = `${score.win}승 ${score.draw}무 ${score.lose}패`;
+          el.className = "score" + (result ? ` ${result}` : "");
+        },
+
+        // 선택 이미지 표시
+        showChoice(player, choice) {
+          const prefix = player === "human" ? "human" : "computer";
+          const el = document.getElementById(`${player}Display`);
+          el.innerHTML = `<img src="../img/${prefix}_${choice}.gif" alt="${choice}">`;
+        },
+
+        // 선택 버튼 하이라이트
+        highlightChoice(choice) {
+          document.querySelectorAll(".choice").forEach((el, i) => {
+            const choices = ["scissors", "rock", "paper"];
+            el.classList.toggle("selected", choices[i] === choice);
+          });
+        },
+
+        // 선택 영역 초기화
+        resetDisplay() {
+          document.getElementById("humanDisplay").innerHTML = "?";
+          document.getElementById("computerDisplay").innerHTML = "?";
+          document
+            .querySelectorAll(".choice")
+            .forEach((el) => el.classList.remove("selected"));
+        },
+
+        // 결과 메시지 표시
+        showResult(message, resultClass = "") {
+          const el = document.getElementById("result");
+          el.textContent = message;
+          el.className = "result" + (resultClass ? ` ${resultClass}` : "");
+        },
+
+        // 타이머 업데이트 (1초마다 호출)
+        updateTimer() {
+          this.seconds++;
+
+          const h = Math.floor(this.seconds / 3600);
+          const m = Math.floor((this.seconds % 3600) / 60);
+          const s = this.seconds % 60;
+
+          // padStart로 2자리 포맷팅 (예: 01:02:03)
+          document.getElementById("timer").textContent = [h, m, s]
+            .map((n) => String(n).padStart(2, "0"))
+            .join(":");
+        },
+      };
+    </script>
+  </body>
+</html>
