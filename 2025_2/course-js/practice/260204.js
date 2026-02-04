@@ -16,11 +16,4 @@ function map(argList, argFn) {
   }
 }
 
-// let myFn = function (argValue) {
-//   // my task
-//   return argValue * 10;
-// };
-
-map(myList, function (argValue) {
-  return argValue * 10;
-});
+map(myList, (argValue) => argValue * 10);
