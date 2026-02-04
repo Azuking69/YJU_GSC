@@ -2,18 +2,15 @@
 let myList = [10, 20, 30];
 
 // 배열을 순회하겠다
-// 순회하면서 실행할 알고리즘은 사용자 정의에 따라
-function forEach(argList, argFn) {
-  // 배열을 순회 첫번째 -> 마지막까지
-  for (const value of argList) {
-    // 사용자 알고리즘 실행
-    argFn(value);
+// 순회하면서 실행할 알고리즘은
+// 각 요소 값을 사용자 함수에 입력하고,
+// 이때 변환하는 값을 각 요소로 치환
+
+function map(argList, argFn) {
+  // 배열을 순회
+  for (index in argList) {
+    // 사용자 함수의 변환 값을 현재 요소 값으로 치환
+    // 이때, 사용자 함수 호출 시, 현 요소값을 전달
+    argList[index] = argFn(argList(argList[index]));
   }
 }
-
-let myFn = function (argValue) {
-  // my task
-  console.log(argValue);
-};
-
-forEach(myList, myFn); // 10, 20, 30
