@@ -18,3 +18,13 @@ function map(argList, argFn) {
 
 map(myList, (argValue) => argValue * 10);
 console.log(myList); // 100, 200, 300
+
+let bar = 3;
+
+function addOne(argBar) {
+  let bar = argBar + 1;
+  return argBar + 1;
+}
+
+// 출력 순서
+console.log(addOne(bar), bar);
