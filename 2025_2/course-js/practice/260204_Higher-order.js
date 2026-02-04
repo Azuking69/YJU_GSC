@@ -17,3 +17,4 @@ function map(argList, argFn) {
 }
 
 map(myList, (argValue) => argValue * 10);
+console.log(myList); // 100, 200, 300
