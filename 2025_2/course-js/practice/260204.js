@@ -1,5 +1,14 @@
-let myList = [10.3333, 20.22, 30.333];
+class Student {
+  constructor(argAge) {
+    this.age = argAge;
+  }
+}
 
-let newList = myList.filter((v) => v >= 15);
+const myList = [];
 
+myList.push(new Student(20));
+myList.push(new Student(30));
+myList.push(new Student(40));
+
+let newList = myList.filter((v) => v.age >= 30);
 console.log(newList);
