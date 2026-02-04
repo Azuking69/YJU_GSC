@@ -1,6 +1,6 @@
-let myList = [10, 20, 30];
+let myList = [10.3333, 20.22, 30.333];
 
-myList.map();
+let newList = myList.map((v) => parseInt(v));
 
 myList.forEach((v) => {
   console.log("-----------");
