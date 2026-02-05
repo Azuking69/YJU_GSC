@@ -5,6 +5,10 @@ print = console.log;
 class Student {
   #name = undefined;
   #age = undefined;
+  constructor(argName, argAge) {
+    this.#name = argName;
+    this.#age = argAge;
+  }
 
   // getter for name MV
   getName() {
