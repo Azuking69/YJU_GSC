@@ -14,6 +14,17 @@ class Student {
   setName(argName) {
     this.#name = argName;
   }
+  // getter for age
+  getAge() {
+    return this.#age;
+  }
+  // setter for age
+  setAge(argAge) {
+    if (argAge >= 0 && argAge <= 150) {
+      this.#age = argAge;
+      return true;
+    }
+  }
 }
 
 let std1 = new Student();
