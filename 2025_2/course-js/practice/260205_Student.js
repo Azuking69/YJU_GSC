@@ -1,3 +1,5 @@
+print = console.log;
+
 class Student {
   #name = undefined;
   #age = undefined;
