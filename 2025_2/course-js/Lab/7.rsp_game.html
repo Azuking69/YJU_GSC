@@ -256,13 +256,13 @@
     <script>
       /*
        * ╔══════════════════════════════════════════════════════════════════╗
-       * ║                    가위바위보 게임 실습                            ║
+       * ║                    가위바위보 게임 실습                             ║
        * ╠══════════════════════════════════════════════════════════════════╣
        * ║  학습 목표:                                                       ║
-       * ║  1. 객체(Object)를 활용한 상태 관리                               ║
-       * ║  2. 조건문을 이용한 승패 판정 로직                                ║
-       * ║  3. Math.random()을 이용한 랜덤 선택                              ║
-       * ║  4. setInterval/clearInterval을 이용한 타이머                    ║
+       * ║  1. 객체(Object)를 활용한 상태 관리                                 ║
+       * ║  2. 조건문을 이용한 승패 판정 로직                                   ║
+       * ║  3. Math.random()을 이용한 랜덤 선택                               ║
+       * ║  4. setInterval/clearInterval을 이용한 타이머                      ║
        * ║  5. DOM 조작 (getElementById, innerHTML, classList)              ║
        * ╚══════════════════════════════════════════════════════════════════╝
        */
@@ -297,11 +297,13 @@
         start() {
           // TODO: 게임 상태를 '진행 중'으로 변경하세요
           // 힌트: this.isRunning = ???;
-
+          this.isRunning = true;
           // TODO: 점수 객체를 초기화하세요 (win, draw, lose 모두 0으로)
           // 힌트: this.humanScore = { win: 0, draw: 0, lose: 0 };
-
+          this.humanScore = { win: 0, draw: 0, lose: 0 };
+          this.computerScore = { win: 0, draw: 0, lose: 0 };
           // TODO: 경과 시간을 0으로 초기화하세요
+          this.seconds = 0;
 
           // 화면 초기화 (이 부분은 완성되어 있습니다)
           this.updateScore("human");
@@ -311,27 +313,36 @@
 
           // TODO: 기존 타이머가 있으면 정지하세요
           // 힌트: clearInterval(this.timerId);
+          if (tis.timerId !== null) {
+            clearInterval(this.timerId);
+            this.timerId = null;
+          }
 
           // TODO: 새 타이머를 시작하세요 (1초 = 1000ms 마다 updateTimer 호출)
           // 힌트: this.timerId = setInterval(() => this.updateTimer(), ???);
+          this.timerId = setInterval(() => this.updateTimer(), 1000);
         },
 
         /*
          * ┌─────────────────────────────────────────────────────────────┐
-         * │  [실습 3] 게임 종료 함수                                     │
+         * │  [실습 3] 게임 종료 함수                                       │
          * │                                                             │
-         * │  게임 종료 버튼을 클릭하면 호출됩니다.                       │
+         * │  게임 종료 버튼을 클릭하면 호출됩니다.                           │
          * │  해야 할 일:                                                 │
          * │  1. isRunning을 false로 설정                                 │
-         * │  2. clearInterval로 타이머 정지                              │
-         * │  3. 최종 승패 결과 계산 후 화면에 표시                       │
+         * │  2. clearInterval로 타이머 정지                               │
+         * │  3. 최종 승패 결과 계산 후 화면에 표시                           │
          * └─────────────────────────────────────────────────────────────┘
          */
         stop() {
           // TODO: 게임 상태를 '정지'로 변경하세요
-
+          this.isRunning = false;
           // TODO: 타이머를 정지하세요
           // 힌트: clearInterval(???);
+          if (this.timerId !== null) {
+            clearInterval(this.timerId);
+            this.timerId = null;
+          }
 
           // 최종 결과 계산 (구조 분해 할당으로 점수 가져오기)
           const { win, draw, lose } = this.humanScore;
@@ -340,8 +351,19 @@
           // TODO: 승패에 따라 message와 resultClass를 설정하세요
           // 조건:
           //   - win > lose 이면: message = '승리!', resultClass = 'win'
-          //   - win < lose 이면: message = '패배...', resultClass = 'lose'
-          //   - 그 외(무승부): message = '무승부!', resultClass = 'draw'
+          if (win > lose) {
+            message = "승리!";
+            resultClass = "win";
+            //   - win < lose 이면: message = '패배...', resultClass = 'lose'
+          } else if (win < lose) {
+            message = "패배...";
+            resultClass = "lose";
+            //   - 그 외(무승부): message = '무승부!', resultClass = 'draw'
+          } else {
+            message = "무승부!";
+            resultClass = "draw";
+          }
+
           // 힌트: if-else if-else 문을 사용하세요
 
           // 결과 화면에 표시
@@ -353,18 +375,18 @@
 
         /*
          * ┌─────────────────────────────────────────────────────────────┐
-         * │  [실습 4] 한 판 진행 함수 (핵심!)                            │
+         * │  [실습 4] 한 판 진행 함수 (핵심!)                              │
          * │                                                             │
-         * │  사용자가 가위/바위/보를 클릭하면 호출됩니다.                │
-         * │  매개변수 humanChoice: 'scissors', 'rock', 'paper' 중 하나  │
+         * │  사용자가 가위/바위/보를 클릭하면 호출됩니다.                     │
+         * │  매개변수 humanChoice: 'scissors', 'rock', 'paper' 중 하나    │
          * │                                                             │
          * │  처리 순서:                                                  │
-         * │  1. 게임이 시작되지 않았으면 안내 메시지 표시 후 종료        │
-         * │  2. 컴퓨터의 선택을 랜덤으로 결정                            │
-         * │  3. 양쪽 선택을 화면에 표시                                  │
+         * │  1. 게임이 시작되지 않았으면 안내 메시지 표시 후 종료              │
+         * │  2. 컴퓨터의 선택을 랜덤으로 결정                               │
+         * │  3. 양쪽 선택을 화면에 표시                                    │
          * │  4. 승패 판정                                                │
-         * │  5. 점수 업데이트                                            │
-         * │  6. 결과 화면에 표시                                         │
+         * │  5. 점수 업데이트                                             │
+         * │  6. 결과 화면에 표시                                          │
          * └─────────────────────────────────────────────────────────────┘
          */
         play(humanChoice) {
@@ -386,7 +408,8 @@
            *   - Math.floor(Math.random() * 3)은 0, 1, 2 중 하나를 반환합니다
            */
           const choices = ["scissors", "rock", "paper"];
-          const computerChoice = null; // TODO: 랜덤 선택 구현
+          const computerChoice =
+            choices[Math.floor(Math.random() * choices.length)]; // TODO: 랜덤 선택 구현
 
           // 선택 이미지를 화면에 표시 (이 부분은 완성되어 있습니다)
           this.showChoice("human", humanChoice);
@@ -408,7 +431,7 @@
            */
           // TODO: 사용자 점수 증가
           // 힌트: this.humanScore[result]++;
-
+          this.humanScore[result]++;
           // 컴퓨터는 반대 결과 적용 (win↔lose, draw는 동일)
           const opposite = { win: "lose", lose: "win", draw: "draw" };
           // TODO: 컴퓨터 점수 증가
@@ -424,22 +447,22 @@
 
         /*
          * ┌─────────────────────────────────────────────────────────────┐
-         * │  [실습 5] 승패 판정 함수                                     │
+         * │  [실습 5] 승패 판정 함수                                       │
          * │                                                             │
-         * │  사용자와 컴퓨터의 선택을 비교하여 승패를 결정합니다.        │
-         * │  반환값: 'win' (사용자 승), 'lose' (사용자 패), 'draw' (무승부)│
+         * │  사용자와 컴퓨터의 선택을 비교하여 승패를 결정합니다.               │
+         * │  반환값: 'win' (사용자 승), 'lose' (사용자 패), 'draw' (무승부)  │
          * │                                                             │
-         * │  가위바위보 규칙:                                            │
-         * │    - 가위(scissors)는 보(paper)를 이깁니다                   │
-         * │    - 바위(rock)는 가위(scissors)를 이깁니다                  │
-         * │    - 보(paper)는 바위(rock)를 이깁니다                       │
-         * │    - 같으면 무승부입니다                                     │
+         * │  가위바위보 규칙:                                             │
+         * │    - 가위(scissors)는 보(paper)를 이깁니다                     │
+         * │    - 바위(rock)는 가위(scissors)를 이깁니다                    │
+         * │    - 보(paper)는 바위(rock)를 이깁니다                         │
+         * │    - 같으면 무승부입니다                                       │
          * └─────────────────────────────────────────────────────────────┘
          */
         judge(human, computer) {
           // TODO: 같은 것을 냈으면 무승부를 반환하세요
           // 힌트: if (human === computer) return 'draw';
-
+          if (human === computer) return "draw";
           /*
            * TODO: 승패를 판정하세요
            *
@@ -460,14 +483,15 @@
 
           // TODO: winMap을 활용해서 승패를 판정하고 반환하세요
           // 힌트: return winMap[human] === computer ? 'win' : 'lose';
+          return winMap[human] === computer ? "win" : "lose";
         },
 
         /*
          * ┌─────────────────────────────────────────────────────────────┐
-         * │  [도우미 함수들] - 이미 완성되어 있습니다!                   │
+         * │  [도우미 함수들] - 이미 완성되어 있습니다!                       │
          * │                                                             │
-         * │  아래 함수들은 화면 업데이트를 담당합니다.                   │
-         * │  코드를 읽고 어떻게 동작하는지 이해해보세요.                 │
+         * │  아래 함수들은 화면 업데이트를 담당합니다.                        │
+         * │  코드를 읽고 어떻게 동작하는지 이해해보세요.                      │
          * └─────────────────────────────────────────────────────────────┘
          */
 
@@ -523,7 +547,7 @@
         updateTimer() {
           // TODO: 경과 시간(초)을 1 증가시키세요
           // 힌트: this.seconds++;
-
+          this.seconds++;
           /*
            * TODO: 초를 시:분:초로 변환하세요
            *
@@ -534,9 +558,9 @@
            *
            * 힌트: Math.floor()를 사용하세요
            */
-          const h = 0; // TODO: 시간 계산
-          const m = 0; // TODO: 분 계산
-          const s = 0; // TODO: 초 계산
+          const h = Math.floor(this.seconds / 3600); // TODO: 시간 계산
+          const m = Math.floor((this.seconds % 3600) / 60); // TODO: 분 계산
+          const s = this.seconds % 60; // TODO: 초 계산
 
           /*
            * 화면에 표시 (2자리 형식: 01:02:03)
