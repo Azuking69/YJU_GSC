@@ -1,5 +1,5 @@
 // default export
-export default class MyButton{}
+// export default class MyButton{}
 
 // named export
 export default class Student {
