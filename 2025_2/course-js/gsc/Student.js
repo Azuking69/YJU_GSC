@@ -1,3 +1,7 @@
+// default export
+export default class MyButton{}
+
+// named export
 export default class Student {
   name = undefined;
   age = undefined;
@@ -10,6 +14,7 @@ export default class Student {
   }
 }
 
+// named export
 export class Foo {
   constructor(argName) {
     this.name = argName;
