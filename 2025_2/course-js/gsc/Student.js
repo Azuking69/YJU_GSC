@@ -1,4 +1,4 @@
-export class Student {
+export default class Student {
   name = undefined;
   age = undefined;
   gender = undefined;
@@ -10,7 +10,7 @@ export class Student {
   }
 }
 
-class Foo {
+export class Foo {
   constructor(argName) {
     this.name = argName;
   }
