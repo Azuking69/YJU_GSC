@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Callback Hell 예제</title>
+  </head>
+  <body>
+    <h1>Callback Hell 예제</h1>
+    <p>콘솔(F12)을 확인하세요.</p>
+
+    <script>
+      // 서버에서 데이터를 가져오는 것을 시뮬레이션하는 함수
+      function getUser(userId, callback) {
+        setTimeout(() => {
+          console.log("1. 사용자 조회 완료");
+          callback({ id: userId, name: "홍길동" });
+        }, 1000);
+      }
+
+      function getOrders(user, callback) {
+        setTimeout(() => {
+          console.log("2. 주문 목록 조회 완료");
+          callback([
+            { id: 101, item: "노트북", userId: user.id },
+            { id: 102, item: "마우스", userId: user.id },
+          ]);
+        }, 1000);
+      }
+
+      function getOrderDetail(order, callback) {
+        setTimeout(() => {
+          console.log("3. 주문 상세 조회 완료");
+          callback({ ...order, price: 1500000, status: "배송중" });
+        }, 1000);
+      }
+
+      function getShipping(detail, callback) {
+        setTimeout(() => {
+          console.log("4. 배송 정보 조회 완료");
+          callback({
+            orderId: detail.id,
+            courier: "우체국",
+            trackingNo: "1234-5678",
+          });
+        }, 1000);
+      }
+
+      // Callback Hell - 처리 중 에러가 발생 한다면?"
+      getUser(1, function (user) {
+        getOrders(user, function (orders) {
+          getOrderDetail(orders[0], function (detail) {
+            getShipping(detail, function (shipping) {
+              console.log("========== 최종 결과 ==========");
+              console.log("사용자:", user.name);
+              console.log("주문 상품:", detail.item);
+              console.log("가격:", detail.price);
+              console.log("배송 상태:", detail.status);
+              console.log("택배사:", shipping.courier);
+              console.log("운송장 번호:", shipping.trackingNo);
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

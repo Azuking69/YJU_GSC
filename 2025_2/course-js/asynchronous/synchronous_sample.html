@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <title>동기 처리 Demo</title>
+  </head>
+  <body>
+    <button onclick="run()">동기 처리</button>
+    <input placeholder="여기에 타이핑 해보세요" />
+
+    <script>
+      function sleepSync(ms) {
+        const end = Date.now() + ms;
+        // 메인 스레드를 점유 (blocking)
+        while (Date.now() < end) {}
+      }
+
+      function run() {
+        console.log("1. 시작");
+        sleepSync(3000); // 동기: 3초간 메인 스레드를 막음
+        console.log("2. 3초 후 실행");
+        console.log("3. 끝");
+      }
+      // 출력 순서: 1 → (3초 대기) → 2 → 3
+      // 버튼을 누른 뒤 input에 타이핑 불가 (UI가 멈춤)
+    </script>
+  </body>
+</html>
