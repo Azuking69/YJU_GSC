@@ -9,11 +9,14 @@ let p = new Promise(
   (resolve, reject) => {
     console.log("start");
 
-    if (makeDelay(3000)) resolve("S");
-    else reject("F");
-
+    setTimeout(() => {
+        if (Math.random > 0.5){
+            resolve("S");
+        }else{
+            reject("F");
+        }, 3000);
     console.log("end");
-  },
+  }
 );
 
 p.then(
