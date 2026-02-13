@@ -5,6 +5,7 @@ let p1 = new Promise((resolve, reject) => {
 let p2 = p1.then(
   (result) => {
     console.log("p1 - resolve");
+    return Promise.reject();
   },
   (error) => {
     console.log("p1 - resolve");
