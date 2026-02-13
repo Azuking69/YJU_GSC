@@ -1,9 +1,10 @@
-new Promise(
+let p1 = new Promise(
   // Excutor function
   (resovle, reject) => {
     console.log("Excutor function is invoked!!");
+    setTimeout(() => console.log("wait 3 seconds!!"), 3000);
     // resovle(hello);
-    reject(["hi", "reject"]);
+    resovle("Hello");
   },
 );
 
