@@ -8,7 +8,7 @@ new Promise((resolve, reject) => {
     },
     (error) => {
       console.log(`then-T: ${error}`);
-      throw new Error("Error!!!! Then");
+      return Promise.rejecy("reject - Then");
     },
   )
   //   Exception Handling
