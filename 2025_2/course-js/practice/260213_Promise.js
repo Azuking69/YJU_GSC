@@ -2,6 +2,8 @@ new Promise(
   // Excutor function
   (resovle, reject) => {
     console.log("Excutor function is invoked!!");
+    // resovle(hello);
+    reject(["hi", "reject"]);
   },
 );
 
