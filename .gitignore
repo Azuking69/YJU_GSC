@@ -41,3 +41,6 @@ outputs/
 # ✅ 운영체제가 자동 생성하는 숨김 파일 무시
 .DS_Store
 Thumbs.db
+
+#Ignore vscode AI rules
+.github\instructions\codacy.instructions.md
