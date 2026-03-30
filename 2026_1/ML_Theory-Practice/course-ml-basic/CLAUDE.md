@@ -18,7 +18,6 @@ Requires Python 3.10+. Dependencies: numpy, pandas, matplotlib, scikit-learn.
 ## Running Code
 
 개별 스크립트를 직접 실행:
-
 ```bash
 python 02_linear_regression/examples/01_simple_linear_regression.py
 ```
