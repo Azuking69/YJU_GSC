@@ -1,6 +1,6 @@
 """
-실습: 이 데이터, 선형 회귀로 풀 수 있을까?
-==========================================
+실습 정답: 이 데이터, 선형 회귀로 풀 수 있을까?
+=================================================
 
 4개의 실생활 데이터셋이 주어진다.
 각 데이터셋에 대해 다음을 수행하라:
@@ -9,11 +9,6 @@
   2. 선형 회귀를 적용하고 MSE 손실을 계산한다.
   3. 잔차(residual = 실제값 - 예측값)를 계산하고 그래프로 확인한다.
   4. 위 결과를 종합하여 "선형 회귀가 적합한가?"를 판단한다.
-
-지시사항:
-  - TODO 로 표시된 부분을 채워 넣으세요.
-  - 각 함수의 docstring을 참고하세요.
-  - 마지막에 판단 결과를 answers 딕셔너리에 기록하세요.
 """
 
 import platform
@@ -63,6 +58,7 @@ datasets = {
 # 함수 정의
 # ============================================================
 
+
 def train_linear_regression(x_data, y_data, lr, epochs):
     """
     경사하강법으로 선형 회귀를 학습한다.
@@ -80,23 +76,22 @@ def train_linear_regression(x_data, y_data, lr, epochs):
     n = len(x_data)
 
     for epoch in range(epochs):
-        # TODO: 예측값 리스트를 구하세요. y_pred = [w * x + b for x in x_data]
-        y_pred = None
+        y_pred = [w * x + b for x in x_data]
 
-        # TODO: 그래디언트를 계산하세요.
-        #   grad_w = (2/n) * Σ (y_pred[i] - y_data[i]) * x_data[i]
-        #   grad_b = (2/n) * Σ (y_pred[i] - y_data[i])
         grad_w = 0.0
         grad_b = 0.0
+        for i in range(n):
+            error = y_pred[i] - y_data[i]
+            grad_w += error * x_data[i]
+            grad_b += error
+        grad_w = (2 / n) * grad_w
+        grad_b = (2 / n) * grad_b
 
-        # TODO: 파라미터를 업데이트하세요.
-        #   w = w - lr * grad_w
-        #   b = b - lr * grad_b
-        pass
+        w = w - lr * grad_w
+        b = b - lr * grad_b
 
-    # TODO: 최종 손실(MSE)을 계산하세요.
     y_pred = [w * x + b for x in x_data]
-    loss = None
+    loss = sum((p - y) ** 2 for p, y in zip(y_pred, y_data)) / n
 
     return w, b, loss
 
@@ -117,15 +112,17 @@ def compute_residuals(x_data, y_data, w, b):
     Returns:
         잔차 리스트
     """
-    # TODO: 각 데이터 포인트에 대해 (실제값 - 예측값)을 계산하여 리스트로 반환하세요.
-    pass
+    residuals = []
+    for x, y in zip(x_data, y_data):
+        pred = w * x + b
+        residuals.append(y - pred)
+    return residuals
 
 
 # ============================================================
 # 분석 실행
 # ============================================================
 if __name__ == "__main__":
-    # 학습률 (데이터 스케일에 따라 다르게 설정)
     learning_rates = {"A": 0.01, "B": 0.0000001, "C": 0.00001, "D": 0.00001}
 
     fig, axes = plt.subplots(4, 2, figsize=(13, 18))
@@ -140,12 +137,10 @@ if __name__ == "__main__":
         print(f"\n[데이터셋 {key}] {data['title']}")
         print(f"  설명: {data['description']}")
 
-        # 학습
         w, b, loss = train_linear_regression(x, y, lr=lr, epochs=5000)
         print(f"  회귀식: H(x) = {w:.4f}x + {b:.4f}")
         print(f"  MSE: {loss:.4f}")
 
-        # 잔차 계산
         residuals = compute_residuals(x, y, w, b)
 
         results[key] = {"w": w, "b": b, "loss": loss, "residuals": residuals}
@@ -156,8 +151,13 @@ if __name__ == "__main__":
         plot_x_min, plot_x_max = min(x), max(x)
         plot_x = [plot_x_min + (plot_x_max - plot_x_min) * i / 100 for i in range(101)]
         plot_y = [w * xi + b for xi in plot_x]
-        ax_left.plot(plot_x, plot_y, color="tomato", linewidth=2,
-                     label=f"H(x) = {w:.2f}x + {b:.2f}")
+        ax_left.plot(
+            plot_x,
+            plot_y,
+            color="tomato",
+            linewidth=2,
+            label=f"H(x) = {w:.2f}x + {b:.2f}",
+        )
         ax_left.set_title(f"[{key}] {data['title']} (MSE: {loss:.2f})", fontsize=11)
         ax_left.legend(fontsize=9)
         ax_left.grid(True, alpha=0.3)
@@ -174,27 +174,37 @@ if __name__ == "__main__":
     plt.tight_layout()
 
     # ============================================================
-    # 최종 판단
+    # 최종 판단 (정답)
     # ============================================================
-    # TODO: 각 데이터셋에 대해 선형 회귀가 적합한지 판단하세요.
-    #       "linear" 또는 "nonlinear" 로 기록하세요.
-    #
-    # 판단 기준:
-    #   - 산점도에서 점들이 직선 형태로 분포하는가?
-    #   - 잔차가 무작위로 흩어져 있는가? (패턴 없이 0 주변에 분포)
-    #   - 잔차에 곡선 패턴(U자, 역U자 등)이 보이면 비선형을 의심
     answers = {
-        "A": None,  # TODO: "linear" 또는 "nonlinear"
-        "B": None,  # TODO: "linear" 또는 "nonlinear"
-        "C": None,  # TODO: "linear" 또는 "nonlinear"
-        "D": None,  # TODO: "linear" 또는 "nonlinear"
+        "A": "linear",  # 공부 시간 vs 점수: 거의 완벽한 선형 관계
+        "B": "nonlinear",  # 속도 vs 제동거리: 제곱 관계 (물리 법칙)
+        "C": "linear",  # 기온 vs 아이스크림: 선형 증가 패턴
+        "D": "nonlinear",  # 나무 나이 vs 높이: 로그 형태 (성장 둔화)
     }
 
     print("\n" + "=" * 50)
-    print("최종 판단")
+    print("최종 판단 (정답)")
     print("=" * 50)
     for key in datasets:
-        label = answers[key] if answers[key] else "(미작성)"
+        label = answers[key]
         print(f"  [{key}] {datasets[key]['title']}: {label}")
+
+    print()
+    print("해설:")
+    print("  [A] 공부 시간 vs 시험 점수")
+    print("      → 선형(linear). 산점도가 직선 형태이고 잔차가 무작위로 분포한다.")
+    print()
+    print("  [B] 차량 속도 vs 제동 거리")
+    print("      → 비선형(nonlinear). 제동 거리 ∝ 속도² (물리 법칙).")
+    print("        잔차가 U자 패턴을 보인다 = 선형 모델이 곡선을 놓치고 있다.")
+    print()
+    print("  [C] 기온 vs 아이스크림 판매량")
+    print("      → 선형(linear). 기온이 오를수록 판매량이 일정하게 증가한다.")
+    print("        잔차가 0 주변에 고르게 분포한다.")
+    print()
+    print("  [D] 나무 나이 vs 높이")
+    print("      → 비선형(nonlinear). 어릴 때 급성장 후 포화하는 로그 곡선.")
+    print("        잔차에 역U자 패턴이 나타난다.")
 
     plt.show()

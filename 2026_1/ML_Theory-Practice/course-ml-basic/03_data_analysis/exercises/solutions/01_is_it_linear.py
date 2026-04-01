@@ -58,6 +58,7 @@ datasets = {
 # 함수 정의
 # ============================================================
 
+
 def train_linear_regression(x_data, y_data, lr, epochs):
     """
     경사하강법으로 선형 회귀를 학습한다.
@@ -150,8 +151,13 @@ if __name__ == "__main__":
         plot_x_min, plot_x_max = min(x), max(x)
         plot_x = [plot_x_min + (plot_x_max - plot_x_min) * i / 100 for i in range(101)]
         plot_y = [w * xi + b for xi in plot_x]
-        ax_left.plot(plot_x, plot_y, color="tomato", linewidth=2,
-                     label=f"H(x) = {w:.2f}x + {b:.2f}")
+        ax_left.plot(
+            plot_x,
+            plot_y,
+            color="tomato",
+            linewidth=2,
+            label=f"H(x) = {w:.2f}x + {b:.2f}",
+        )
         ax_left.set_title(f"[{key}] {data['title']} (MSE: {loss:.2f})", fontsize=11)
         ax_left.legend(fontsize=9)
         ax_left.grid(True, alpha=0.3)
@@ -171,9 +177,9 @@ if __name__ == "__main__":
     # 최종 판단 (정답)
     # ============================================================
     answers = {
-        "A": "linear",     # 공부 시간 vs 점수: 거의 완벽한 선형 관계
+        "A": "linear",  # 공부 시간 vs 점수: 거의 완벽한 선형 관계
         "B": "nonlinear",  # 속도 vs 제동거리: 제곱 관계 (물리 법칙)
-        "C": "linear",     # 기온 vs 아이스크림: 선형 증가 패턴
+        "C": "linear",  # 기온 vs 아이스크림: 선형 증가 패턴
         "D": "nonlinear",  # 나무 나이 vs 높이: 로그 형태 (성장 둔화)
     }
 

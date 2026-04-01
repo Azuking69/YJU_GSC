@@ -115,7 +115,13 @@ fig, axes = plt.subplots(1, 2, figsize=(12, 5))
 ax1 = axes[0]
 ax1.scatter(linear_x, linear_y, color="steelblue", label="데이터", zorder=3)
 pred_line = [w_lin * x + b_lin for x in plot_x]
-ax1.plot(plot_x, pred_line, color="tomato", linewidth=2, label=f"H(x) = {w_lin:.2f}x + {b_lin:.2f}")
+ax1.plot(
+    plot_x,
+    pred_line,
+    color="tomato",
+    linewidth=2,
+    label=f"H(x) = {w_lin:.2f}x + {b_lin:.2f}",
+)
 ax1.set_title(f"선형 데이터 (MSE: {loss_lin:.4f})", fontsize=13)
 ax1.set_xlabel("x")
 ax1.set_ylabel("y")
@@ -126,11 +132,24 @@ ax1.grid(True, alpha=0.3)
 ax2 = axes[1]
 ax2.scatter(nonlinear_x, nonlinear_y, color="steelblue", label="데이터", zorder=3)
 pred_line_non = [w_non * x + b_non for x in plot_x]
-ax2.plot(plot_x, pred_line_non, color="tomato", linewidth=2, label=f"H(x) = {w_non:.2f}x + {b_non:.2f}")
+ax2.plot(
+    plot_x,
+    pred_line_non,
+    color="tomato",
+    linewidth=2,
+    label=f"H(x) = {w_non:.2f}x + {b_non:.2f}",
+)
 
 # 실제 비선형 곡선도 함께 표시
 true_curve = [0.3 * x**2 - 2 * x + 5 for x in plot_x]
-ax2.plot(plot_x, true_curve, color="gray", linewidth=1.5, linestyle="--", label="실제 곡선 (y=0.3x²-2x+5)")
+ax2.plot(
+    plot_x,
+    true_curve,
+    color="gray",
+    linewidth=1.5,
+    linestyle="--",
+    label="실제 곡선 (y=0.3x²-2x+5)",
+)
 
 ax2.set_title(f"비선형 데이터 (MSE: {loss_non:.4f})", fontsize=13)
 ax2.set_xlabel("x")

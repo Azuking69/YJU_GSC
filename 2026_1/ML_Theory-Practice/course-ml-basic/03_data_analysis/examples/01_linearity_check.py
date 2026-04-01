@@ -83,7 +83,9 @@ for idx, (title, x_data, y_data, lr) in enumerate(datasets):
     ax_left.scatter(x_data, y_data, color="steelblue", zorder=3, label="데이터")
     plot_x = [min(x_data) + (max(x_data) - min(x_data)) * i / 100 for i in range(101)]
     plot_y = [w * x + b for x in plot_x]
-    ax_left.plot(plot_x, plot_y, color="tomato", linewidth=2, label=f"H(x) = {w:.2f}x + {b:.2f}")
+    ax_left.plot(
+        plot_x, plot_y, color="tomato", linewidth=2, label=f"H(x) = {w:.2f}x + {b:.2f}"
+    )
     ax_left.set_title(f"{title}\n(MSE: {loss:.2f})", fontsize=12)
     ax_left.legend()
     ax_left.grid(True, alpha=0.3)
@@ -113,10 +115,13 @@ for idx, (title, x_data, y_data, lr) in enumerate(datasets):
 
     # 잔차 패턴 확인: 부호가 연속으로 바뀌지 않으면 비선형 의심
     sign_changes = sum(
-        1 for i in range(1, len(residuals))
+        1
+        for i in range(1, len(residuals))
         if (residuals[i] > 0) != (residuals[i - 1] > 0)
     )
-    print(f"  잔차 부호 변경 횟수: {sign_changes}회 (많을수록 무작위 → 선형 가능성 높음)")
+    print(
+        f"  잔차 부호 변경 횟수: {sign_changes}회 (많을수록 무작위 → 선형 가능성 높음)"
+    )
     print()
 
 print("판단 방법:")
