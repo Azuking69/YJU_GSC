@@ -16,7 +16,7 @@ $pdo = new PDO('mysql:host=db;dbname=example;charset=utf8mb4', 'root', 'root');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // URI에서 HTTP 메서드와 경로 세그먼트를 추출하여 라우팅
-$method = $_SERVER['REQUEST_METHOD'];
+$method = $_SERVER['REQUEST_METHOD']; // post, get, patch
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $segments = explode('/', trim($uri, '/'));   // 예: "/api/users/3" → ["api", "users", "3"]
 
