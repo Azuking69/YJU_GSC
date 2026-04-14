@@ -33,7 +33,7 @@ for i in range(epoch):
         # 3-4 오차 계산
         # error: 예측값 - 정답
         error = y - y_data[j]
-        # loss: (y^ - y) ** 2
+        # loss: (예측값 - 정답) ** 2
         loss = error**2
 
         # Gradient 계산
