@@ -34,7 +34,7 @@ for i in range(epoch):
         # error: 예측값 - 정답
         error = y - y_data[j]
         # loss: (예측값 - 정답) ** 2
-        loss = error**2
+        loss += error**2
 
         # Gradient 계산
         # 미분을 사용해서 기울기를 구하기
