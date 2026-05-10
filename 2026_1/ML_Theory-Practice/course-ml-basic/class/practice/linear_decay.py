@@ -11,43 +11,45 @@ data_size = len(x_data)
 # ============================================================
 # 학생 구현 영역
 # ============================================================
-# Hyper parameter setting
-epoch = 500
-batch_size = 4
+# Hyperparameter setting
+epochs = 500
+bach_size = 4
 base_lr = 0.008
 decay_steps = 2500
 
-# parameter setting
+# Parameter setting
 w = 0.0
 b = 0.0
 
-# global_step : 1 부터 시작, 매 batch 마다 +1
-global_step = 1
+# global_steps: 1부터 시작
+global_steps = 1
 
 # Loop: epoch
-for i in range(1, epoch + 1):
-    # 매 epoch마다 데이터 순서 섞기
+for loop_epoch in range(1, epochs + 1):
+    # epoch마다 데이터 순서 섞기
     random_data = list(range(data_size))
     random.shuffle(random_data)
 
     # epoch loss 초기화
     epoch_loss = 0.0
 
-    # Loop: batch(step)
-    for j in range(0, data_size, batch_size):
-        # batch단위로 index를 가져오기
-        batch_index = random_data[j : j + batch_size]
+
+    # Loop: batch
+    for loop_batch in range(0, data_size, bach_size):
+        # batch단위로 index를 초기화
+        batch_index = random_data[loop_batch:loop_batch + bach_size]
 
         # batch마다 gradient, loss를 초기화
-        w_grad = 0.0
-        b_grad = 0.0
-        batch_loss = 0.0
+        grad_w = 0.0
+        grad_b = 0.0
+        loss = 0.0
+
 
         # Loop: sample
-        for k in batch_index:
+        for loop_sample in batch_index:
             # data 가져오기
-            x = x_data[k]
-            y = y_data[k]
+            x = x_data[loop_sample]
+            y = y_data[loop_sample]
 
             # 예측값 계산
             # Model: H(X) = wx + b
@@ -56,37 +58,36 @@ for i in range(1, epoch + 1):
             # error: 예측값 - 정답
             error = pred_y - y
 
-            # parameter 기울기 값 계선 누적
-            w_grad += 2 * x * error
-            b_grad += 2 * error
+            # Parameter 기울기 누적
+            grad_w += 2 * x * error
+            grad_b += 2 * error
+            loss += error ** 2
 
-            # loss: error ** 2 누적
-            batch_loss += error**2
-
-        # 이 batch중의 평균
+        # 평균 계산
         batch_len = len(batch_index)
-        w_grad = w_grad / batch_len
-        b_grad = b_grad / batch_len
-        batch_loss = batch_loss / batch_len
+        grad_w = grad_w / batch_len
+        grad_b = grad_b / batch_len
+        loss = loss / batch_len
 
         # Linear Decay 수식
-        lr = base_lr * max(0.0, 1 - global_step / decay_steps)
+        lr = base_lr * max(0.0, 1 - global_steps / decay_steps)
 
-        # parameter update
-        w = w - lr * w_grad
-        b = b - lr * b_grad
+        # Parameter update
+        w = w - lr * grad_w
+        b = b - lr * grad_b
 
-        #  매 batch 마다 +1
-        global_step += 1
+        # epoch loss 누적
+        epoch_loss += loss * batch_len
 
-    # epoch loss 평균
+        # global steps + 1
+        global_steps += 1
+
+    # loss epoch 평균
     epoch_loss = epoch_loss / data_size
 
-    # loss 출력
-    if i == 1 or i % 100 == 0:
-        print(f"Epoch: {i} | Loss: {epoch_loss:.4f} | w: {w:.4f} | b: {b:.4f}")
+    # 결과 출력
+    if loop_epoch == 1 or loop_epoch % 100 == 0:
+        print(f"Epoch: {loop_epoch} | Loss: {loss:.4f} | w: {w:.4f} | b: {b:.4f}")
 
 # 최종 결과 출력
-print(
-    f"\nFinal Loss: {epoch_loss:.4f}\nFinal w: {w:.4f}\nFinal b: {b:.4f}\nFinal global_step: {global_step}"
-)
+print(f"\nFinal loss: {epoch_loss} | Final w: {w:.4f} | Final b: {b:.4f} | Final global_steps: {global_steps}")

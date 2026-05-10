@@ -62,9 +62,6 @@ for loop_epoch in range(1, epochs + 1):
             # Parameter 기울기 누적
             grad_w += 2 * x * error
             grad_b += 2 * error
-
-            # loss값 누적
-            # loss = error ** 2
             loss += error ** 2
 
         # 평균 계산
