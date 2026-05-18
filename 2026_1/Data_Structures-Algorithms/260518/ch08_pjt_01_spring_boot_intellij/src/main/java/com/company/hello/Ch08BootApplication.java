@@ -1,0 +1,12 @@
+package com.company.hello;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Ch08BootApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Ch08BootApplication.class, args);
+    }
+}
