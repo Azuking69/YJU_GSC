@@ -1,6 +1,8 @@
 import numpy as np
 
-# 2 x 1 x 3
-bar = np.array([2.0, 3.0])
+foo = [1, 2, 3, 4, 5, 6]  # vector(6, )
+pos = [[1, 2], [3, 4], [5, 6]]  # matrix(3, 2)
 
-print(bar.dtype)
+bar = np.array([2, 2])
+
+print(bar.dtype)  # float32 -> float64
