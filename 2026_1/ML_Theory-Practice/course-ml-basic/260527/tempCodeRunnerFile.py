@@ -7,7 +7,7 @@ pos = np.array(foo)
 print(pos)
 print(pos.shape)
 
-bar = pos.copy().reshape(2, 3)
+bar = pos.reshape(2, 3)
 print(bar)
 print(bar.shape)
 
