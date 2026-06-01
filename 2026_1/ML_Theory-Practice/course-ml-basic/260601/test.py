@@ -1,10 +1,13 @@
 import numpy as np
 
-bar = np.arange(1, 17)
-pos = bar.reshape(4, 4)
-foo = pos.reshape(2, 4, 2)
-print(f"bar: {bar}")
-print("*" * 20)
-print(f"pos: {pos}")
-print("*" * 20)
-print(f"foo: {foo}")
+# x_data
+x_data = np.arange(1, 26).reshape(5, 5)
+
+# indexing
+# Python - slice indexing
+# start:stop:step
+# start, stop 생략 시 -> 전체
+# stop 생략 시 -> 끝
+# step 생략 시 -> +1
+print(x_data[::1, ::])
+print(x_data[1:-1, 1:-1])
