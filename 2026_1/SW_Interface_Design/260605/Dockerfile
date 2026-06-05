@@ -1,3 +1,6 @@
 FROM python:3.12-slim
 WORKDIR /app
-RUN apt update && apt install -y vim && rm -rf /var/lib/apt/lists/*
+
+# 환경변수 등록
+ENV GSC=hello
+
