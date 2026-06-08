@@ -5,10 +5,11 @@ w_true = np.array([0.2, 0.4, 0.5, 0.6]).reshape(-1, 1)
 b_true = 2.0
 
 # -4.0 ~ 4.0 -> (5, 4)
-# x_dara = (np.random.random((5, 4)) - 0.5) * 8 
+x_data = (np.random.random((5, 4)) - 0.5) * 8
+y_data = x_data @ w_true + b_true
 
-bar = np.arange(1, 10).reshape(3, 3) # (3, 3)
-foo = np.array([0.1, 0.2, 0.3]).reshape(-1, 1) #(3, 1) 
-
-print(f"bar: {bar}\nfoo: {foo}")
-print(f"\nbar@foo\n{bar @ foo}")
+print(x_data)
+print()
+print(w_true)
+print()
+print(y_data)
