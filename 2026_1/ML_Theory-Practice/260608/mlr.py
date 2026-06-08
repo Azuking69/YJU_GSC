@@ -8,8 +8,13 @@ b_true = 2.0
 x_data = (np.random.random((5, 4)) - 0.5) * 8
 y_data = x_data @ w_true + b_true
 
-print(x_data)
-print()
-print(w_true)
-print()
-print(y_data)
+# parameter
+epochs = 1
+w = np.random.random((4, 11))
+b = np.random.random()
+
+for epoch in range(1, epochs + 1):
+    y_pred = x_data @ w + b
+    
+    error = y_pred - y_data
+    print(error)
