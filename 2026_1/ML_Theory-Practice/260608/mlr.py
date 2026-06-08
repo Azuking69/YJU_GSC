@@ -7,9 +7,8 @@ b_true = 2.0
 # -4.0 ~ 4.0 -> (5, 4)
 # x_dara = (np.random.random((5, 4)) - 0.5) * 8 
 
-bar = np.arange(1, 10).reshape(-1, 3)
-foo = np.array([0.1, 0.2, 0.3, 0.4])
+bar = np.arange(1, 10).reshape(3, 3) # (3, 3)
+foo = np.array([0.1, 0.2, 0.3]).reshape(-1, 1) #(3, 1) 
 
-print(bar)
-print(foo)
-print(bar + 2)
+print(f"bar: {bar}\nfoo: {foo}")
+print(f"\nbar@foo\n{bar @ foo}")
