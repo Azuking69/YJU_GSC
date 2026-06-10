@@ -28,10 +28,12 @@ for epoch in range(1, epochs + 1):
     print(y_pred)
     
     # Error: Prediction - Y
-    error = y_pred - y_data
-    
-    # Loss
+    error = y_pred - y_data # n, 1
     
     # Grad
+    print(f"x_data:\n{x_data}")
+    print(f"x_data.T:\n{x_data.T}")
     
     # Update
+  
+    # Loss
