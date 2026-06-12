@@ -11,6 +11,6 @@ r = redis.Redis(host=os.getenv('REDIS_HOST', 'localhost'),
 def index():
     count = r.incr('hits')
     return f'방문 횟수: {count}'
-  
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
