@@ -1,0 +1,29 @@
+services:
+  web1:
+    image: nginx:alpine
+    ports:
+      - "8090:80"
+    volumes:
+      - db_data_1:/temp
+    networks:
+      - gsc_net
+
+  web2:
+    image: nginx:alpine
+    ports:
+      - "8091:80"
+    networks:
+      - gsc_net
+
+  web3:
+    image: nginx:alpine
+    ports:
+      - "8092:80"
+    networks:
+      - gsc_net
+
+volumes:
+  db_data_1:
+
+networks:
+  gsc_net:
