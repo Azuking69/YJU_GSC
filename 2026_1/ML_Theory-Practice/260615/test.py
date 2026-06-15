@@ -1,3 +1,11 @@
-bar = [10, 20, 30, 40, 50, 60]
+import numpy as np
 
-print(bar[:-4:-1])
+bar = np.arange(12).reshape(3, 4)
+
+print(f"bar\n{bar}\n")                   # shape(3, 4)
+                                         # shape[1] -> 4
+print(bar.shape[0], bar.shape[1])        # shape[0] -> 3
+
+print(f"axis=1\n{bar.mean(axis=1)}\n")
+print(f"axis=0\n{bar.mean(axis=0)}\n")
+print(f"axis=-1\n{bar.mean(axis=-1)}\n")

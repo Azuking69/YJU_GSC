@@ -14,7 +14,8 @@ w = np.random.random((D, 1)) # D, 1
 b = np.random.random()
 
 # Hyper Parameters
-epochs = 1
+epochs = 10000
+lr = 0.007
 
 #Loop: Training
 for epoch in range(1, epochs + 1):
@@ -32,10 +33,19 @@ for epoch in range(1, epochs + 1):
     
     # Grad
     w_grad = (2 / N) * x_data.T @ error #N, 1
-    b_grad = (2 / N) * error
+    b_grad = (2 / N) * error.sum() # 1
     print(w_grad)
 
-    
     # Update
-
+    w = w - lr * w_grad # D, 1
+    b = b = lr * b_grad # 1
+    
     # Loss
+    if epoch % 100 == 0:
+      print(f"Loss: {(error ** 2).mean():.4f}")
+      
+print(f"w_true: {w_true}\n")
+print(f"b_true: {b_true}\n")
+print(f"w_true: {w_true}\n")
+print(f"w_true: {w_true}\n")
+print(f"w_true: {w_true}\n")
