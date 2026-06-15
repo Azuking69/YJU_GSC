@@ -31,8 +31,9 @@ for epoch in range(1, epochs + 1):
     error = y_pred - y_data # n, 1
     
     # Grad
-    print(f"x_data:\n{x_data}")
-    print(f"x_data.T:\n{x_data.T}")
+    w_grad = x_data.T @ error #N, 1
+    print(w_grad)
+
     
     # Update
 
