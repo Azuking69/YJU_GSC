@@ -31,7 +31,8 @@ for epoch in range(1, epochs + 1):
     error = y_pred - y_data # n, 1
     
     # Grad
-    w_grad = x_data.T @ error #N, 1
+    w_grad = (2 / N) * x_data.T @ error #N, 1
+    b_grad = (2 / N) * error
     print(w_grad)
 
     
