@@ -11,7 +11,7 @@ services:
   web:
     build: ./app
     environment:
-      DATABASE_URL:       postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
       REDIS_HOST: redis
     depends_on:
       db:
