@@ -6,7 +6,8 @@ N, D = 5, 4
 w_true = np.array([0.2, 0.4, 0.5, 0.7]).reshape(-1, 1) # D, 1
 b_true = 2.0 
 
-x_data = (np.random.random((N, D)) - 0.5) * 8 #N, D
+x_data = (np.random.random((N, D)) - 0.5) * 70 #N, D
+x_data = (x_data - x_data.mean(0)) / x_data.std(0)
 y_data = x_data @ w_true + b_true # N, 1
 
 # Model Parameters
@@ -14,8 +15,8 @@ w = np.random.random((D, 1)) # D, 1
 b = np.random.random()
 
 # Hyper Parameters
-epochs = 10000
-lr = 0.007
+epochs = 50_000
+lr = 0.003
 
 #Loop: Training, BGD
 for epoch in range(1, epochs + 1):
