@@ -17,8 +17,12 @@ b = np.random.random()
 epochs = 1000
 lr = 0.007
 
-#Loop: Training
+#Loop: Training, BGD
 for epochs in range(1, epochs + 1):
+    # prediction
+    y_pred = x_data @ w + b # N, 1
+    
+    print(y_pred)
     ...
       
 # print(f"w_true: {w_true}\n")
