@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>로또 번호 맞추기</title>
+    <style>
+      body {
+        font-family: Arial;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(5, 50px) 80px;
+        gap: 5px;
+        margin: 20px 0;
+      }
+      .grid input {
+        width: 50px;
+        height: 40px;
+        text-align: center;
+        font-size: 16px;
+      }
+      .grid .count {
+        line-height: 40px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .match {
+        background: #ffeb3b;
+        color: #d32f2f;
+        font-weight: bold;
+      }
+
+      button {
+        display: block;
+        margin: 20px auto;
+        padding: 15px 30px;
+        font-size: 18px;
+        background: #4a90d9;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #357abd;
+      }
+
+      .result {
+        text-align: center;
+        margin: 20px 0;
+        padding: 15px;
+        background: #f5f5f5;
+        border-radius: 5px;
+      }
+      .result .numbers {
+        font-size: 24px;
+        font-weight: bold;
+        color: #d32f2f;
+      }
+      .row-label {
+        line-height: 40px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>로또 번호 맞추기</h1>
+
+    <!-- 5x5 입력 그리드 -->
+    <div id="grid"></div>
+
+    <button onclick="generateLotto()">로또 번호 생성</button>
+
+    <!-- 결과 표시 -->
+    <div class="result" id="result" style="display: none">
+      <p>당첨 번호</p>
+      <p class="numbers" id="lottoNumbers"></p>
+    </div>
+
+    <script>
+      const ROWS = 5;
+      const COLS = 5;
+      const grid = document.getElementById("grid");
+
+      // 그리드 생성
+      function createGrid() {
+        for (let row = 0; row < ROWS; row++) {
+          // 행 라벨
+          const label = document.createElement("div");
+          label.className = "row-label";
+          label.textContent = `${row + 1}행`;
+          grid.appendChild(label);
+
+          // 입력 필드 5개
+          for (let col = 0; col < COLS; col++) {
+            const input = document.createElement("input");
+            input.type = "number";
+            input.min = 1;
+            input.max = 45;
+            input.dataset.row = row;
+            input.id = `cell-${row}-${col}`;
+            grid.appendChild(input);
+          }
+
+          // 맞춘 개수 표시
+          const count = document.createElement("div");
+          count.className = "count";
+          count.id = `count-${row}`;
+          count.textContent = "-";
+          grid.appendChild(count);
+        }
+      }
+
+      // 로또 번호 생성 (1-45 중 6개)
+      function generateLotto() {
+        // 입력값 초기화 (스타일)
+        document.querySelectorAll("input").forEach((input) => {
+          input.classList.remove("match");
+        });
+
+        // 로또 번호 생성
+        const lottoNumbers = [];
+        while (lottoNumbers.length < 6) {
+          const num = Math.floor(Math.random() * 45) + 1;
+          if (!lottoNumbers.includes(num)) {
+            lottoNumbers.push(num);
+          }
+        }
+        lottoNumbers.sort((a, b) => a - b);
+
+        // 결과 표시
+        document.getElementById("result").style.display = "block";
+        document.getElementById("lottoNumbers").textContent =
+          lottoNumbers.join(", ");
+
+        // 각 행별 검사
+        for (let row = 0; row < ROWS; row++) {
+          let matchCount = 0;
+          const rowNumbers = [];
+
+          for (let col = 0; col < COLS; col++) {
+            const input = document.getElementById(`cell-${row}-${col}`);
+            const value = parseInt(input.value);
+
+            // 유효한 값인지 확인
+            if (value >= 1 && value <= 45) {
+              // 행 내 중복 체크
+              if (rowNumbers.includes(value)) {
+                alert(`${row + 1}행에 중복된 숫자(${value})가 있습니다!`);
+                return;
+              }
+              rowNumbers.push(value);
+
+              // 로또 번호와 일치 여부
+              if (lottoNumbers.includes(value)) {
+                input.classList.add("match");
+                matchCount++;
+              }
+            }
+          }
+
+          // 맞춘 개수 표시
+          document.getElementById(`count-${row}`).textContent =
+            `${matchCount}개`;
+        }
+      }
+
+      // 초기화
+      createGrid();
+    </script>
+  </body>
+</html>

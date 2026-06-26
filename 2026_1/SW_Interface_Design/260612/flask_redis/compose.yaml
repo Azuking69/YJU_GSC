@@ -1,0 +1,15 @@
+services:
+  web:
+    build: .
+    ports: ["5000:5000"]
+    environment: { REDIS_HOST: redis, REDIS_PORT: 6379}
+    depends_on:
+      redis: { condition: service_healthy } # 핵심: 준비된 뒤 시작
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 5s

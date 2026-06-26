@@ -1,0 +1,17 @@
+<script>
+  let _name = "global";
+
+  function foo() {
+    console.log("function", this._name);
+  }
+
+  const obj = {
+    _name: "obj",
+    bar() {
+      console.log("method", this._name);
+    },
+  };
+
+  foo();
+  obj.bar();
+</script>

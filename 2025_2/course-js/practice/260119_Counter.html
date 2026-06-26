@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="number" id="input_value" placeholder="Put numbers" />
+    <button id="add_btn" onclick="add_num()">Add</button>
+    <script>
+      function createdAdder() {
+        let result = 0;
+
+        // Event handler
+        function add() {
+          const input = document.getElementById("input_value").value;
+
+          // previous value + current value
+          result += Number(input);
+          // show result
+          alert(result);
+        }
+        return add; // 자신이 만들어진 장소의 바깥쪽변수 result를 외운 채로 계속 살아가다
+      }
+      const add_num = createdAdder();
+    </script>
+  </body>
+</html>

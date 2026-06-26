@@ -1,0 +1,14 @@
+# 함수 정의
+# -> 자기만의 함수를 만들고 싶을 때
+
+# bar 함수 정의
+# of parameters: 5개 EA
+# Required: 2개 EA -> a, b, c
+# Option: 3개 EA -> d, e
+def plot(*args):
+    print(args, type(args))
+
+# bar 함수 호출
+plot(1)
+plot(1, 2)
+plot(1, 2, "hello")

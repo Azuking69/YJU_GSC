@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Promise로 Callback Hell 해결</title>
+  </head>
+  <body>
+    <h1>Promise로 Callback Hell 해결</h1>
+    <p>콘솔(F12)을 확인하세요.</p>
+
+    <script>
+      // 서버에서 데이터를 가져오는 것을 시뮬레이션하는 함수
+      // → callback 대신 Promise를 반환하도록 변경
+      function getUser(userId) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            console.log("1. 사용자 조회 완료");
+            resolve({ id: userId, name: "홍길동" });
+          }, 1000);
+        });
+      }
+
+      function getOrders(user) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            console.log("2. 주문 목록 조회 완료");
+            resolve([
+              { id: 101, item: "노트북", userId: user.id },
+              { id: 102, item: "마우스", userId: user.id },
+            ]);
+          }, 1000);
+        });
+      }
+
+      function getOrderDetail(order) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            console.log("3. 주문 상세 조회 완료");
+            resolve({ ...order, price: 1500000, status: "배송중" });
+          }, 1000);
+        });
+      }
+
+      function getShipping(detail) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            console.log("4. 배송 정보 조회 완료");
+            resolve({
+              orderId: detail.id,
+              courier: "우체국",
+              trackingNo: "1234-5678",
+            });
+          }, 1000);
+        });
+      }
+
+      // Promise 체이닝으로 Callback Hell 해결
+      // → 들여쓰기 없이 평탄하게 순서대로 읽을 수 있다!
+      let savedUser;
+
+      getUser(1)
+        .then((user) => {
+          savedUser = user;
+          return getOrders(user);
+        })
+        .then((orders) => {
+          return getOrderDetail(orders[0]);
+        })
+        .then((detail) => {
+          savedUser.detail = detail;
+          return getShipping(detail);
+        })
+        .then((shipping) => {
+          const detail = savedUser.detail;
+          console.log("========== 최종 결과 ==========");
+          console.log("사용자:", savedUser.name);
+          console.log("주문 상품:", detail.item);
+          console.log("가격:", detail.price);
+          console.log("배송 상태:", detail.status);
+          console.log("택배사:", shipping.courier);
+          console.log("운송장 번호:", shipping.trackingNo);
+        })
+        .catch((error) => {
+          console.error("에러 발생:", error);
+        });
+    </script>
+  </body>
+</html>

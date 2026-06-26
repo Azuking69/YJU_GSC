@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   class MakeIncease {
+      //     count = 0;
+
+      //     increase() {
+      //       this.count++;
+      //       console.log(this.count);
+      //     }
+      //   }
+
+      //   Obj1 = new MakeIncease();
+      //   obj1.increase();
+      //   setTimeout(obj1.increase, 1000);
+
+      function request(method, url) {
+        console.log(method, url);
+      }
+
+      const get = request.bind(null, "get");
+      const posts = request.bind(null, "posts");
+
+      gets("http://www.www.com");
+      posts("http://www.www.com");
+    </script>
+  </body>
+</html>

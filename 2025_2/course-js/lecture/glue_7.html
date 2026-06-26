@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Weather App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 350px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        select {
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background: #4facfe;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #007bff;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f4f8ff;
+            border-left: 5px solid #4facfe;
+            min-height: 80px;
+        }
+
+        .result h4 {
+            margin: 0 0 10px 0;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h3>🌤 날씨 확인하기</h3>
+
+        <form onsubmit="return getWeather();">
+            <label>지역 선택</label>
+            <select id="city">
+                <option value="">-- 지역을 선택하세요 --</option>
+                <option value="seoul">서울</option>
+                <option value="busan">부산</option>
+                <option value="daegu">대구</option>
+                <option value="incheon">인천</option>
+                <option value="gwangju">광주</option>
+            </select>
+
+            <button type="submit">날씨 확인하기</button>
+        </form>
+
+        <div id="result" class="result">
+            날씨 정보가 여기에 표시됩니다.
+        </div>
+    </div>
+
+    <script>
+        function getWeather() {
+            let city = document.getElementById("city").value;
+            let resultDiv = document.getElementById("result");
+
+            if (city === "") {
+                alert("지역을 선택하세요.");
+                return false;
+            }
+
+            const coords = {
+                seoul:   { lat: 37.5665, lon: 126.9780, name: "서울" },
+                busan:   { lat: 35.1796, lon: 129.0756, name: "부산" },
+                daegu:   { lat: 35.8714, lon: 128.6014, name: "대구" },
+                incheon: { lat: 37.4563, lon: 126.7052, name: "인천" },
+                gwangju: { lat: 35.1595, lon: 126.8526, name: "광주" }
+            };
+
+            const lat = coords[city].lat;
+            const lon = coords[city].lon;
+            const cityName = coords[city].name;
+
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const temp = data.current_weather.temperature;
+                    const wind = data.current_weather.windspeed;
+
+                    resultDiv.innerHTML = `
+                        <h4>${cityName} 날씨</h4>
+                        <p>🌡 온도: <b>${temp} ℃</b></p>
+                        <p>💨 풍속: <b>${wind} m/s</b></p>
+                    `;
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = "날씨 정보를 불러오는데 실패했습니다.";
+                    console.error(error);
+                });
+
+            return false;
+        }
+    </script>
+
+</body>
+</html>
