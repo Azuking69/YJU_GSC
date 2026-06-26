@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.venv/
+.env
+*.egg
+.pytest_cache/
+tests/
+*.db
+.MD
+=======
 # ✅ 파이썬 실행 시 자동 생성되는 캐시 및 빌드 파일 무시
 __pycache__/
 *.pyc
@@ -44,3 +59,4 @@ Thumbs.db
 
 #Ignore vscode AI rules
 .github\instructions\codacy.instructions.md
+>>>>>>> d2b9c463bf5727f8cebd1cf662766e0611e1b235
