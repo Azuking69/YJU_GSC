@@ -17,7 +17,7 @@ client = Anthropic()
 
 def call_claude(prompt: str, temperature: float = 1.0, max_tokens: int = 1024) -> str:
     response = client.messages.create(
-        model="claude-sonnet-4-20250514",
+        model="claude-haiku-4-5-20251001",
         max_tokens=max_tokens,
         temperature=temperature,
         messages=[{"role": "user", "content": prompt}],
