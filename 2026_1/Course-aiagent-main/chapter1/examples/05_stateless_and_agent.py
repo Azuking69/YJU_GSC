@@ -15,7 +15,7 @@ from anthropic import Anthropic
 load_dotenv()
 
 client = Anthropic()
-MODEL = "claude-haiku-4-5-20251001"
+MODEL = "claude-sonnet-4-6"
 
 # ============================================================
 # 1부: LLM은 기억하지 못한다 (Stateless)
