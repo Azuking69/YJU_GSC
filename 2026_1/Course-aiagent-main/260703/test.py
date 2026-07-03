@@ -1,10 +1,11 @@
 import time
 
-start = time.time()
+def main():
+    start = time.time()
+    time.sleep(2) # 2초 정지
+    elasped_time = time.time() - start
 
-time.sleep(2) # 2초 정지
+    print(f"경과 시간 {elasped_time}")
 
-elasped_time = time.time() - start
-
-print(f"경과 시간 {elasped_time}")
-print(__name__) # __main__
+if __name__ == "__main__":
+    main()
