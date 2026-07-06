@@ -1,7 +1,9 @@
 import asyncio
+import time
 
-def main():
-    ...
+async def main():
+    print("hello world")
 
 if __name__ == "__main__":
+    print(main())
     asyncio.run # EL system start
