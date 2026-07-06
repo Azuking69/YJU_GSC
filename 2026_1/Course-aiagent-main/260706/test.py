@@ -8,9 +8,9 @@ async def test(name):
 
 async def main():
     # task1
-    asyncio.create_task() # return -> task
+    asyncio.create_task(test(1)) # return -> task
     # task 2
-    asyncio.create_task() # return -> task
+    asyncio.create_task(test(2)) # return -> task
 
     print("프로그램 종료")
 
