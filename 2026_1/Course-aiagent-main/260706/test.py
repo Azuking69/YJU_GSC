@@ -1,9 +1,13 @@
 import asyncio
 import time
 
+async def bar():
+    print("bar is invoked")
+    await asyncio.sleep(0)
+
 async def test(name):
     print(f"{name} is started")
-    await asyncio.sleep(2)
+    await bar()
     print(f"{name} is finished")
 
 async def main():
