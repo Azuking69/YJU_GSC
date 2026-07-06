@@ -5,5 +5,4 @@ async def main():
     print("hello world")
 
 if __name__ == "__main__":
-    print(main())
-    asyncio.run # EL system start
+    asyncio.run(main()) # EL system start
