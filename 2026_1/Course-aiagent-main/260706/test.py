@@ -7,7 +7,12 @@ async def test(name):
     print(f"{name} is finished")
 
 async def main():
-    print("hello world")
+    # task1
+    asyncio.create_task() # return -> task
+    # task 2
+    asyncio.create_task() # return -> task
+
+    print("프로그램 종료")
 
 if __name__ == "__main__":
     asyncio.run(main()) # EL system start
