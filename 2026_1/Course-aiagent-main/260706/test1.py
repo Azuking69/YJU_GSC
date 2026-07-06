@@ -17,7 +17,9 @@ async def cr_task3():
 async def main():
     task1 = asyncio.create_task(cr_task1()) #task1
     task2 = asyncio.create_task(cr_task2()) #task2
-    task3 = asyncio.create_task(cr_task1()) #task3
+    task3 = asyncio.create_task(cr_task3()) #task3
+
+    await task1, task2, task3
 
 if __name__ == "__main__":
     asyncio.run(main())
