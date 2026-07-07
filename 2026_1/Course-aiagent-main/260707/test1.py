@@ -1,13 +1,16 @@
 import asyncio
 import time
 from anthropic import AsyncAnthropic
+from dotenv import load_dotenv
 
-MODEL = "claud-haiku-4-5-20251001"
-async def ask(client: AsyncAnthropic, message:str)->str:
+load_dotenv()
+
+MODEL = "claude-haiku-4-5-20251001"
+async def ask(client: AsyncAnthropic, question:str)->str:
     response = await client.messages.create( # await로 비동기 호출
         model = MODEL,
-        max_token = 100,
-        message = [{"role": "user", "content": question}],
+        max_tokens = 100,
+        messages = [{"role": "user", "content": question}],
     )
 
     return response.content[0].text
@@ -28,7 +31,7 @@ async def main():
     for text in result:
         print(text)
         print("*" * 50)
-        
+
     print(f"총 소요시간: {elapsed_time}")
 
 
