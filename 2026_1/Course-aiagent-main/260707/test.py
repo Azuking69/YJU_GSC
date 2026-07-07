@@ -15,7 +15,6 @@ async def main():
     # result = await asyncio.gather(make_order("라떼", 3), make_order("아아", 2), make_order("우유", 1))
 
     elapsed_time = time.time() - start_time
-    print(f"{result1}\n{result2}\n{result3}")
     print(f"총 소요시간: {elapsed_time}")
 
 if __name__ == "__main__":
