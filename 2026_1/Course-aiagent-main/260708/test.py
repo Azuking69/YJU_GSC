@@ -3,7 +3,12 @@ import time
 from anthropic import AsyncAnthropic
 
 async def ask(client: AsyncAnthropic, prompt: str) -> str:
-    ...
+    client.messages.create(
+        model = "claude-haiku-4-5-20251001",
+        max_tokens = 200,
+        messages = [{"role":"user", "content":prompt}],
+    )
+    return rsp.content[0]
 
 async def main():
     client = AsyncAnthropic()
