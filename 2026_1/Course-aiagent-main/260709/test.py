@@ -28,11 +28,13 @@ async def call_llm(client: AsyncAnthropic, prompt:str, max_retries:int=3, delay:
             except Exception as e:
                 print(f"예외 발생: {e}")
                 # 즉시 예외 발생: 모델명을 잘 못 선택
+
                 # 재전송
 
                 if attempt >= max_retries - 1:
                     print("최대 재시도 횟수 초과. 실패 처리.")
                     return Exception
+                
                 await asyncio.sleep(delay)  # 재시도 전 대기
 
     """
