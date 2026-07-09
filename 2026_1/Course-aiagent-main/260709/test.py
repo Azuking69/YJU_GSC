@@ -8,7 +8,7 @@ load_dotenv()
 sem = asyncio.Semaphore(3)  # 동시 호출 제한
 
 # LLM 호출
-async def call_llm(client: AsyncAnthropic, prompt:str, max_retries:int=3)->str:
+async def call_llm(client: AsyncAnthropic, prompt:str, max_retries:int=3, delay:int=3)->str:
     for attempt in range(max_retries):
         async with sem:
             # 1) 성공
@@ -27,6 +27,11 @@ async def call_llm(client: AsyncAnthropic, prompt:str, max_retries:int=3)->str:
             #    예외 처리        
             except Exception as e:
                 print(f"예외 발생: {e}")
+
+                if attempt >= max_retries - 1:
+                    print("최대 재시도 횟수 초과. 실패 처리.")
+                    return Exception
+                await asyncio.sleep(delay)  # 재시도 전 대기
 
     """
     
