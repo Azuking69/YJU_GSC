@@ -11,4 +11,15 @@ dependencies = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["chapter1*", "chapter2*", "chapter3*", "chapter4*", "appendix*", "260703*", "260706*", "260707*", "260708*", "260709*"]
+include = [
+    "chapter1*", 
+    "chapter2*", 
+    "chapter3*", 
+    "chapter4*", 
+    "appendix*", 
+    "260703*", 
+    "260706*", 
+    "260707*", 
+    "260708*", 
+    "260709*",
+    ]
