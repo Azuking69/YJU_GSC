@@ -2,7 +2,7 @@
 Chapter 2-2: Chain of Thought (CoT) — 단계적 추론
 
 CoT란?
-  LLM이 바로 답만 내지 않고, 중간 풀이 과정을 거치게 하는 기법입니다.
+  LLM이 바로 답만 내지 않고, 문제를 중간 단계로 나누어 풀게 하는 기법입니다.
   LLM은 다음 토큰을 예측하는 모델이므로, 중간 단계를 출력하면
   각 단계가 다음 단계의 맥락이 되어 더 정확한 결론에 도달합니다.
 
@@ -13,14 +13,14 @@ CoT를 구현하는 두 가지 방식:
 
   2. Extended Thinking (Reasoning Model)
      - 모델이 응답 전에 내부적으로 "생각"하는 단계를 거침
-     - 추론 과정은 별도 thinking 블록에 담기고, 응답은 결론만 포함
+     - API에는 전체 내부 사고가 아니라 thinking 요약 블록과 최종 text 블록이 반환됨
      - 같은 모델이라도 thinking 파라미터로 활성화/비활성화 가능
      - 예: Claude (Extended Thinking), OpenAI o1/o3, DeepSeek R1
 
 이 예제의 구성:
   1부: 프롬프트 기반 CoT — 추론 형식을 프롬프트로 제어
   2부: Extended Thinking — 모델 내장 추론과 thinking 블록 활용
-  3부: Agent 실전 패턴 — 추론과 결과를 JSON으로 분리하여 코드에서 활용
+  3부: Agent 실전 패턴 — 간결한 판단 근거와 결과를 JSON으로 분리
 """
 
 import json
@@ -45,6 +45,7 @@ problem = """학교에 학생이 450명 있습니다.
 # 같은 문제라도 어떤 지시를 주느냐에 따라 출력이 크게 달라집니다.
 print("=" * 60)
 print("1부: 프롬프트 기반 CoT")
+print("관찰 포인트: 정답뿐 아니라 검증 가능한 풀이 구조도 요청합니다.")
 print("=" * 60)
 
 # --- 자유 형식 CoT ---
@@ -86,17 +87,18 @@ print(f"\n  [토큰: 입력 {response.usage.input_tokens} / 출력 {response.usa
 # 같은 모델(claude-sonnet-4-6)이지만 동작 방식이 달라집니다:
 #
 #   프롬프트 CoT: [프롬프트] → [추론 + 답이 섞인 응답]
-#   Extended Thinking: [프롬프트] → [내부 thinking] → [결론만 응답]
+#   Extended Thinking: [프롬프트] → [모델 내부 추론] → [thinking 요약 + 최종 응답]
 #
 # thinking의 type 옵션:
-#   "enabled"  — 항상 thinking을 수행. budget_tokens로 사고량 조절 (1024 이상).
-#   "adaptive" — 모델이 문제 난이도를 판단하여 thinking 여부를 스스로 결정.
+#   "adaptive" — 권장. 모델이 문제 난이도를 보고 thinking 여부와 양을 스스로 결정.
 #                간단한 질문에는 건너뛰고, 복잡한 문제에만 thinking 수행.
 #                → 불필요한 thinking 토큰 비용을 절약할 수 있음.
-#   "disabled" — thinking을 사용하지 않음 (기본값, 파라미터 생략과 동일).
+#   "enabled"  — 구식. budget_tokens로 사고량을 수동 지정 (1024 이상).
+#                Sonnet 4.6에서 deprecated, 4.7+/Sonnet 5에서는 400 에러로 제거됨.
+#   "disabled" — thinking을 사용하지 않음 (Sonnet 4.6에서는 파라미터 생략과 동일).
 #
 # 주의사항:
-#   - Extended Thinking 사용 시 temperature는 1로 고정 (변경 불가)
+#   - thinking 사용 시 temperature는 조정할 수 없습니다 (1로 고정)
 #   - max_tokens는 thinking + 응답 전체의 상한이므로 넉넉하게 설정
 print()
 print("=" * 60)
@@ -107,21 +109,25 @@ print("\n--- 같은 문제를 Extended Thinking으로 풀기 ---")
 response = client.messages.create(
     model=MODEL,
     max_tokens=16000,
-    thinking={
-        "type": "enabled",
-        "budget_tokens": 10000,
-    },
+    thinking={"type": "adaptive"},   # 모델이 필요한 만큼 스스로 생각
     messages=[{"role": "user", "content": problem}],
 )
 
 # 응답 content에는 thinking 블록과 text 블록이 나뉘어 들어옵니다.
+has_thinking = False
 for block in response.content:
     if block.type == "thinking":
-        print(f"[thinking 블록 — 내부 추론 과정]")
+        has_thinking = True
+        print("[thinking 블록 — 모델이 제공한 추론 요약]")
         print(f"{block.thinking}\n")
     elif block.type == "text":
         print(f"[text 블록 — 최종 응답]")
         print(f"{block.text}")
+
+if not has_thinking:
+    # adaptive는 "생각할 가치가 있는가"까지 모델이 판단합니다.
+    # 이 문제가 간단하다고 보면 thinking 없이 바로 답할 수도 있습니다.
+    print("\n(모델이 이 문제는 thinking 없이 풀 수 있다고 판단했습니다 — adaptive의 특징)")
 
 print(f"\n  [토큰: 입력 {response.usage.input_tokens} / 출력 {response.usage.output_tokens}]")
 # → 프롬프트에 "단계별로"라고 쓰지 않아도 모델이 충분히 생각한 뒤 답합니다.
@@ -131,9 +137,10 @@ print(f"\n  [토큰: 입력 {response.usage.input_tokens} / 출력 {response.usa
 # ============================================================
 # 3부: Agent 실전 패턴 — 추론과 결과를 JSON으로 분리
 # ============================================================
-# Agent가 결정을 내릴 때는 "왜 그렇게 판단했는지"를 나중에 확인할 수 있어야 합니다.
+# Agent가 결정을 내릴 때는 "어떤 근거로 판단했는지"를 확인할 수 있어야 합니다.
+# 여기서 요청하는 reasoning은 내부 사고 전체가 아니라 사용자에게 설명 가능한 짧은 근거입니다.
 # JSON에 reasoning 필드를 포함시키면:
-#   - reasoning → 로깅/디버깅용 (판단 근거 추적)
+#   - reasoning → 감사/디버깅용 간결한 판단 근거
 #   - 나머지 필드 → 코드에서 활용 (분기 처리, 라우팅 등)
 #
 # Extended Thinking도 thinking/text 분리를 자동으로 해주지만,
@@ -152,7 +159,7 @@ response = client.messages.create(
 문의를 분석하고 아래 JSON 형식으로만 응답하세요. 마크다운 코드블록 없이 순수 JSON만 출력하세요.
 
 {
-  "reasoning": "판단 근거를 단계별로 서술",
+  "reasoning": "판단에 사용한 핵심 근거를 한 문장으로 요약",
   "category": "환불|배송|제품문의|기술지원|기타",
   "priority": "high|medium|low",
   "suggested_action": "추천 대응 방법"
@@ -175,7 +182,7 @@ if cleaned.startswith("```"):
 result = json.loads(cleaned)
 
 # Agent 코드에서는 reasoning은 로그로, 나머지 필드는 실제 분기 처리에 쓸 수 있습니다.
-print("[로깅용] 추론 과정:", result["reasoning"])
+print("[검토용] 판단 근거:", result["reasoning"])
 print("[코드용] 분류:", result["category"])
 print("[코드용] 우선순위:", result["priority"])
 print("[코드용] 추천 대응:", result["suggested_action"])
@@ -197,7 +204,7 @@ print("""
 2. Extended Thinking (Reasoning Model)
    - thinking 파라미터로 활성화 (같은 모델에서 켜고 끄기 가능)
    - thinking 블록(추론)과 text 블록(결론)이 자동 분리
-   - type 옵션: enabled(항상) / adaptive(자동 판단) / disabled(끔)
+   - type 옵션: adaptive(권장, 자동 판단) / disabled(끔) / enabled(구식, 4.7+ 제거)
    - 복잡한 추론에서 정확도가 더 높음
 
 3. 선택 가이드

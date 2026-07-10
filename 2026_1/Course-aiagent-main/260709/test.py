@@ -8,20 +8,22 @@ load_dotenv()
 sem = asyncio.Semaphore(3)  # 동시 호출 제한
 
 # LLM 호출
-async def call_llm(client: AsyncAnthropic, prompt:str, max_retries:int=3, delay:int=3)->str:
+async def call_llm(client: AsyncAnthropic, prompt:str, \
+                   max_retries:int=3, delay:int=3, timeout:int=50)->str:
     for attempt in range(max_retries):
         async with sem:
             # 1) 성공
             #    결과 값 포맷 검증
             try:
-                # send prompt
-                rsp = await client.messages.create(
-                    model="claude-haiku-4-5",
-                    max_tokens=200,
-                    messages=[{"role": "user", "content": prompt}]
-                )
-                # 결과 값 반환
-                return rsp.content[0]
+                async with timeout(timeout):
+                    # send prompt
+                    rsp = await client.messages.create(
+                        model="claude-haiku-4-5",
+                        max_tokens=200,
+                        messages=[{"role": "user", "content": prompt}]
+                    )
+                    # 결과 값 반환
+                    return rsp.content[0]
             
             # 2) 실패
             #    예외 처리        
@@ -31,22 +33,14 @@ async def call_llm(client: AsyncAnthropic, prompt:str, max_retries:int=3, delay:
 
                 # 재전송
 
+                # if 결과 값 검증 실패 or 예외 발생(재시도)
                 if attempt >= max_retries - 1:
                     print("최대 재시도 횟수 초과. 실패 처리.")
+                    # 재전송
                     return Exception
                 
                 await asyncio.sleep(delay)  # 재시도 전 대기
 
-    """
-    
-    
-        
-
-
-    if 결과 값 검증 실패 or 예외 발생(재시도)
-        재전송
-    """
-    ...
 
 async def main():
     # LLM 호출
