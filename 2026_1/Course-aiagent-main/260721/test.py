@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import Literal
 
 class car(BaseModel):
-    mode: str
+    model: str
     year: int
     c_type: Literal[ "suv", "sedan", "pickup"]
 
