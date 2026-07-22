@@ -1,3 +1,4 @@
+import json
 from pydantic import BaseModel, ValidationError
 from typing import Literal
 
@@ -7,8 +8,9 @@ class Student(BaseModel):
     grade:Literal["1","2","3"]
 
 try:
-    obj = Student(id=1, name="gsc", grade="4")
+    rcvd_data = '{"id": 1, "name": "gsc", "grade": "4"}'
+    obj = Student.model_validate_json(rcvd_data)
+    print(obj)
 except ValidationError:
     print("예외처리")
 
-print(obj)
