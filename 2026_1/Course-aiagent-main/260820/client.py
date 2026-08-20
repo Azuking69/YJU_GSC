@@ -11,6 +11,7 @@ from mcp.types import (
     Root,
     TextContent
 )
+import anthropic from Anthropic;
 
 SERVER_PATH = str(Path(__file__).parent / "02_connection_server.py")
 
@@ -22,6 +23,7 @@ server_params = StdioServerParameters(
 
 
 async def main():
+    llm_client = AnthropicClient();
     # stdクライアント
     async with stdio_client(server_params) as (read, write):
         # 서버와 연결된 클라이언트 세션
@@ -36,7 +38,15 @@ async def main():
             for tool in result.tools:
                 print(tool)
                 print()
-            dump("Discover result for tools", result)
+
+            promts = [{"role": "user", "content": "글로벌시스템융합과 학번 10번 학생의 GPA는?"}]
+
+            result = llm_client.message.create(
+                model="claude-4-6",
+                max_tokens=300,
+                messages=promts,
+                tools=tool_list,
+            )
 
 
 
