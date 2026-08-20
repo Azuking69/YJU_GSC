@@ -120,7 +120,10 @@ print("""
 
 다음 예제 로드맵:
   02_connection_*      → Client-Server 초기 연결 절차 확인 (JSON-RPC, handshake)
-  03_components_*      → Resource / Tool / Prompt 본질 비교 (LLM 없이 직접 호출)
-  04_agent_with_mcp    → 3대 구성요소 + Claude LLM 결합 Agent (실전)
-  05_multi_server*     → 다중 서버 연결과 라우팅 패턴
+  03_tool_cycle_*      → MCP 도구를 LLM이 실제로 쓰는 최소 1사이클 (핵심 먼저!)
+  04_resource_*        → Resource 최소 예제 (클라이언트 4단계 골격, list -> read)
+  05_prompt_*          → Prompt 최소 예제 (인자 채워 messages 받기)
+  06_components_*      → Resource / Tool / Prompt 본질 비교 (LLM 없이 직접 호출)
+  07_agent_with_mcp    → 3대 구성요소 + Claude LLM 결합 Agent (실전)
+  08_multi_server*     → 다중 서버 연결과 라우팅 패턴
 """)

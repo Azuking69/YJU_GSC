@@ -26,9 +26,19 @@ async def main():
     async with stdio_client(server_params) as (read, write):
         # 서버와 연결된 클라이언트 세션
         async with ClientSession(read, write) as session:
-            rsp = await session.initialize()
-            # 
-            dump("초기화 후 응답값", rsp)
+            result = await session.initialize()
+
+            # 현제 MCP 서버에서 제공하는 함수(tool)의 목록을 반환
+            # 목록은 Json Schema
+            # -함수이름, 매개변수 구조, 설명글(LLM)
+            result = await session.list_tools();
+
+            for tool in result.tools:
+                print(tool)
+                print()
+            dump("Discover result for tools", result)
+
+
 
 if __name__ == "__main__":
     asyncio.run(main())
