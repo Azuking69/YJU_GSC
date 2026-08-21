@@ -1,6 +1,11 @@
 import asyncio
 import json
 import sys
+
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+
 from pathlib import Path
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
@@ -41,8 +46,7 @@ async def main():
                             {
                                 "name": t.name, 
                                 "description": t.description, 
-                                "input_schema": t.inputSchema, 
-                                "output_schema": t.outputSchema
+                                "input_schema": t.inputSchema
                             } 
                             for t in result.tools
                         ]
