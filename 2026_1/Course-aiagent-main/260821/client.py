@@ -12,7 +12,9 @@ from mcp.types import (
     TextContent
 )
 from anthropic import Anthropic
+from dotenv import load_dotenv
 
+load_dotenv()
 SERVER_PATH = str(Path(__file__).parent / "02_connection_server.py")
 
 server_params = StdioServerParameters(
@@ -39,8 +41,8 @@ async def main():
                             {
                                 "name": t.name, 
                                 "description": t.description, 
-                                "input_schema": t.input_schema, 
-                                "output_schema": t.output_schema
+                                "input_schema": t.inputSchema, 
+                                "output_schema": t.outputSchema
                             } 
                             for t in result.tools
                         ]
@@ -58,6 +60,11 @@ async def main():
                 tools=tool_list,
             )
 
+
+            print(result.stop_reason)
+            for cnt, block in enumerate(result.content):
+                print(f"{cnt} th block ")
+                print(block); print()
 
 
 if __name__ == "__main__":
