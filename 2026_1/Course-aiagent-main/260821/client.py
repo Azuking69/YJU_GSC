@@ -11,14 +11,14 @@ from mcp.types import (
     Root,
     TextContent
 )
-from anthropic import Anthropic;
+from anthropic import Anthropic
 
 SERVER_PATH = str(Path(__file__).parent / "02_connection_server.py")
 
 server_params = StdioServerParameters(
     command=sys.executable,
     # 실행하고자 하는 서버
-    args=["SERVER_PATH"],
+    args=[SERVER_PATH],
 )
 
 
@@ -49,7 +49,7 @@ async def main():
                 print(tool)
                 print()
 
-            promts = [{"role": "user", "content": "글로벌시스템융합과 학번 10번 학생의 GPA는?"}]
+            promts = [{"role": "user", "content": "글로벌시스템융합과 학번 1의 성적 학생의 GPA는?"}]
 
             result = llm_client.messages.create(
                 model="claude-sonnet-4-6",
