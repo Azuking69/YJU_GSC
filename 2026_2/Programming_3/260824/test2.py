@@ -1,6 +1,8 @@
+import sys
 bar = [1, 2, 3]
-del bar 
-print(bar)
+print(sys.getrefcount(bar)) # 2
+foo = bar 
+print(sys.getrefcount(bar)) # 3
 
 # class Student:
 #   def __init__(self, arg_name, arg_math, arg_eng) -> None:
