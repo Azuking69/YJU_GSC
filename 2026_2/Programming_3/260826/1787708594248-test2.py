@@ -16,4 +16,4 @@ class Student:
 std_1 = Student("글시융 1"); std_2 = Student("글시융 2")
 print(std_1.univ, std_2.univ)
 std_2.univ = "영진전문대"
-print(std_1.univ, std_2.univ)
+print(std_1.name, std_2.name)
