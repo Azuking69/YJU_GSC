@@ -13,7 +13,7 @@ class Bar:
 
 
 # Object 생성
-print(Bar.id)
+print()
 
 # obj: 참조 변수
 obj = Bar()
