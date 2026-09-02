@@ -16,7 +16,5 @@ class Student:
         self.sum = 20 + 30
 
 
-std_1 = Student()
-std_1.get_sum()
-std_1.univ = "YJU"
-print(std_1.name, std_1.id, std_1.gpa, std_1.sum, std_1.univ)
+obj = Student()
+print(obj.__dict__)
