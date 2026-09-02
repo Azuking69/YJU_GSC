@@ -9,4 +9,7 @@ class Bar:
     # self: 매개 변수 -> 
     # 참조 변수: 현재 생성된 인스턴스의 주소
     def __init__(self):
-        pass
+        print(self)
+        print(isinstance(self, Bar))
+
+Bar()
