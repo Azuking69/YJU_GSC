@@ -11,7 +11,7 @@ from mcp.types import (
     Root,
     TextContent
 )
-import anthropic from Anthropic;
+from anthropic import Anthropic;
 
 SERVER_PATH = str(Path(__file__).parent / "02_connection_server.py")
 
@@ -23,7 +23,7 @@ server_params = StdioServerParameters(
 
 
 async def main():
-    llm_client = AnthropicClient();
+    llm_client = Anthropic()
     # stdクライアント
     async with stdio_client(server_params) as (read, write):
         # 서버와 연결된 클라이언트 세션
