@@ -6,6 +6,14 @@ class Student:
         self.name = arg_name
         self.id = arg_id
 
+        # 멤버 메소드
+        # 1) 클래스 멤버 메소드
+        # 2) 인스턴스 멤버 메소드
+
+        # 1) 클래스 멤버 메소드
+        def printInfo(self, s):
+            print(self.id, self.name)
+
 std_1 = Student("a", 1)
 std_2 = Student("b", 2)
 
