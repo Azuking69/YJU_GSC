@@ -6,5 +6,8 @@ class Student:
         self.name = arg_name
         self.id = arg_id
 
-std_1 = Student()
-std_2 = Student()
+std_1 = Student("a", 1)
+std_2 = Student("b", 2)
+
+print(std_1.id, std_1.name, std_1.univ)
+print(std_2.id, std_2.name, std_2.univ)
