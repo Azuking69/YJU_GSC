@@ -7,4 +7,5 @@ class Foo:
         print("Foo 소멸")
 
 
-Foo() # 생성자 호출, 소멸자 호출
+obj1 = Foo()
+print("hello") 
