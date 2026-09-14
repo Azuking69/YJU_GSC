@@ -3,12 +3,8 @@ class Foo:
         print("Foo 생성")
 
     # Magic Method, Magic member variable
-    def __del__(self): # 소멸자 Destructor
+    def __del__(self, exc_type, exc, tb): # 소멸자 Destructor
         print("Foo 소멸")
 
-
-obj1 = Foo() # Foo 생성
-obj2 = obj1
-del obj1 
-print("hello") # hello
-#프로그램 종료 -> Foo 소멸
+with Foo() as f:
+    print("with~~")
