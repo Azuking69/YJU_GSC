@@ -6,26 +6,29 @@ Y = np.array([0, 0, 0, 0, 0, 0, 1, 1, 1])
 N = len(Y)
 D = X_Data.shape[-1]
 
-epochs = 1
-lr = 0.01
+epochs = 10000
+lr = 0.1
 
-w = np.random.randn()
+w = np.random.randn(D)
 b = np.random.randn()
 
 # Leraning loop
 for epoch in range(1, epochs + 1):
     # Prediction : 1) logit[wx + b] -> 2) sigmoid(1/1 + e^-z) -> H
-    z = w * X_Data + b
-    H = 1 / (1 + np.exp(-z))
+    logit = X_Data @ w + b # (N, )
+    predict = 1 / (1 + np.exp(-logit)) # (N, )
+    print(f"logit: {logit}")
+    print(f"predict: {predict}")
 
     # Error : H - y
-    error = H - Y
+    error = predict - Y
 
     # Calculate gradient : w, b
     # w_grad = error * x / N
     # b_grad = error / N
-    w_grad = np.dot(error.T, X_Data) / N
-    b_grad = np.sum(error) / N
+    w_grad = error @ X_Data / N
+    b_grad = np.mean(error)
+    print(f"w_grad: {w_grad} b_grad: {b_grad}")
 
     # Update parameters
     # w = w - lr * w_grad
@@ -34,7 +37,9 @@ for epoch in range(1, epochs + 1):
     b -= lr * b_grad
 
     # Loss : -y*logH - (1-y)log(1-H)
-    loss = -np.mean(Y * np.log(H) + (1 - Y) * np.log(1 - H))
+    if epoch % 1000 == 0:
+        loss = -np.mean(Y*np.log(predict) + (1 - Y) * np.log(1 - predict))
+        print(f"{epoch} th, loss: {loss}")
 
-
-    print(f"{epoch} th: Epoch\n w: {w} b: {b}")
+y = 1 / (1 + np.exp(-2 * w + b))
+print((y >= 0.5).astype(bool))
