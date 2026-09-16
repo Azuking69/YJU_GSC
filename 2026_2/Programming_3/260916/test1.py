@@ -1,6 +1,7 @@
 class Bar:
     def __init__(self):
         self.name = "GSC"
+        self.age = 100 # 새롭게 추가
 
     def prt_info(self):
         print(self.name, self.age)
