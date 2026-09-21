@@ -1,21 +1,25 @@
 class A:
     def __init__(self):
-        pass
+        self.name = "A"
+
+    def prt_info(self):
+        print(self.name)
 
 
 class B(A):
     def __init__(self):
-        pass
+        self.name = "B"
 
 
 class C(A):
     def __init__(self):
-        pass
+        self.name = "C"
 
 
 class D(B, C):
     def __init__(self):
-        pass
+        self.name = "D"
 
 
-print(D.mro())
+obj = D()
+obj.prt_info()
