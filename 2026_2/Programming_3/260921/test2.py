@@ -1,24 +1,33 @@
 class A:
     def __init__(self):
-        self.name = "A"
+        pass
 
     def prt_info(self):
-        print(self.name)
+        print("A의 prt_info")
 
 
 class B(A):
     def __init__(self):
-        self.name = "B"
+        super().__init__()
 
+    def prt_info(self):
+            print("B의 prt_info")
 
 class C(A):
     def __init__(self):
-        self.name = "C"
+        super().__init__()
+
+    def prt_info(self):
+            print("C의 prt_info")
 
 
-class D(B, C):
+class D(C, B):
     def __init__(self):
-        self.name = "D"
+        super().__init__()
+
+    def prt_info(self):
+            super().prt_info()
+            print("D의 prt_info")
 
 
 obj = D()
