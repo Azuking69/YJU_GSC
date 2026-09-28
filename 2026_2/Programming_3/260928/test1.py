@@ -17,6 +17,9 @@ class Tiger(Animal):
     def sounds(self):
         print("어흥")
 
+class Lion(Animal):
+    ...
+
 def make_sound(obj):
     obj.sounds()
 
@@ -27,3 +30,6 @@ obj_2 = Cat()
 make_sound(obj_1)
 make_sound(obj_2)
 make_sound(Tiger())
+# make_sound(Lion())
+
+print(Animal.__abstractmethods__)
