@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 class Animal(ABC):
     @abstractmethod
     def sounds(self):
@@ -16,9 +17,6 @@ class Tiger(Animal):
     def sounds(self):
         print("어흥")
 
-class Lion:
-    ...
-
 def make_sound(obj):
     obj.sounds()
 
@@ -29,4 +27,3 @@ obj_2 = Cat()
 make_sound(obj_1)
 make_sound(obj_2)
 make_sound(Tiger())
-make_sound(Lion())  # This will raise an error since Lion does not implement the sounds method
