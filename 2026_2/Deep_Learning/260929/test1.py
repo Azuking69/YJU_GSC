@@ -20,6 +20,9 @@ lr = 0.1
 w = np.random.randn(D)
 b = np.random.randn()
 
+print("max")
+print(X_train[0].max())
+
 
 for epoch in range(1, epochs + 1):
     # logit: WX + b
