@@ -1,8 +1,12 @@
 import numpy as np
 
-pred = 0.000_0000_0000_0000_1
-y = 0
+# infinity
 
-# Logistic regression
-loss = -y * np.log(pred) - (1 - y) * np.log(1 - pred)
-print(loss)
+# 1 / 0
+print(np.float32(1) / 0)
+
+# log(0)
+print(np.log(0))
+
+# overflow
+print(np.exp(10000))
