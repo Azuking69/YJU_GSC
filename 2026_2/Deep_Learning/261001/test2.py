@@ -1,12 +1,12 @@
 import numpy as np
 
-# infinity
+pred = 0.0000_0000_0000_0000_1
 
-# 1 / 0
-print(np.float32(1) / 0)
+bar = np.array([-1, 2, 3, np.inf, -np.inf])
+# bar -> -inf, -1, 2, 3, inf
 
-# log(0)
-print(np.log(0))
+# np.clip(원데이터, 최소값, 최대값)
+print(np.clip(bar, -10, 100))
 
-# overflow
-print(np.exp(10000))
+eps = 1e-15 # log(0) 방지용 아주 작은 수
+H_safe = np.clip(H, eps, 1 - eps)
