@@ -1,10 +1,10 @@
 import numpy as np
 
 
-bar = np.array([1, 2, 3])
-foo = np.array([1.0, 2, 3.0])
-pos = np.array([1.0, 2.0, 3.0], dtype=np.float32)
+bar16 = np.array([1, 2], dtype = np.float16)
+bar32 = np.array([1, 2], dtype = np.float32)
+bar64 = np.array([1, 2], dtype = np.float64)
 
-print(bar.dtype) # int32
-print(foo.dtype) # float64
-print(pos.dtype) # float32
+print(np.finfo(bar16.dtype).eps)
+print(np.finfo(bar32.dtype).eps)
+print(np.finfo(bar64.dtype).eps)
