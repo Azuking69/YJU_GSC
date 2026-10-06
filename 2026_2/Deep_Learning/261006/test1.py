@@ -28,7 +28,7 @@ print(f"after: {X_train[0]}")
 
 
 # Hyperparameters
-epochs = 10
+epochs = 100
 lr = 0.1
 
 
@@ -60,7 +60,7 @@ for epoch in range(1, epochs + 1):
     b = b - lr * b_grad
 
     # loss
-
     # ESP -> np.clip
-
-    print(f"epoch: {epoch}")
+    if epoch % 10 == 0:
+        loss = -(y_train * np.log(pred) + (1 - y_train) * np.log(1 - pred))
+        print(f"epoch: {epoch}, train loss: {loss:.4f}")
