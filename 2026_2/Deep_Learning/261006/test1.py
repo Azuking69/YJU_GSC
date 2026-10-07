@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix, precision_recall_fscore_support
 
 X, y = load_breast_cancer(return_X_y=True)
 
@@ -62,5 +63,15 @@ for epoch in range(1, epochs + 1):
     # loss
     # ESP -> np.clip
     if epoch % 10 == 0:
-        loss = -(y_train * np.log(pred) + (1 - y_train) * np.log(1 - pred))
+        loss = -np.mean(y_train * np.log(pred + (1 - y_train) * np.log(1 - pred))
         print(f"epoch: {epoch}, train loss: {loss:.4f}")
+
+t_logit = X_test @ w + b
+t_pred = 1 / (1 + np.exp(-t_logit))
+t_pred (t_pred >= 0.5).astype(int)
+
+accuracy = (t_pred == y_test).mean()
+
+print(f"accuracy: {accuracy}")
+print(confusion_matrix(y_test, t_pred))
+print(classification_recall_fscore_support(y_test, t_pred))
