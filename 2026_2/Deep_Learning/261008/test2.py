@@ -12,17 +12,15 @@ X_train, X_T, y_train, y_T = \
 X_valid, X_test, y_valid, y_test = \
     train_test_split(X_T, y_T, train_size=0.5, random_state=40, stratify=y_T)
 
-print(y_train.shape)
-print(y_valid.shape)
-print(y_test.shape)
 
-# N = len(X_train)
-# D = len(X_train[0])
+N = len(X_train)
+D = len(X_train[0])
 
-# mu = X_train.mean(axis = 0) # (D, )
-# sigma = X_train.std(axis = 0) # (D, )
+mu = X_train.mean(axis = 0) # (D, )
+sigma = X_train.std(axis = 0) # (D, )
 
 X_train = (X_train - mu) / sigma
+X_valid = (X_valid - mu) / sigma
 X_test = (X_test - mu) / sigma
 
 
@@ -79,3 +77,6 @@ for epoch in range(1, epochs + 1):
         # Loss: valid dataset
         loss_bce(w, b, X_test, y_test, "valid")
         print()
+
+# w, b
+# Evaluiation
