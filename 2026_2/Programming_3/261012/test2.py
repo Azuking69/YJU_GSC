@@ -1,21 +1,7 @@
-bar: flaot # Numrcical value
+x: list = [1, 2]
 
-bar = 2
-bar = 2.0
+x:tuple = [1, 2]
 
-foo:int #integget value
+x: dict = {"a": l}
 
-foo = 3
-foo = 3.0
-
-pos: bool
-
-pos = 2
-pos = 0.0
-pos = Ture
-pos = False
-
-kin:int
-
-kin = True
-kin = False
+x: set = {a, 2}
