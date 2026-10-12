@@ -1,7 +1,7 @@
-x: list = [1, 2]
+bar: list[float | str] = [1, 2.0, "4"]
 
-x:tuple = [1, 2]
+pos: set[float | str] = {2, 3, 4, 5.0, "5"}
 
-x: dict = {"a": l}
+kin: dict[str, int] {"name": 1, 2 : 2}
 
-x: set = {a, 2}
+foo: tuple
