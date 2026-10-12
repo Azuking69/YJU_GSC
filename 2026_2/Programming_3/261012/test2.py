@@ -1,9 +1,21 @@
-bar: int | float | str | bool | None
+bar: flaot # Numrcical value
 
-class Foo:
+bar = 2
+bar = 2.0
 
+foo:int #integget value
 
-obj: Foo = Foo()
+foo = 3
+foo = 3.0
 
-my_list1: list = tuple()
-my_list2: list[float]= [1, 2, 3, "4"]
+pos: bool
+
+pos = 2
+pos = 0.0
+pos = Ture
+pos = False
+
+kin:int
+
+kin = True
+kin = False
