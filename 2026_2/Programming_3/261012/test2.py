@@ -1,17 +1,9 @@
+bar: int | float | str | bool | None
 
-bar: int = 2
-
-bar = 3.0
-bar = "3"
-bar = True
-
-def add(a: int, b: int| str) -> :
-    return a + int(b)
+class Foo:
 
 
-add(2, 2)
-add(2, "2")
-add("3", 2)
+obj: Foo = Foo()
 
-result1: str = add(2, 2)
-result2: int = add(2, 2)
+my_list1: list = tuple()
+my_list2: list[float]= [1, 2, 3, "4"]
