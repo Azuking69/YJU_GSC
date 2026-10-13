@@ -2,6 +2,7 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 import numpy as np
 from sklearn.metrics import confusion_matrix, precision_recall_fscore_support
+from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
 
 np.random.seed(0)
 
@@ -83,7 +84,8 @@ for epoch in range(1, epochs + 1):
 
 # 예측값 계산: test data set
 pred_test = lg_predict(w, b, X_test)
-pred_test = pred_test >= 0.5 # boolean array
+# pred_test = pred_test >= 0.5 # boolean array
+pred_test = (pred_test >= 0.5).astype(int)
 print(pred_test)
 
 print(f"pred_test shape: {pred_test.shape}")
@@ -93,3 +95,7 @@ print(f"label_test: {y_test}")
 # Scikit-learn 플레임워크에서 제곤하는 모듈 이용
 # - Confusion matrix
 # - Claculate evaluation metrixs
+print(f"Accuracy: {accuracy_score(y_test, pred_test)}")
+print(f"Precision: {precision_score(y_test, pred_test, pos_label=0)}")
+print(f"Recall: {recall_score(y_test, pred_test)}")
+print(f"F1: {f1_score(y_test, pred_test)}")
