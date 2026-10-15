@@ -10,5 +10,16 @@ ds = fetch_openml("sonar", version=1, as_frame=True)
 X = ds.data.to_numpy(dtype=float)
 y = (ds.target == "Mine").astype(int).to_numpy()
 
-print(X.shape)
-print(y.shape)
+X_train, X_temp, y_train, y_temp = train_test_split(
+    X, y, stratify=y, random_state=40, test_size=0.7
+)
+
+X_valid, X_test, y_valid, y_test = train_test_split(
+    X_temp, y_temp, stratify=y_temp, random_state=40, test_size=0.5
+)
+
+
+print(f"X: {X.shape}")
+print(f"X_train: {X_train.shape}")
+print(f"X_valid: {X_valid.shape}")
+print(f"X_test: {X_test.shape}")
