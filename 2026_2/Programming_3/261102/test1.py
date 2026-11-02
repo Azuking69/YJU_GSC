@@ -1,12 +1,16 @@
-from typing import TypedDict
+from typing import TypedDict, NotRequired
+from dataclasses import asdict, dataclass
+
+@dataclass
+class Bar:
+    name: str = "gsc"
+    age:  int =  10
 
 
-class Bar(TypedDict):
-    name: str
-    age: int
+obj: Bar = Bar(name="yju")
+print(obj, type(obj))
+print(asdict(obj))
 
-
-obj1: Bar = Bar(name = "gsc", age = 20)
-obj2: Bar = {"name": "yju", "age":30}
-
-print(obj2, type(obj1))
+test = {"name": "yju gsc", "age": 20}
+obj2: Bar = Bar(**test)
+print(obj2)
