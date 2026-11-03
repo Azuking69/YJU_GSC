@@ -15,11 +15,12 @@ N, D = X_train.shape            # 글씨 수, 픽셀 수(64)
 K = len(ds.target_names)        # 클래스 수(10)
 print(f"학습: {N}장 × {D}픽셀, 테스트: {len(X_test)}장, 클래스: {K}개")
 
-# print(X_train[0, :], y_train[0])  # 첫 번째 글씨 픽셀 값과 정답 클래스
-print(y_train[:10])  # 학습용 글씨 10장 정답 클래스
-# 원-핫 인코딩 — 정답 정수 y 를 길이 K 인 벡터로 바꾼다 (01번 5. 참고)
-# Y_train = np.eye(K)[y_train]    # (N, K)
 
+# 원-핫 인코딩 — 정답 정수 y 를 길이 K 인 벡터로 바꾼다 (01번 5. 참고)
+Y_train = np.eye(K)[y_train]    # (N, K)
+
+print(f"before: {y_train[:3]}\n")
+print(f"after: {Y_train[:3]}")
 
 # ============================================================
 # 2. softmax 함수 — 점수(logit) K 개를 합이 1 인 확률 K 개로 바꾼다
