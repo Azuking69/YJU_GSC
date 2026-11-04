@@ -1,11 +1,9 @@
 from typing import Any, NoReturn, TypedDict, NotRequired, Union, Optional, Literal, Final, Callable
 from dataclasses import asdict, dataclass
 
-def make_exception() -> NoReturn:
-    raise ValueError()
+class Bar:
+    dept: str = "gsc"
 
-def test():
-    ...
-
-# print(type(test)) # return値が無くても、functionを返す
-print(type(make_exception)) # NoReturnを返す。
+    def __init__(self, name:str, age:int) -> None:
+        self.__name:str = name
+        self.__age:int = age
