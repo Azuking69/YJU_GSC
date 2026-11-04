@@ -1,17 +1,14 @@
 from typing import Any, NoReturn, TypedDict, NotRequired, Union, Optional, Literal, Final, Callable, ClassVar
 from dataclasses import asdict, dataclass
 
-class Bar:
-    dept: str = "gsc"
-    univ: ClassVar[str] = "yju"
+class Bar():
 
-    def __init__(self, name:str, age:int) -> None:
-        self.__name:str = name        # Instance Member Variable
-        self.__age:int = age          # Instance Member Variable
+    def __init__(self) -> None:
+        pass
 
-obj = Bar(name="kim", age=20)
+    def __str__(self) -> str: # str(), print()
+        return "hello"
+    
 
-obj.dept = "dfsdfsdfsd"
-print(Bar.dept)
-print(obj.dept)
-# obj.univ = "fdsfsdfsdf"
+obj = Bar()
+print(obj)
