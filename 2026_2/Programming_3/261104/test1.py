@@ -1,10 +1,15 @@
-from typing import Any, TypedDict, NotRequired, Union, Optional
+from typing import Any, TypedDict, NotRequired, Union, Optional, Literal, Final, Callable
 from dataclasses import asdict, dataclass
 
-bar: int | str | bool = 2
-bar: Union[int, str, bool] = 2
 
-def test1(val) -> Any:
+def add(x:int, y:int) -> int:
+    return x + y
 
-        return "test"
+def div(x:int, y:int,) -> float:
+    return x / y
 
+def calc(x:int, y:int, op) -> float:
+    return op(x, y)
+
+print(calc(2, 3, add))
+print(calc(2, 3, div))
