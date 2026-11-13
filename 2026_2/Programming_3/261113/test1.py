@@ -1,14 +1,16 @@
-class MyData:
-    def __init__(self) -> None:
-        self._data = [10, 20, 30]
+def test():
+    print("test 호출")
+    # yield 3
+    print("test 종료")
 
-    # Iteration
-    def __iter__(self):
-        yield from self._data
+test()
+
+class Bar:
+    def prd_spmething(self):
+        print("prd_something 호출")
+        # yield 3
+        print("prd_something 종료")
 
 
-data = MyData()
-
-for value in data:
-    for s_value in data:
-        print(value, s_value)
+obj = Bar()
+obj.prd_spmething()
