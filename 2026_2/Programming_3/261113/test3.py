@@ -6,15 +6,8 @@ def my_range(start, stop):
         cnt += 1
 
 
-try:
-    gen_obj = my_range(2, 5)
-    itr = iter(gen_obj)
+obj = my_range(2, 5)
+print(type(obj))
 
-    while True:
-        print(next(itr))
-
-except StopIteration as e:
-    print(e)
-
-# for value in my_range(2, 5):
-#     print(value)
+itr = iter(obj)
+print(type(itr))
