@@ -12,5 +12,5 @@ try:
 except Exception as e:
     print(e)
 
-finally:
-    f_hndler.close()
+# finally:
+#     f_hndler.close()
