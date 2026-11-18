@@ -4,13 +4,15 @@ from dataclasses import dataclass
 
 
 # State
-State1: dict[str, str|int] = {"msg": "", "age": 2}
+State1: dict[str, str|int] = {"msg": 2, "age": ""}   # {"msg": "", "age": 2}
 
 # TypedDict
 class State2(TypedDict):
     "msg": str
+    "arg": int
 
 # dataclass
 @dataclass
 class State3:
-    msg: int = ""
+    msg: str = ""
+    age: int = 0
